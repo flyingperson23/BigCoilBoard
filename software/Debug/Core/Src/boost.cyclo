@@ -1,0 +1,13 @@
+../Core/Src/boost.c:32:6:Boost_Init	1
+../Core/Src/boost.c:57:6:Boost_Clear	1
+../Core/Src/boost.c:83:6:fconstrain	3
+../Core/Src/boost.c:88:7:Run2p2zFilter	3
+../Core/Src/boost.c:102:6:Init2p2zFilter	1
+../Core/Src/boost.c:112:6:Reset2p2zFilter	1
+../Core/Src/boost.c:122:6:DMATransferComplete_adc2	2
+../Core/Src/boost.c:133:6:DMATransferComplete_adc3	1
+../Core/Src/boost.c:140:6:DMATransferComplete_adc4	2
+../Core/Src/boost.c:150:6:BoostSlowLoop	6
+../Core/Src/boost.c:176:6:BoostFastLoop	5
+../Core/Src/boost.c:200:6:BoostDisable	1
+../Core/Src/boost.c:207:6:BoostEnable	1

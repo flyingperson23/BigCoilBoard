@@ -1,0 +1,4 @@
+../Core/Src/tterm/TTerm_cmd.c:45:9:CMD_testCommandHandler	14
+../Core/Src/tterm/TTerm_cmd.c:174:9:TERM_testCommandAutoCompleter	3
+../Core/Src/tterm/TTerm_cmd.c:210:9:CMD_help	4
+../Core/Src/tterm/TTerm_cmd.c:229:9:CMD_cls	3
