@@ -10,5 +10,5 @@
 ../Core/Src/boost.c:209:6:BoostFastLoop	16	static
 ../Core/Src/boost.c:146:6:MeasureTrigger	24	static
 ../Core/Src/boost.c:133:6:HAL_TIM_PWM_PulseFinishedCallback	0	static
-../Core/Src/boost.c:230:6:BoostDisable	0	static
-../Core/Src/boost.c:236:6:BoostEnable	8	static
+../Core/Src/boost.c:232:6:BoostDisable	0	static
+../Core/Src/boost.c:238:6:BoostEnable	8	static

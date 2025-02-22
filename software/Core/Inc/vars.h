@@ -29,7 +29,7 @@ int64_t GetValue(uint8_t index);
 
 #define MEMORY_START 0x0803F000
 
-#define NUM_VARS 12
+#define NUM_VARS 13
 
 #define MAX_PRI_I 0
 #define MAX_AC_I 1
@@ -42,7 +42,8 @@ int64_t GetValue(uint8_t index);
 #define VBUS_R 8
 #define DRIVER_UVLO 9
 #define I_RAMP 10
-#define MAX_OT 11
+#define I_START 11
+#define MAX_OT 12
 
 
 void store_flash_memory(uint32_t memory_address, uint8_t *data, uint16_t data_length);

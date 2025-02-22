@@ -1,0 +1,4 @@
+../Core/Src/int.c:12:6:DACLut	4
+../Core/Src/int.c:46:6:TIM2Overflow	2
+../Core/Src/int.c:55:6:TIM16Overflow	2
+../Core/Src/int.c:61:6:HAL_GPIO_EXTI_Callback	4

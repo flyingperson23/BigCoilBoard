@@ -1,9 +1,9 @@
-../Core/Src/vars.c:33:6:AddVar	1
+../Core/Src/vars.c:36:6:AddVar	1
 ../Core/Src/vars.c:19:6:AddVars	1
-../Core/Src/vars.c:44:7:GetVar	1
-../Core/Src/vars.c:48:9:GetValue	1
-../Core/Src/vars.c:52:8:GetIndex	3
-../Core/Src/vars.c:80:6:store_flash_memory	6
-../Core/Src/vars.c:68:6:WriteVars	2
-../Core/Src/vars.c:115:6:read_flash_memory	2
-../Core/Src/vars.c:61:6:FillVars	2
+../Core/Src/vars.c:47:7:GetVar	1
+../Core/Src/vars.c:51:9:GetValue	1
+../Core/Src/vars.c:55:8:GetIndex	3
+../Core/Src/vars.c:83:6:store_flash_memory	6
+../Core/Src/vars.c:71:6:WriteVars	2
+../Core/Src/vars.c:118:6:read_flash_memory	2
+../Core/Src/vars.c:64:6:FillVars	2

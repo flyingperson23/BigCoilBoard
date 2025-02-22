@@ -38,7 +38,6 @@ void Boost_Init() {
 	Boost_Clear();
 
 	HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_SET);
-	HAL_SPI_Init(&hspi2);
 
 	TIM1->CCR1 = 50;
 	TIM1->CCR2 = 0;
@@ -115,69 +114,69 @@ void Reset2p2zFilter(Filter2p2z * filter) {
 	filter->x[2] = 0;
 }
 
-void ADC_Get(uint8_t channel, uint16_t * data) {
+void ADC_SPI_Get(uint8_t channel, uint16_t * data) {
 	uint8_t tr[3];
 	uint8_t rec[3];
-	tr[0] = (channel & 0b11) << 6;
-	tr[1] = 0b110 + ((channel & 0b100) >> 2);
+	tr[0] = 0b110 + ((channel & 0b100) >> 2);
+	tr[1] = (channel & 0b11) << 6;
 	tr[2] = 0;
 
+
 	HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_RESET);
-	HAL_SPI_TransmitReceive(&hspi2, tr, rec, 3, 100);
+	HAL_SPI_TransmitReceive(&hspi2, tr, rec, 3, 1000);
 	HAL_GPIO_WritePin(CS_GPIO_Port, CS_Pin, GPIO_PIN_SET);
+
 
 	*data = ((rec[1] & 0b1111) << 8) | rec[2];
 }
 
-uint8_t run = 1;
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim) {
-	if (htim == &htim1 && run) {
-		run = 0;
+	if (htim == &htim1) {
 		MeasureTrigger();
 	}
-}
-
-void TIM1PeriodElapsed() {
-	run = 1;
 }
 
 uint16_t adc_data = 0;
 uint8_t bcounter = 0;
 void MeasureTrigger() {
-	ADC_Get(CH_I_L, &adc_data);
-	I_L = (float) adc_data * VREF / 4095.0 * I_L_conv;
-	BoostFastLoop();
+
 	bcounter++;
-	if (bcounter >= 10) bcounter = 0;
-	if (bcounter == 0) {
-		ADC_Get(CH_VBUS, &adc_data);
+	if (bcounter >= 20) bcounter = 0;
+
+	if (bcounter % 2 == 0) {
+		ADC_SPI_Get(CH_I_L, &adc_data);
+		I_L = (float) adc_data * VREF / 4095.0 * I_L_conv;
+		BoostFastLoop();
+	} else if (bcounter == 1) {
+		ADC_SPI_Get(CH_VBUS, &adc_data);
 		vbus = (float) adc_data * VREF / 4095.0 * vbus_conv;
 		BoostSlowLoop();
 	}
-	else if (bcounter == 1 || bcounter == 4 || bcounter == 7 || bcounter == 9) {
-		ADC_Get(CH_VAC, &adc_data);
+	else if (bcounter == 3 || bcounter == 9 || bcounter == 15 || bcounter == 19) {
+		ADC_SPI_Get(CH_VAC, &adc_data);
 		vac = (float) adc_data * VREF / 4095.0 * vac_conv;
 	}
-	else if (bcounter == 2) {
-		ADC_Get(CH_TEMP1, &adc_data);
+	else if (bcounter == 5) {
+		ADC_SPI_Get(CH_TEMP1, &adc_data);
 		therm_readings[0] = adc_data;
 	}
-	else if (bcounter == 3) {
-		ADC_Get(CH_TEMP2, &adc_data);
+	else if (bcounter == 7) {
+		ADC_SPI_Get(CH_TEMP2, &adc_data);
 		therm_readings[1] = adc_data;
 	}
-	else if (bcounter == 5) {
-		ADC_Get(CH_TEMP3, &adc_data);
+	else if (bcounter == 11) {
+		ADC_SPI_Get(CH_TEMP3, &adc_data);
 		therm_readings[2] = adc_data;
 	}
-	else if (bcounter == 6) {
-		ADC_Get(CH_TEMP4, &adc_data);
+	else if (bcounter == 13) {
+		ADC_SPI_Get(CH_TEMP4, &adc_data);
 		therm_readings[3] = adc_data;
 	}
-	else if (bcounter == 8) {
-		ADC_Get(CH_TEMP5, &adc_data);
+	else if (bcounter == 17) {
+		ADC_SPI_Get(CH_TEMP5, &adc_data);
 		therm_readings[4] = adc_data;
 	}
+	HAL_GPIO_TogglePin(BLED2_GPIO_Port, BLED2_Pin);
 }
 
 void BoostSlowLoop() {

@@ -32,18 +32,19 @@ void TC_Loop_Tim();
 #define BUS_ON 2
 
 #define VREF 3.3
-#define R_MEAS 4990.0
+#define R_MEAS 5100.0
 
 #define TS_CAL1_TEMP 30.0
 #define TS_CAL2_TEMP 130.0
-#define TS_CAL1 1040.0
-#define TS_CAL2 1657.0
+#define TS_CAL1 1018.0
+#define TS_CAL2 1648.0
 
 extern uint32_t fault;
 #define FAULT_OV 1 << 0
 #define FAULT_OC 1 << 1
 #define FAULT_OT 1 << 2
 #define FAULT_UV 1 << 3
+#define FAULT_ONTIME 1 << 4
 
 #define CH_TEMP1 0
 #define CH_TEMP2 1

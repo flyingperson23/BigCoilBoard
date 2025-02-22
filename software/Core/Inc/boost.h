@@ -56,9 +56,7 @@ void BoostFastLoop();
 void BoostDisable();
 void BoostEnable();
 
-void ADC_Get(uint8_t channel, uint16_t * data);
-void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim);
-void TIM1PeriodElapsed();
+void ADC_SPI_Get(uint8_t channel, uint16_t * data);
 void MeasureTrigger();
 
 void Boost_Init();

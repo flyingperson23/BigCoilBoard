@@ -12,6 +12,7 @@
 #include "tc.h"
 
 void TIM2Overflow();
+void TIM16Overflow();
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 void DACLut();
 

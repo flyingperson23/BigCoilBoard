@@ -10,6 +10,7 @@
 uint32_t dac_ramp[STEPS];
 
 void DACLut() {
+
 	int pri_OCD = GetValue(MAX_PRI_I);
 	int ct_ratio = GetValue(CT_FACTOR);
 	float volts_fb = (float) pri_OCD * (float) ct_ratio; // uV/A * A = uV
@@ -19,13 +20,14 @@ void DACLut() {
 
 
 	int64_t a_per_us = GetValue(I_RAMP);
-	int64_t max_ot = GetValue(MAX_OT);
-	float time_step = (float) pri_OCD / (float) a_per_us;
+	int64_t I_start = GetValue(I_START);
+
+	float I_step = (pri_OCD - I_start) / STEPS;
 	for (int i = 0; i < STEPS; i++) {
-		if (a_per_us == 0) {
+		if (a_per_us == 0 || I_start >= pri_OCD) {
 			dac_ramp[i] = counts_max;
 		} else {
-			float amps = time_step * (float) a_per_us * i;
+			float amps = I_step * i + I_start;
 			volts_fb = (float) amps * (float) ct_ratio; // uV/A * A = uV
 			volts_fb = volts_fb / 1000000.0; // V
 			volts_fb = volts_fb / 2.0; // 1k extra resistor
@@ -35,12 +37,10 @@ void DACLut() {
 			dac_ramp[i] = counts;
 		}
 	}
-	if (max_ot != 0) dac_ramp[STEPS - 1] = 0;
 
-
-
-	// time_step = us/step = how many us the timer lasts for
-	TIM2->ARR = (uint32_t) (time_step * 170.0);
+	float ramp_time = (pri_OCD - I_start) / a_per_us / (float) STEPS; // in us
+	if (ramp_time < 1) ramp_time = 1;
+	TIM2->ARR = (uint32_t) (ramp_time * 170.0);
 
 }
 
@@ -48,23 +48,29 @@ uint32_t of_counter = 0;
 void TIM2Overflow() {
 	of_counter++;
 	if (of_counter >= STEPS) {
-		HAL_TIM_Base_Stop(&htim2);
 		HAL_DAC_Stop_DMA(&hdac1, DAC_CHANNEL_1);
-		if (GetValue(MAX_OT) != 0) {
-			HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0);
-		}
+	}
+	if (!(INT_IN_GPIO_Port->IDR & INT_IN_Pin)) {
+		HAL_TIM_Base_Stop(&htim2);
+		HAL_TIM_Base_Stop(&htim16);
+	}
+}
+
+void TIM16Overflow() {
+	if (TIM16->ARR != 0) {
+		SetFault(FAULT_ONTIME);
 	}
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	if (GPIO_Pin == INT_IN_Pin) {
-		if (INT_IN_GPIO_Port->IDR & INT_IN_Pin) {
-			HAL_TIM_Base_Start(&htim2);
-			HAL_DAC_Start_DMA(&hdac1, DAC_CHANNEL_1, dac_ramp, STEPS, DAC_ALIGN_12B_R);
-		} else {
-			HAL_TIM_Base_Stop(&htim2);
-			HAL_DAC_Stop_DMA(&hdac1, DAC_CHANNEL_1);
+		TIM2->CNT = 0;
+		TIM16->CNT = 0;
+		if (TIM16->ARR != 0) {
+			HAL_TIM_Base_Start_IT(&htim16);
 		}
+		HAL_TIM_Base_Start_IT(&htim2);
+		HAL_DAC_Start_DMA(&hdac1, DAC_CHANNEL_1, dac_ramp, STEPS, DAC_ALIGN_12B_R);
 		of_counter=  0;
 	}
 }

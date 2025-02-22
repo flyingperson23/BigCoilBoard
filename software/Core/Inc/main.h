@@ -96,8 +96,10 @@ extern DAC_HandleTypeDef hdac1;
 extern SPI_HandleTypeDef hspi2;
 
 extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim7;
+extern TIM_HandleTypeDef htim16;
 
 extern UART_HandleTypeDef huart3;
 /* USER CODE END Private defines */

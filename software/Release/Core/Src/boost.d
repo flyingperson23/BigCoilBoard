@@ -37,7 +37,8 @@ Core/Src/boost.o: ../Core/Src/boost.c ../Core/Inc/boost.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
  ../Core/Inc/tc.h ../Core/Inc/vars.h ../Core/Inc/boost.h \
  ../Core/Inc/tterm/TTerm.h ../Core/Inc/tterm/TTerm_VT100.h \
- ../Core/Inc/tterm/TTerm_config.h ../Core/Inc/uart.h ../Core/Inc/cmds.h
+ ../Core/Inc/tterm/TTerm_config.h ../Core/Inc/uart.h ../Core/Inc/cmds.h \
+ ../Core/Inc/int.h
 ../Core/Inc/boost.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
@@ -84,3 +85,4 @@ Core/Src/boost.o: ../Core/Src/boost.c ../Core/Inc/boost.h \
 ../Core/Inc/tterm/TTerm_config.h:
 ../Core/Inc/uart.h:
 ../Core/Inc/cmds.h:
+../Core/Inc/int.h:

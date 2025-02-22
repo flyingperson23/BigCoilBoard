@@ -20,11 +20,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if (htim == &htim7) {
 		Overlay_Send(terminal);
 	}
-	if (htim == &htim1) {
-		TIM1PeriodElapsed();
-	}
 	if (htim == &htim2) {
 		TIM2Overflow();
+	}
+	if (htim == &htim16) {
+		TIM16Overflow();
 	}
 }
 
@@ -41,11 +41,11 @@ void TC_Init() {
 	HAL_GPIO_WritePin(BLED2_GPIO_Port, BLED2_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(BLED3_GPIO_Port, BLED3_Pin, GPIO_PIN_RESET);
 
+
+	//HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
+
 	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t *) aux_adc, 1);
-
-	// OCD
-	HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
 
 	HAL_TIM_Base_Start_IT(&htim6);
 	HAL_TIM_Base_Start_IT(&htim7);
@@ -53,6 +53,10 @@ void TC_Init() {
 	Boost_Init();
 
 	DACLut();
+
+
+
+
 
 }
 
@@ -67,6 +71,7 @@ void TC_Loop() {
 	HAL_Delay(500);
 }
 
+int counter3 = 0;
 void TC_Loop_Tim() {
 	// check voltage
 	if (vbus > GetValue(MAX_OUT_V)) {
@@ -97,7 +102,7 @@ void TC_Loop_Tim() {
 	}
 
 	// OCD
-	OCD_Set();
+	//OCD_Set();
 
 	if (fault == 0 && bus_status != BUS_CHARGING) {
 		HAL_GPIO_WritePin(STOP_GPIO_Port, STOP_Pin, GPIO_PIN_RESET);
@@ -113,6 +118,12 @@ void TC_Loop_Tim() {
 	} else {
 		HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
 		BoostDisable();
+	}
+
+	TIM16->ARR = GetValue(MAX_OT);
+	counter3++;
+	if (counter3 % 100 == 0) {
+		DACLut();
 	}
 
 }
