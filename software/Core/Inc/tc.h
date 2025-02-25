@@ -55,7 +55,6 @@ extern uint32_t fault;
 #define CH_VAC 6
 #define CH_VBUS 7
 
-void OCD_Set();
 void CN_Actuate();
 void Overlay_Send(TERMINAL_HANDLE * handle);
 

@@ -41,6 +41,8 @@ void TC_Init() {
 	HAL_GPIO_WritePin(BLED2_GPIO_Port, BLED2_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(BLED3_GPIO_Port, BLED3_Pin, GPIO_PIN_RESET);
 
+	HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+
 
 	//HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
 
@@ -53,11 +55,6 @@ void TC_Init() {
 	Boost_Init();
 
 	DACLut();
-
-
-
-
-
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
@@ -100,9 +97,6 @@ void TC_Loop_Tim() {
 			SetFault(FAULT_OT);
 		}
 	}
-
-	// OCD
-	//OCD_Set();
 
 	if (fault == 0 && bus_status != BUS_CHARGING) {
 		HAL_GPIO_WritePin(STOP_GPIO_Port, STOP_Pin, GPIO_PIN_RESET);
@@ -151,21 +145,6 @@ void CN_Actuate() {
 			HAL_GPIO_WritePin(CN1_GPIO_Port, CN1_Pin, GPIO_PIN_SET);
 			HAL_GPIO_WritePin(CN2_GPIO_Port, CN2_Pin, GPIO_PIN_SET);
 		}
-}
-
-float volts_fb = 0;
-uint16_t counts = 0;
-uint8_t send_data[2];
-void OCD_Set() {
-	int pri_OCD = GetValue(MAX_PRI_I);
-	int ct_ratio = GetValue(CT_FACTOR);
-	volts_fb = (float) pri_OCD * (float) ct_ratio; // uV/A * A = uV
-	volts_fb = volts_fb / 1000000.0; // V
-	volts_fb = volts_fb / 2.0; // 1k extra resistor
-	counts = (int) (volts_fb / VREF * 4095.0);
-	if (counts < 0) counts = 0;
-	if (counts > 4095) counts = 4095;
-	HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, counts);
 }
 
 void TERM_Box(TERMINAL_HANDLE * handle, uint8_t row1, uint8_t col1, uint8_t row2, uint8_t col2) {

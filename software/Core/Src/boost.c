@@ -7,6 +7,13 @@
 
 #include "boost.h"
 
+#include "leadlag.h"
+
+
+LeadLagLPFStruct controller_I_A;
+
+
+
 float vbus;
 float vbus_target;
 float I_L;
@@ -30,6 +37,13 @@ float vac_conv = 0;
 float I_L_conv = 0;
 
 void Boost_Init() {
+	LeadLagLPF_reset(&controller_I_A);
+	controller_I_A.num_leads = 0;
+	controller_I_A.num_lpfs = 0;
+	controller_I_A.lag_ki = 0.05f;
+
+	controller_I_A.Kp = 3.0f;
+
 	Init2p2zFilter(&CompensatorV, A1_V, A2_V, B0_V, B1_V, B2_V, -9999999.0, 9999999.0);
 	Init2p2zFilter(&CompensatorI, A1_I, A2_I, B0_I, B1_I, B2_I, 0.0, 0.8);
 	Init2p2zFilter(&FilterVFF, A1_VFF, A2_VFF, B0_VFF, B1_VFF, B2_VFF, -9999.0, 9999.0);
@@ -183,9 +197,6 @@ void BoostSlowLoop() {
 	if (vbus > GetValue(MAX_OUT_V)) {
 		SetFault(FAULT_OV);
 	}
-	if (I_L > GetValue(MAX_I_L)) {
-		SetFault(FAULT_OC);
-	}
 
 	if (enabled && vbus_target > 20.0) Run2p2zFilter(&CompensatorV, vbus_target - vbus);
 	Run2p2zFilter(&FilterVFF, vac);
@@ -205,8 +216,70 @@ void BoostSlowLoop() {
 
 }
 
+float v_boost_ref = 0;
+float i_ref = 0;
+void FastLoop2() {
+
+
+	v_boost_ref = ((vac*2.5f)*0.001f) + (v_boost_ref*0.999f);  // ensure we don't have an excessive boost ratio
+	if (v_boost_ref > vbus_target) {v_boost_ref = vbus_target;}                 // clip to 700 though
+	i_ref = (-(v_boost_ref - vbus)*0.1f) + (i_ref*0.9f);
+
+	if (fabsf(i_ref) < 0.1f) {i_ref = 0.0f;}  // this will shut down the bridge (shuts down if I_a_ref = 0)
+
+
+	//i_ref = -6.0f;
+
+	//constrain(&i_ref, -I_PHASE_MAX, 0.0f);
+	if (i_ref < -1*GetValue(MAX_AC_I)) i_ref = -1*GetValue(MAX_AC_I);
+	if (i_ref > GetValue(MAX_AC_I)) i_ref = GetValue(MAX_AC_I);
+
+
+	//  =========== ensure that none of these are above or below what is possible ===========
+
+	float vout_ff = vac;
+
+
+	controller_I_A.cmd_lim_min = -150.0f;  // don't add in V out here because we're already FF-ing it
+	controller_I_A.cmd_lim_max = 150.0f;
+
+	if (controller_I_A.cmd_lim_min + vout_ff < 0.0f) { controller_I_A.cmd_lim_min = 0.0f - vout_ff; }         // can't apply voltages less than zero
+	if (controller_I_A.cmd_lim_max + vout_ff > GetValue(MAX_OUT_V)) { controller_I_A.cmd_lim_max = GetValue(MAX_OUT_V) - vout_ff; } // can't apply voltages greater than Vmax
+	if (controller_I_A.cmd_lim_min > 0.0f) { controller_I_A.cmd_lim_min = 0.0f; }
+	if (controller_I_A.cmd_lim_max < 0.0f) { controller_I_A.cmd_lim_max = 0.0f; }
+
+
+	if (I_L > 0.0f) {
+		if ((i_ref-I_L) >= 0.0f) {
+			controller_I_A.Kp = 1.5;
+		} else {
+			controller_I_A.Kp = 2.5;
+		}
+	}
+
+	float v_a = LeadLagLPF_Update(&controller_I_A, i_ref-I_L) + vout_ff;
+
+
+
+
+	// voltage to duty cycle
+	if (vbus > 50.0f) {   // prevents /0 errors
+		TIM1->CCR2 = (int) (v_a/vbus * TIM1->ARR);
+		TIM1->CCR1 = TIM1->CCR2 >> 1;
+	} else {
+		TIM1->CCR2 = (int) (v_a*0.1f * TIM1->ARR);
+		TIM1->CCR1 = TIM1->CCR2 >> 1;
+	}
+
+}
+
 void BoostFastLoop() {
+	if (I_L > GetValue(MAX_I_L)) {
+		SetFault(FAULT_OC);
+	}
+
 	if (enabled && vbus_target > 20.0) {
+		/*
 		I_L_target = vac * CompensatorV.y[0] * VInvSq_rms;
 		if (I_L_target > vac * GetValue(MAX_AC_I) * VInv_rms) {
 			I_L_target = vac * GetValue(MAX_AC_I) * VInv_rms;
@@ -218,9 +291,11 @@ void BoostFastLoop() {
 		float compare =  ((float) TIM1->ARR) * dtc;
 
 		TIM1->CCR1 = (int) compare >> 1;
-		TIM1->CCR2 = (int) compare;
+		TIM1->CCR2 = (int) compare;*/
+		FastLoop2();
 
 		if (TIM1->CCR1 < 50) TIM1->CCR1 = 50;
+
 
 	} else {
 		TIM1->CCR1 = 50;
@@ -235,6 +310,8 @@ void BoostDisable() {
 }
 
 void BoostEnable() {
+	LeadLagLPF_reset(&controller_I_A);
+
 	Reset2p2zFilter(&CompensatorV);
 	Reset2p2zFilter(&CompensatorI);
 	enabled = 1;
