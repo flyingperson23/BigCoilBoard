@@ -190,7 +190,6 @@ void MeasureTrigger() {
 		ADC_SPI_Get(CH_TEMP5, &adc_data);
 		therm_readings[4] = adc_data;
 	}
-	HAL_GPIO_TogglePin(BLED2_GPIO_Port, BLED2_Pin);
 }
 
 void BoostSlowLoop() {
@@ -198,7 +197,7 @@ void BoostSlowLoop() {
 		SetFault(FAULT_OV);
 	}
 
-	if (enabled && vbus_target > 20.0) Run2p2zFilter(&CompensatorV, vbus_target - vbus);
+	//if (enabled && vbus_target > 20.0) Run2p2zFilter(&CompensatorV, vbus_target - vbus);
 	Run2p2zFilter(&FilterVFF, vac);
 	Run2p2zFilter(&FilterIRMS, I_L);
 
@@ -218,58 +217,44 @@ void BoostSlowLoop() {
 
 float v_boost_ref = 0;
 float i_ref = 0;
+float v_a = 0;
 void FastLoop2() {
+	v_boost_ref = (vbus_target * 0.001f) + (v_boost_ref * 0.999f);
+	i_ref = ((v_boost_ref - vbus)*0.1f) + (i_ref*0.9f);
 
+	if (fabsf(i_ref) < 1.0f) {i_ref = 0.0f;}  // this will shut down the bridge (shuts down if I_a_ref = 0)
 
-	v_boost_ref = ((vac*2.5f)*0.001f) + (v_boost_ref*0.999f);  // ensure we don't have an excessive boost ratio
-	if (v_boost_ref > vbus_target) {v_boost_ref = vbus_target;}                 // clip to 700 though
-	i_ref = (-(v_boost_ref - vbus)*0.1f) + (i_ref*0.9f);
-
-	if (fabsf(i_ref) < 0.1f) {i_ref = 0.0f;}  // this will shut down the bridge (shuts down if I_a_ref = 0)
-
-
-	//i_ref = -6.0f;
-
-	//constrain(&i_ref, -I_PHASE_MAX, 0.0f);
-	if (i_ref < -1*GetValue(MAX_AC_I)) i_ref = -1*GetValue(MAX_AC_I);
-	if (i_ref > GetValue(MAX_AC_I)) i_ref = GetValue(MAX_AC_I);
-
-
-	//  =========== ensure that none of these are above or below what is possible ===========
-
-	float vout_ff = vac;
-
+	constrain(&i_ref, 0.0f, GetValue(MAX_AC_I));
 
 	controller_I_A.cmd_lim_min = -150.0f;  // don't add in V out here because we're already FF-ing it
 	controller_I_A.cmd_lim_max = 150.0f;
 
-	if (controller_I_A.cmd_lim_min + vout_ff < 0.0f) { controller_I_A.cmd_lim_min = 0.0f - vout_ff; }         // can't apply voltages less than zero
-	if (controller_I_A.cmd_lim_max + vout_ff > GetValue(MAX_OUT_V)) { controller_I_A.cmd_lim_max = GetValue(MAX_OUT_V) - vout_ff; } // can't apply voltages greater than Vmax
+	if (controller_I_A.cmd_lim_min + vac < 0.0f) { controller_I_A.cmd_lim_min = 0.0f - vac; }         // can't apply voltages less than zero
+	if (controller_I_A.cmd_lim_max + vac > GetValue(MAX_OUT_V)) { controller_I_A.cmd_lim_max = GetValue(MAX_OUT_V) - vac; } // can't apply voltages greater than Vmax
 	if (controller_I_A.cmd_lim_min > 0.0f) { controller_I_A.cmd_lim_min = 0.0f; }
 	if (controller_I_A.cmd_lim_max < 0.0f) { controller_I_A.cmd_lim_max = 0.0f; }
 
 
-	if (I_L > 0.0f) {
-		if ((i_ref-I_L) >= 0.0f) {
-			controller_I_A.Kp = 1.5;
-		} else {
-			controller_I_A.Kp = 2.5;
-		}
+	if ((i_ref-I_L) >= 0.0f) {
+		controller_I_A.Kp = 1.5;
+	} else {
+		controller_I_A.Kp = 2.5;
 	}
 
-	float v_a = LeadLagLPF_Update(&controller_I_A, i_ref-I_L) + vout_ff;
 
-
+	v_a = LeadLagLPF_Update(&controller_I_A, i_ref-I_L) + vac;
 
 
 	// voltage to duty cycle
 	if (vbus > 50.0f) {   // prevents /0 errors
-		TIM1->CCR2 = (int) (v_a/vbus * TIM1->ARR);
-		TIM1->CCR1 = TIM1->CCR2 >> 1;
+		dtc = (v_a / vbus);
+		if (vbus > vbus_target) dtc = 0;
+		TIM1->CCR2 = (int) (dtc * TIM1->ARR);
 	} else {
 		TIM1->CCR2 = (int) (v_a*0.1f * TIM1->ARR);
-		TIM1->CCR1 = TIM1->CCR2 >> 1;
 	}
+
+	TIM1->CCR1 = TIM1->CCR2 >> 1;
 
 }
 

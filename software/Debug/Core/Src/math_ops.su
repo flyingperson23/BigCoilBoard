@@ -1,0 +1,9 @@
+../Core/Src/math_ops.c:5:7:fmaxf	16	static
+../Core/Src/math_ops.c:9:7:fminf	16	static
+../Core/Src/math_ops.c:13:7:fmaxf3	24	static
+../Core/Src/math_ops.c:17:7:fminf3	24	static
+../Core/Src/math_ops.c:21:5:limit_norm	32	static
+../Core/Src/math_ops.c:34:6:limit_abs	16	static
+../Core/Src/math_ops.c:45:6:constrain	24	static
+../Core/Src/math_ops.c:50:6:constrain_int	24	static
+../Core/Src/math_ops.c:55:6:slew_rate_lim	24	static

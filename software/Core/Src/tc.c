@@ -114,6 +114,10 @@ void TC_Loop_Tim() {
 		BoostDisable();
 	}
 
+	if (fault != 0) {
+		bus_status = BUS_OFF;
+	}
+
 	TIM16->ARR = GetValue(MAX_OT);
 	counter3++;
 	if (counter3 % 100 == 0) {
@@ -134,12 +138,11 @@ void CN_Actuate() {
 			HAL_GPIO_WritePin(CN2_GPIO_Port, CN2_Pin, GPIO_PIN_RESET);
 			counter = (counter + 1) % 1000;
 			if (counter == 0) {
-				float bus_voltage = 1;
-				float difference = bus_voltage - last;
+				float difference = vbus - last;
 				if (difference <= threshold && vbus > 20) {
 					bus_status = BUS_ON;
 				}
-				last = bus_voltage;
+				last = vbus;
 			}
 		} else if (bus_status == BUS_ON) {
 			HAL_GPIO_WritePin(CN1_GPIO_Port, CN1_Pin, GPIO_PIN_SET);
@@ -176,7 +179,7 @@ void Overlay_Send(TERMINAL_HANDLE * handle) {
 	TERM_sendVT100Code(handle, _VT100_CURSOR_DISABLE,0);
 
 	uint8_t row_pos = 1;
-	uint8_t col_pos = 115;
+	uint8_t col_pos = 110;
 	TERM_Box(handle, row_pos, col_pos, row_pos + 8, col_pos + 25);
 	TERM_setCursorPos(handle, row_pos + 1, col_pos + 1);
 	ttprintf("Bus Voltage:       %4iV", (int) vbus);
