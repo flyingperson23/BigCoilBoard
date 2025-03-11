@@ -9,6 +9,6 @@
 ../Core/Src/main.c:514:13:MX_TIM7_Init	3
 ../Core/Src/main.c:552:13:MX_TIM16_Init	2
 ../Core/Src/main.c:584:13:MX_USART3_UART_Init	5
-../Core/Src/main.c:631:13:MX_DMA_Init	1
-../Core/Src/main.c:653:13:MX_GPIO_Init	1
-../Core/Src/main.c:709:6:Error_Handler	1
+../Core/Src/main.c:630:13:MX_DMA_Init	1
+../Core/Src/main.c:652:13:MX_GPIO_Init	1
+../Core/Src/main.c:708:6:Error_Handler	1

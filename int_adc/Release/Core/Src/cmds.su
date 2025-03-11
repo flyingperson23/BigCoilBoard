@@ -1,0 +1,8 @@
+../Core/Src/cmds.c:13:9:CMD_telem	24	static
+../Core/Src/cmds.c:22:9:CMD_get	40	static
+../Core/Src/cmds.c:43:9:CMD_set	32	static
+../Core/Src/cmds.c:144:9:CMD_bus	16	static
+../Core/Src/cmds.c:110:9:CMD_vbus	24	static
+../Core/Src/cmds.c:75:9:CMD_fault	16	static
+../Core/Src/cmds.c:173:6:addCommand	16	static
+../Core/Src/cmds.c:177:6:CmdsInit	8	static

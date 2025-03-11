@@ -44,7 +44,7 @@ void TC_Init() {
 	HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
 
 
-	//HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
+	HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
 
 	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t *) aux_adc, 1);
@@ -128,7 +128,7 @@ void TC_Loop_Tim() {
 
 uint8_t counter = 0;
 float last = 0;
-float threshold = 0.5;
+float threshold = 25;
 void CN_Actuate() {
 	if (bus_status == BUS_OFF) {
 			HAL_GPIO_WritePin(CN1_GPIO_Port, CN1_Pin, GPIO_PIN_RESET);
@@ -209,17 +209,22 @@ void Overlay_Send(TERMINAL_HANDLE * handle) {
 	TERM_setCursorPos(handle, row_pos + 5, col_pos + 1);
 	ttprintf("Bus status: ");
 
-	switch (bus_status) {
-		case BUS_OFF:
-			ttprintf("         Off");
-			break;
-		case BUS_CHARGING:
-			ttprintf("    Charging");
-			break;
-		case BUS_ON:
-			ttprintf("          On");
-			break;
+	if (fault != 0) {
+		ttprintf("       Fault");
+	} else {
+		switch (bus_status) {
+			case BUS_OFF:
+				ttprintf("         Off");
+				break;
+			case BUS_CHARGING:
+				ttprintf("    Charging");
+				break;
+			case BUS_ON:
+				ttprintf("          On");
+				break;
+		}
 	}
+
 
 	TERM_setCursorPos(handle, row_pos + 6, col_pos + 1);
 	ttprintf("RMS power:         %4iW", (int) (vac_rms * I_L_rms));

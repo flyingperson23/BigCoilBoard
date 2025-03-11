@@ -7,8 +7,8 @@
 ../Core/Src/boost.c:131:6:ADC_SPI_Get	32	static
 ../Core/Src/boost.c:147:6:HAL_TIM_PWM_PulseFinishedCallback	16	static
 ../Core/Src/boost.c:155:6:MeasureTrigger	16	static
-../Core/Src/boost.c:196:6:BoostSlowLoop	8	static
-../Core/Src/boost.c:222:6:FastLoop2	32	static
-../Core/Src/boost.c:282:6:BoostFastLoop	8	static
-../Core/Src/boost.c:312:6:BoostDisable	4	static
-../Core/Src/boost.c:318:6:BoostEnable	8	static
+../Core/Src/boost.c:195:6:BoostSlowLoop	8	static
+../Core/Src/boost.c:221:6:FastLoop2	16	static
+../Core/Src/boost.c:260:6:BoostFastLoop	8	static
+../Core/Src/boost.c:290:6:BoostDisable	4	static
+../Core/Src/boost.c:296:6:BoostEnable	8	static

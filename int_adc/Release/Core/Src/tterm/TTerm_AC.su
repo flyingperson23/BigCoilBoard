@@ -1,0 +1,13 @@
+../Core/Src/tterm/TTerm_AC.c:37:6:TERM_addCommandAC	0	static
+../Core/Src/tterm/TTerm_AC.c:68:9:TERM_findMatchingCMDs	40	static
+../Core/Src/tterm/TTerm_AC.c:42:9:TERM_doAutoComplete	16	static
+../Core/Src/tterm/TTerm_AC.c:93:9:TERM_findLastArg	24	static
+../Core/Src/tterm/TTerm_AC.c:124:9:TERM_doListAC	40	static
+../Core/Src/tterm/TTerm_AC.c:164:9:ACL_defaultCompleter	24	static
+../Core/Src/tterm/TTerm_AC.c:186:19:ACL_getNext	0	static
+../Core/Src/tterm/TTerm_AC.c:190:16:ACL_create	8	static
+../Core/Src/tterm/TTerm_AC.c:198:16:ACL_createConst	24	static
+../Core/Src/tterm/TTerm_AC.c:214:19:ACL_find	32	static
+../Core/Src/tterm/TTerm_AC.c:273:6:ACL_remove	48	static
+../Core/Src/tterm/TTerm_AC.c:298:10:ACL_isSorted	32	static
+../Core/Src/tterm/TTerm_AC.c:229:6:ACL_add	24	static

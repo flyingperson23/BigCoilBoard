@@ -1,0 +1,9 @@
+../Core/Src/tc.c:17:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/tc.c:32:6:TC_Init	8	static
+../Core/Src/tc.c:67:6:TC_Loop	8	static
+../Core/Src/tc.c:73:6:TC_Loop_Tim	40	static
+../Core/Src/tc.c:136:6:CN_Actuate	16	static
+../Core/Src/tc.c:157:6:TERM_Box	24	static
+../Core/Src/tc.c:181:6:Overlay_Send	48	static
+../Core/Src/tc.c:243:6:SetFault	16	static
+../Core/Src/tc.c:247:6:ClearFault	16	static

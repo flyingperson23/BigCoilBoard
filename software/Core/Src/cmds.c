@@ -95,6 +95,12 @@ uint8_t CMD_fault(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args) {
 			if (fault & FAULT_UV) {
 				ttprintf(" -Undervoltage\r\n");
 			}
+			if (fault & FAULT_ONTIME) {
+				ttprintf(" -Ontime\r\n");
+			}
+			if (fault & FAULT_MANSTOP) {
+				ttprintf(" -Manual Stop\r\n");
+			}
 		}
 		return TERM_CMD_EXIT_SUCCESS;
 	}
@@ -169,6 +175,12 @@ uint8_t CMD_bus(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args) {
 	return TERM_CMD_EXIT_SUCCESS;
 }
 
+uint8_t CMD_kill(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args) {
+	SetFault(FAULT_MANSTOP);
+
+	return TERM_CMD_EXIT_SUCCESS;
+}
+
 
 void addCommand(TermCommandFunction function, const char * command, const char * description){
 	TERM_addCommand(function, command, description, 0, &TERM_defaultList);
@@ -181,4 +193,6 @@ void CmdsInit(){
 	addCommand(CMD_telem, "telem", "Gets telemetry");
 	addCommand(CMD_bus, "bus", "Changes bus status");
 	addCommand(CMD_vbus, "vbus", "Changes vbus setpoint");
+	addCommand(CMD_kill, "kill", "Manual E-Stop");
+	addCommand(CMD_kill, "stop", "Manual E-Stop");
 }

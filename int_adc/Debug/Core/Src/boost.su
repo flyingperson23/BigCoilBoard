@@ -1,0 +1,7 @@
+../Core/Src/boost.c:32:6:HAL_ADC_ConvCpltCallback	24	static
+../Core/Src/boost.c:41:6:Boost_Init	8	static
+../Core/Src/boost.c:71:6:Boost_Clear	4	static
+../Core/Src/boost.c:83:6:FastLoop2	16	static
+../Core/Src/boost.c:122:6:BoostFastLoop	8	static
+../Core/Src/boost.c:144:6:BoostDisable	4	static
+../Core/Src/boost.c:150:6:BoostEnable	8	static

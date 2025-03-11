@@ -1,0 +1,4 @@
+../Core/Src/int.c:12:6:DACLut	72	static
+../Core/Src/int.c:48:6:TIM2Overflow	8	static
+../Core/Src/int.c:59:6:TIM16Overflow	0	static
+../Core/Src/int.c:65:6:HAL_GPIO_EXTI_Callback	16	static

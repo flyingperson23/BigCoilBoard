@@ -206,7 +206,7 @@ void BoostSlowLoop() {
 		VInv_rms = 1.0;
 		vac_rms = 0.0;
 	} else {
-		vac_rms = 1.1 * FilterVFF.y[0];
+		vac_rms = 1.1 * FilterVFF.y[0] * 0.666;
 		VInv_rms = 1.0 / vac_rms;
 		VInvSq_rms = VInv_rms * VInv_rms;
 	}
@@ -235,10 +235,9 @@ void FastLoop2() {
 	if (controller_I_A.cmd_lim_max < 0.0f) { controller_I_A.cmd_lim_max = 0.0f; }
 
 
-	if ((i_ref-I_L) >= 0.0f) {
-		controller_I_A.Kp = 1.5;
-	} else {
-		controller_I_A.Kp = 2.5;
+	controller_I_A.Kp = ((float) GetValue(BOOST_KP)) / 10.0f;
+	if ((i_ref-I_L) < 0.0f) {
+		controller_I_A.Kp = controller_I_A.Kp * 2.5f / 1.5f;
 	}
 
 

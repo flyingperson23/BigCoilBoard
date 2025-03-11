@@ -45,6 +45,7 @@ extern uint32_t fault;
 #define FAULT_OT 1 << 2
 #define FAULT_UV 1 << 3
 #define FAULT_ONTIME 1 << 4
+#define FAULT_MANSTOP 1 << 5
 
 #define CH_TEMP1 0
 #define CH_TEMP2 1
