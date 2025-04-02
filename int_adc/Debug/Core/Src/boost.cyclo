@@ -1,7 +1,10 @@
-../Core/Src/boost.c:32:6:HAL_ADC_ConvCpltCallback	2
-../Core/Src/boost.c:41:6:Boost_Init	1
-../Core/Src/boost.c:71:6:Boost_Clear	1
-../Core/Src/boost.c:83:6:FastLoop2	9
-../Core/Src/boost.c:122:6:BoostFastLoop	6
-../Core/Src/boost.c:144:6:BoostDisable	1
-../Core/Src/boost.c:150:6:BoostEnable	1
+../Core/Src/boost.c:34:6:HAL_ADC_ConvCpltCallback	5
+../Core/Src/boost.c:52:6:ClearRMS	1
+../Core/Src/boost.c:58:6:AddRMS	1
+../Core/Src/boost.c:63:7:CalcRMS	2
+../Core/Src/boost.c:78:6:Boost_Init	1
+../Core/Src/boost.c:114:6:Boost_Clear	1
+../Core/Src/boost.c:126:6:FastLoop2	9
+../Core/Src/boost.c:162:6:BoostFastLoop	5
+../Core/Src/boost.c:186:6:BoostDisable	1
+../Core/Src/boost.c:191:6:BoostEnable	1

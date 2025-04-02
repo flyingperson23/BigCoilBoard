@@ -1,9 +1,9 @@
 ../Core/Src/cmds.c:13:9:CMD_telem	48	static
-../Core/Src/cmds.c:22:9:CMD_get	48	static
-../Core/Src/cmds.c:43:9:CMD_set	64	static
-../Core/Src/cmds.c:75:9:CMD_fault	24	static
-../Core/Src/cmds.c:116:9:CMD_vbus	40	static
-../Core/Src/cmds.c:150:9:CMD_bus	24	static
-../Core/Src/cmds.c:178:9:CMD_kill	24	static
-../Core/Src/cmds.c:185:6:addCommand	32	static
-../Core/Src/cmds.c:189:6:CmdsInit	8	static
+../Core/Src/cmds.c:26:9:CMD_get	48	static
+../Core/Src/cmds.c:47:9:CMD_set	64	static
+../Core/Src/cmds.c:79:9:CMD_fault	24	static
+../Core/Src/cmds.c:120:9:CMD_vbus	40	static
+../Core/Src/cmds.c:151:9:CMD_bus	24	static
+../Core/Src/cmds.c:179:9:CMD_kill	24	static
+../Core/Src/cmds.c:186:6:addCommand	32	static
+../Core/Src/cmds.c:190:6:CmdsInit	8	static

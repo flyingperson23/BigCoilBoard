@@ -8,11 +8,17 @@
 #include "tc.h"
 
 uint8_t bus_status = BUS_OFF;
-uint16_t therm_readings[5];
+uint16_t therm_readings[4];
 float temps[6];
-uint16_t aux_adc[4];
+uint16_t aux_adc[3];
 uint32_t fault = 0;
 float v24_value = 0;
+
+uint16_t TS_CAL1 = 1;
+uint16_t TS_CAL2 = 2;
+uint16_t VREFINT = 1;
+float VREF = 3.3f;
+
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if (htim == &htim6) {
@@ -30,8 +36,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 }
 
 void TC_Init() {
+	aux_adc[0] = 0;
+	aux_adc[1] = 0;
+	aux_adc[2] = 0;
+
+	TS_CAL1 = (*(uint16_t *)(0x1FFF75A8));
+	TS_CAL2 = (*(uint16_t *)(0x1FFF75CA));
+	VREFINT = (*(uint16_t *)(0x1FFF75AA));
 
 	HAL_GPIO_WritePin(STOP_GPIO_Port, STOP_Pin, GPIO_PIN_RESET);
+
+	HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+
 
 	UartInit();
 	AddVars();
@@ -44,22 +60,23 @@ void TC_Init() {
 
 
 
-	HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
+	HAL_DAC_Start(&hdac1, DAC_CHANNEL_2);
 	HAL_DAC_Start(&hdac4, DAC_CHANNEL_1);
 
+
 	HAL_ADCEx_Calibration_Start(&hadc5, ADC_SINGLE_ENDED);
-	HAL_ADC_Start_DMA(&hadc5, (uint32_t *) aux_adc, 4);
+	HAL_ADC_Start_DMA(&hadc5, (uint32_t *) aux_adc, 3);
 
 	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
-	HAL_ADC_Start_DMA(&hadc1, (uint32_t *) therm_readings, 5);
+	HAL_ADC_Start_DMA(&hadc1, (uint32_t *) therm_readings, 4);
 
 	HAL_COMP_Start(&hcomp5);
 
+	Boost_Init();
 
 	HAL_TIM_Base_Start_IT(&htim6);
 	HAL_TIM_Base_Start_IT(&htim7);
 
-	Boost_Init();
 
 	DACLut();
 }
@@ -71,30 +88,53 @@ void TC_Loop() {
 
 int counter3 = 0;
 void TC_Loop_Tim() {
+	if (aux_adc[2] != 0) {
+		float vref_new = 3.0f * (float) VREFINT / (float) aux_adc[2];
+		if (vref_new < 5.0f && vref_new > 1.5f) {
+			VREF = (VREF + vref_new) / 2.0f;
+		}
+	}
+
 	// contactors
 	CN_Actuate();
 
 	// thermistors
-	for (int i = 0; i < 5; i++) {
+
+
+	for (int i = 0; i < 4; i++) {
 		float voltage = (float) therm_readings[i] * VREF / 4095.0;
+		if (voltage > 0) {
+			float resistance = R_MEAS * (3.3 / voltage - 1.0);
+			if (resistance > 1) {
+				float temp_1 = log(resistance/5000.0) / 3433.0 + 1.0/298.15;
+				if (temp_1 > 0) {
+					temps[i] = (1.0 / temp_1) - 273.15;
+				}
+			}
+		}
+	}
+
+	float voltage = (float) vbus_buf[1] * VREF / 4095.0;
+	if (voltage > 0) {
 		float resistance = R_MEAS * (3.3 / voltage - 1.0);
 		if (resistance > 1) {
 			float temp_1 = log(resistance/5000.0) / 3433.0 + 1.0/298.15;
 			if (temp_1 > 0) {
-				temps[i] = (1.0 / temp_1) - 273.15;
+				temps[4] = (1.0 / temp_1) - 273.15;
 			}
 		}
 	}
-	temps[5] = (TS_CAL2_TEMP - TS_CAL1_TEMP)/(TS_CAL2 - TS_CAL1) * ((float) aux_adc[1] - TS_CAL1) + TS_CAL1_TEMP;
-	v24_value = aux_adc[0] * VREF / 4095.0 * 11.0;
-	if (v24_value < GetValue(DRIVER_UVLO)) {
-		SetFault(FAULT_UV);
-	}
+	temps[5] = (TS_CAL2_TEMP - TS_CAL1_TEMP)/((float) TS_CAL2 - (float) TS_CAL1) * ((float) aux_adc[1] - (float) TS_CAL1) + TS_CAL1_TEMP;
 
 	for (int i = 0; i < 6; i++) {
 		if (temps[i] > GetValue(MAX_TEMP)) {
 			SetFault(FAULT_OT);
 		}
+	}
+
+	v24_value = aux_adc[0] * VREF / 4095.0 * 11.0;
+	if (v24_value < GetValue(DRIVER_UVLO) && v24_value > 5.0f) {
+		SetFault(FAULT_UV);
 	}
 
 	if (fault == 0 && bus_status != BUS_CHARGING) {
@@ -123,8 +163,15 @@ void TC_Loop_Tim() {
 		DACLut();
 	}
 
+	if (counter3 % 10 == 0) {
+		CalcRMS(&vac_rms);
+		CalcRMS(&I_L_rms);
+	}
+
 	if (I_L_conv != 0) {
 		float counts = (float) GetValue(MAX_I_L) / I_L_conv * 4095.0 / VREF;
+		if (counts > 4095) counts = 4095;
+		if (counts < 0) counts = 0;
 		HAL_DAC_SetValue(&hdac4, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (int) counts);
 	}
 
@@ -179,6 +226,7 @@ void TERM_Box(TERMINAL_HANDLE * handle, uint8_t row1, uint8_t col1, uint8_t row2
 }
 
 void Overlay_Send(TERMINAL_HANDLE * handle) {
+
 	TERM_sendVT100Code(handle, _VT100_CURSOR_SAVE_POSITION,0);
 	TERM_sendVT100Code(handle, _VT100_CURSOR_DISABLE,0);
 
@@ -186,10 +234,10 @@ void Overlay_Send(TERMINAL_HANDLE * handle) {
 	uint8_t col_pos = 110;
 	TERM_Box(handle, row_pos, col_pos, row_pos + 8, col_pos + 25);
 	TERM_setCursorPos(handle, row_pos + 1, col_pos + 1);
-	ttprintf("Bus Voltage:       %4iV", (int) vbus);
+	ttprintf("Bus Voltage:       %4iV", (int) (vbus));
 
 	TERM_setCursorPos(handle, row_pos + 2, col_pos + 1);
-	ttprintf("AC Voltage:        %4iV", (int) 0);
+	ttprintf("AC Voltage:        %4iV", (int) (vac_rms.out));
 
 
 	float hi_temp = -1;
@@ -231,10 +279,10 @@ void Overlay_Send(TERMINAL_HANDLE * handle) {
 
 
 	TERM_setCursorPos(handle, row_pos + 6, col_pos + 1);
-	ttprintf("RMS power:         %4iW", (int) (0));
+	ttprintf("RMS power:         %4iW", (int) (vac_rms.out * I_L_rms.out));
 
 	TERM_setCursorPos(handle, row_pos + 7, col_pos + 1);
-	ttprintf("RMS Current:       %4iA", (int) (0));
+	ttprintf("RMS Current:       %4iA", (int) (I_L_rms.out));
 
 	TERM_sendVT100Code(handle, _VT100_CURSOR_RESTORE_POSITION,0);
 	TERM_sendVT100Code(handle, _VT100_CURSOR_ENABLE,0);

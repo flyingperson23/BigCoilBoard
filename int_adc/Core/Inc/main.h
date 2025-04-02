@@ -59,31 +59,27 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define CN1_Pin GPIO_PIN_13
-#define CN1_GPIO_Port GPIOC
-#define INT_OUT_Pin GPIO_PIN_14
-#define INT_OUT_GPIO_Port GPIOC
-#define THERM5_Pin GPIO_PIN_1
+#define LED4_Pin GPIO_PIN_13
+#define LED4_GPIO_Port GPIOC
+#define THERM5_Pin GPIO_PIN_2
 #define THERM5_GPIO_Port GPIOA
-#define THERM4_Pin GPIO_PIN_2
+#define THERM4_Pin GPIO_PIN_3
 #define THERM4_GPIO_Port GPIOA
-#define THERM3_Pin GPIO_PIN_3
+#define THERM3_Pin GPIO_PIN_4
 #define THERM3_GPIO_Port GPIOA
-#define OCD_OUT_Pin GPIO_PIN_4
+#define OCD_OUT_Pin GPIO_PIN_5
 #define OCD_OUT_GPIO_Port GPIOA
-#define LED2_Pin GPIO_PIN_5
-#define LED2_GPIO_Port GPIOA
-#define LED3_Pin GPIO_PIN_6
-#define LED3_GPIO_Port GPIOA
-#define LED4_Pin GPIO_PIN_7
-#define LED4_GPIO_Port GPIOA
+#define CN2_Pin GPIO_PIN_6
+#define CN2_GPIO_Port GPIOA
+#define CN1_Pin GPIO_PIN_7
+#define CN1_GPIO_Port GPIOA
 #define THERM2_Pin GPIO_PIN_0
 #define THERM2_GPIO_Port GPIOB
 #define THERM1_Pin GPIO_PIN_1
 #define THERM1_GPIO_Port GPIOB
-#define INT_IN_Pin GPIO_PIN_12
+#define INT_IN_Pin GPIO_PIN_2
 #define INT_IN_GPIO_Port GPIOB
-#define INT_IN_EXTI_IRQn EXTI15_10_IRQn
+#define INT_IN_EXTI_IRQn EXTI2_IRQn
 #define I_L_Pin GPIO_PIN_13
 #define I_L_GPIO_Port GPIOB
 #define VAC_SENSE_Pin GPIO_PIN_14
@@ -100,10 +96,14 @@ void Error_Handler(void);
 #define BLED2_GPIO_Port GPIOA
 #define BLED3_Pin GPIO_PIN_12
 #define BLED3_GPIO_Port GPIOA
-#define STOP_Pin GPIO_PIN_6
+#define STOP_Pin GPIO_PIN_5
 #define STOP_GPIO_Port GPIOB
-#define CN2_Pin GPIO_PIN_9
-#define CN2_GPIO_Port GPIOB
+#define LED1_Pin GPIO_PIN_6
+#define LED1_GPIO_Port GPIOB
+#define LED2_Pin GPIO_PIN_7
+#define LED2_GPIO_Port GPIOB
+#define LED3_Pin GPIO_PIN_9
+#define LED3_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 extern ADC_HandleTypeDef hadc1;

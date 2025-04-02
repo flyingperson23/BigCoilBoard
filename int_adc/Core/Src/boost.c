@@ -18,7 +18,7 @@ float I_L;
 float I_L_target;
 float vac;
 
-uint16_t vbus_buf[1];
+uint16_t vbus_buf[2];
 uint16_t vac_buf[1];
 uint16_t I_L_buf[1];
 
@@ -29,18 +29,60 @@ float vbus_conv = 0;
 float vac_conv = 0;
 float I_L_conv = 0;
 
+uint8_t bit = 0;
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
-	if (hadc == &hadc3) {
+
+	if (hadc == &hadc2) {
 		vbus = vbus_buf[0] * VREF / 4095.0 * vbus_conv;
-		vac = vac_buf[0] * VREF / 4095.0 * vbus_conv;
+	}
+
+	if (hadc == &hadc3) {
 		I_L = I_L_buf[0] * VREF / 4095.0 * I_L_conv;
-		BoostFastLoop();
+		HAL_GPIO_TogglePin(BLED3_GPIO_Port, BLED3_Pin);
+		bit = !bit;
+		if (bit) BoostFastLoop();
+	}
+
+	if (hadc == &hadc4) {
+		vac = vac_buf[0] * VREF / 4095.0 * vac_conv;
 	}
 }
 
+void ClearRMS(FilterRMS * filter) {
+	filter->acc = 0;
+	filter->cnt = 0;
+	filter->out = 0;
+}
+
+void AddRMS(FilterRMS * filter, float value) {
+	filter->cnt = filter->cnt + 1;
+	filter->acc = filter->acc + (value * value);
+}
+
+float CalcRMS(FilterRMS * filter) {
+	if (filter->cnt == 0) {
+		filter->out = 0;
+		filter->acc = 0;
+	} else {
+		filter->out = sqrt(filter->acc / (float) filter->cnt);
+		filter->acc = 0;
+		filter->cnt = 0;
+	}
+	return filter->out;
+}
+
+FilterRMS vac_rms;
+FilterRMS I_L_rms;
+
 void Boost_Init() {
+	vbus_conv = 1000.0 * (float) GetValue(VBUS_R) / R_MEAS;
+	vac_conv = 1000.0 * (float) GetValue(VAC_R) / R_MEAS;
+	I_L_conv = 1000000.0 / (float) GetValue(AC_CT_FACTOR); // A/V
+
+
 	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
-	HAL_ADC_Start_DMA(&hadc2, (uint32_t *) vbus_buf, 1);
+	HAL_ADC_Start_DMA(&hadc2, (uint32_t *) vbus_buf, 2);
 
 	HAL_ADCEx_Calibration_Start(&hadc3, ADC_SINGLE_ENDED);
 	HAL_ADC_Start_DMA(&hadc3, (uint32_t *) I_L_buf, 1);
@@ -55,16 +97,17 @@ void Boost_Init() {
 	controller_I_A.lag_ki = 0.05f;
 	controller_I_A.Kp = 3.0f;
 
+	ClearRMS(&vac_rms);
+	ClearRMS(&I_L_rms);
+
 	Boost_Clear();
 
 	TIM1->CCR1 = 0;
-	TIM1->CCR2 = 50;
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start_IT(&htim1, TIM_CHANNEL_2);
 
-	vbus_conv = 1000.0 * (float) GetValue(VBUS_R) / R_MEAS;
-	vac_conv = 1000.0 * (float) GetValue(VAC_R) / R_MEAS;
-	I_L_conv = 1000000.0 / (float) GetValue(AC_CT_FACTOR); // A/V
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_5);
+
+
 
 }
 
@@ -114,9 +157,6 @@ void FastLoop2() {
 	} else {
 		TIM1->CCR1 = (int) (v_a*0.1f * TIM1->ARR);
 	}
-
-	TIM1->CCR2 = TIM1->CCR1 >> 1;
-
 }
 
 void BoostFastLoop() {
@@ -132,18 +172,19 @@ void BoostFastLoop() {
 
 		FastLoop2();
 
-		if (TIM1->CCR2 < 50) TIM1->CCR2 = 50;
-
-
 	} else {
-		TIM1->CCR2 = 50;
 		TIM1->CCR1 = 0;
 	}
+
+	AddRMS(&vac_rms, vac);
+	AddRMS(&I_L_rms, I_L);
+
+	TIM1->CCR1 = 0.3 * TIM1->ARR;
+
 }
 
 void BoostDisable() {
-	TIM1->CCR2 = 50;
-	TIM1->CCR1 = 0;
+	//TIM1->CCR1 = 0;
 	enabled = 0;
 }
 

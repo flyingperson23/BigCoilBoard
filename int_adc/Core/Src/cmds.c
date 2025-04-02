@@ -11,11 +11,15 @@ Var * tempVar;
 int tempInt;
 
 uint8_t CMD_telem(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args) {
-	ttprintf("Bus Voltage: %fVdc\r\n", (int) vbus);
-	//ttprintf("Line Voltage: %fVac\r\n", (int) vac_rms);
-	//ttprintf("Line Current: %fA\r\n", (int) I_L_rms);
+	ttprintf("Bus Voltage: %iVdc\r\n", (int) vbus);
+	ttprintf("Line Voltage: %iVac\r\n", (int) (vac_rms.out));
+	ttprintf("Line Current: %iA\r\n", (int) (I_L_rms.out));
+	ttprintf("Driver Voltage: %iV\r\n", (int) v24_value);
+	ttprintf("VREF: %imV\r\n", (int) (1000*VREF));
 	ttprintf("Temps: %i %i %i %i %i %i\r\n", (int) temps[0], (int) temps[1], (int) temps[2], (int) temps[3], (int) temps[4], (int) temps[5]);
-	//ttprintf("ADC Readings: %i %i %i\r\n", vbus_buf[0], vac_buf[0], I_L_buf[0]);
+	ttprintf("Aux ADC: %i %i %i\r\n", aux_adc[0], aux_adc[1], aux_adc[2]);
+	ttprintf("Boost ADC: %i %i %i\r\n", vbus_buf[0], vac_buf[0], I_L_buf[0]);
+	ttprintf("Therm ADC: %i %i %i %i %i\r\n", therm_readings[0], therm_readings[1], therm_readings[2], therm_readings[3], therm_readings[4]);
 	return TERM_CMD_EXIT_SUCCESS;
 }
 
@@ -118,13 +122,10 @@ uint8_t CMD_vbus(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args) {
 		if (!strcmp(args[0], "get")) {
 			ttprintf("vbus: %i\r\n", (int) (1000 * vbus));
 			ttprintf("vbus target: %i\r\n", (int) (1000 * vbus_target));
-			//ttprintf("I_L: %i\r\n", (int) (1000 * I_L_rms));
+			ttprintf("I_L: %i\r\n", (int) (1000 * I_L_rms.out));
 			ttprintf("I_L_target: %i\r\n", (int) (1000 * I_L_target));
 			ttprintf("vac: %i\r\n", (int) (1000 * vac));
-			//ttprintf("vac_rms: %i\r\n", (int) (1000 * vac_rms));
-			//ttprintf("vinvsq_rms: %i\r\n", (int) (1000000 * VInvSq_rms));
-			//ttprintf("CompVOut: %i\r\n", (int) (1000 * CompensatorV.y[0]));
-			//ttprintf("CompIOut: %i\r\n", (int) (1000 * CompensatorI.y[0]));
+			ttprintf("vac_rms: %i\r\n", (int) (1000 * vac_rms.out));
 			ttprintf("dtc: %i / 1000\r\n", (int) (dtc * 1000));
 			ttprintf("enabled: %i", enabled);
 			return TERM_CMD_EXIT_SUCCESS;

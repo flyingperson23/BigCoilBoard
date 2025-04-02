@@ -123,6 +123,10 @@ void TC_Loop_Tim() {
 	if (counter3 % 100 == 0) {
 		DACLut();
 	}
+	if (counter3 % 10 == 0) {
+		CalcRMS(&vac_rms);
+		CalcRMS(&I_L_rms);
+	}
 
 }
 
