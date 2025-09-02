@@ -32,7 +32,7 @@ void TC_Loop_Tim();
 #define BUS_CHARGING 1
 #define BUS_ON 2
 
-#define R_MEAS 4700.0
+#define R_MEAS 4990.0
 
 extern uint32_t fault;
 #define FAULT_OV 1 << 0
@@ -50,11 +50,6 @@ extern uint32_t fault;
 #define CH_I_L 5
 #define CH_VAC 6
 #define CH_VBUS 7
-
-
-#define TS_CAL1_P ((uint16_t *) 0x1FFF75A8);
-#define TS_CAL2_P ((uint16_t *) 0x1FFF75CA);
-#define VREFINT_P ((uint16_t *) 0x1FFF75AA);
 
 #define TS_CAL1_TEMP 30.0
 #define TS_CAL2_TEMP 130.0

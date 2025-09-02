@@ -55,7 +55,6 @@ COMP_HandleTypeDef hcomp5;
 
 DAC_HandleTypeDef hdac1;
 DAC_HandleTypeDef hdac4;
-DMA_HandleTypeDef hdma_dac1_ch2;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
@@ -172,12 +171,11 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV4;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV2;
   RCC_OscInitStruct.PLL.PLLN = 85;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
@@ -634,7 +632,7 @@ static void MX_DAC1_Init(void)
   sConfig.DAC_DMADoubleDataMode = DISABLE;
   sConfig.DAC_SignedFormat = DISABLE;
   sConfig.DAC_SampleAndHold = DAC_SAMPLEANDHOLD_DISABLE;
-  sConfig.DAC_Trigger = DAC_TRIGGER_SOFTWARE;
+  sConfig.DAC_Trigger = DAC_TRIGGER_NONE;
   sConfig.DAC_Trigger2 = DAC_TRIGGER_NONE;
   sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;
   sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_EXTERNAL;
@@ -998,9 +996,6 @@ static void MX_DMA_Init(void)
   /* DMA1_Channel1_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
-  /* DMA1_Channel2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Channel2_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Channel2_IRQn);
   /* DMA1_Channel3_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Channel3_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Channel3_IRQn);
@@ -1041,7 +1036,8 @@ static void MX_GPIO_Init(void)
                           |BLED3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, STOP_Pin|LED1_Pin|LED2_Pin|LED3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, AUX_Pin|STOP_Pin|LED1_Pin|LED2_Pin
+                          |LED3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : LED4_Pin */
   GPIO_InitStruct.Pin = LED4_Pin;
@@ -1065,8 +1061,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(INT_IN_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : STOP_Pin LED1_Pin LED2_Pin LED3_Pin */
-  GPIO_InitStruct.Pin = STOP_Pin|LED1_Pin|LED2_Pin|LED3_Pin;
+  /*Configure GPIO pins : AUX_Pin STOP_Pin LED1_Pin LED2_Pin
+                           LED3_Pin */
+  GPIO_InitStruct.Pin = AUX_Pin|STOP_Pin|LED1_Pin|LED2_Pin
+                          |LED3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

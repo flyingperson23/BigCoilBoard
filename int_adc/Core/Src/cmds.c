@@ -131,6 +131,7 @@ uint8_t CMD_vbus(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args) {
 			return TERM_CMD_EXIT_SUCCESS;
 		} else if (!strcmp(args[0], "off")) {
 			ttprintf("Boost: off\r\n");
+			vbus_target_fast = 0;
 			vbus_target = 0;
 			return TERM_CMD_EXIT_SUCCESS;
 		} else {
@@ -140,7 +141,7 @@ uint8_t CMD_vbus(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args) {
 				return TERM_CMD_EXIT_SUCCESS;
 			} else {
 				ttprintf("Boost: %iV", setpoint);
-				vbus_target = setpoint;
+				vbus_target_fast = setpoint;
 				return TERM_CMD_EXIT_SUCCESS;
 			}
 		}

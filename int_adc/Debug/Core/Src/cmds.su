@@ -3,7 +3,7 @@
 ../Core/Src/cmds.c:47:9:CMD_set	64	static
 ../Core/Src/cmds.c:79:9:CMD_fault	24	static
 ../Core/Src/cmds.c:120:9:CMD_vbus	40	static
-../Core/Src/cmds.c:151:9:CMD_bus	24	static
-../Core/Src/cmds.c:179:9:CMD_kill	24	static
-../Core/Src/cmds.c:186:6:addCommand	32	static
-../Core/Src/cmds.c:190:6:CmdsInit	8	static
+../Core/Src/cmds.c:152:9:CMD_bus	24	static
+../Core/Src/cmds.c:180:9:CMD_kill	24	static
+../Core/Src/cmds.c:187:6:addCommand	32	static
+../Core/Src/cmds.c:191:6:CmdsInit	8	static

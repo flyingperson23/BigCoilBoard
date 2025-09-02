@@ -13,6 +13,7 @@
 
 extern float vbus;
 extern float vbus_target;
+extern float vbus_target_fast;
 extern float I_L;
 extern float I_L_target;
 extern float vac;

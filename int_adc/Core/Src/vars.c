@@ -24,8 +24,8 @@ void AddVars() {
 	AddVar("max_i_l", 150, "A", MAX_I_L, 0, 1000);
 	AddVar("ct_conv_factor", 1812, "u", CT_FACTOR, 0, 1000000); // 1:2814 ct + 5R1 burden - 1A out / 2814A in * 5,100,000uV out / 1A out = 1812 uV/A
 	AddVar("ac_ct_conv_factor", 20000, "u", AC_CT_FACTOR, 0, 10000000); // 1 A out / 1000 A in * 20,000,000 uV out / 1 A out = 20,000 uV out / A in
-	AddVar("vac_r", 500, "k", VAC_R, 0, 1000000);
-	AddVar("vbus_r", 1000, "k", VBUS_R, 0, 1000000);
+	AddVar("vac_r", 1120, "k", VAC_R, 0, 1000000);
+	AddVar("vbus_r", 1680, "k", VBUS_R, 0, 1000000);
 	AddVar("driver_uvlo", 18, "V", DRIVER_UVLO, 0, 30);
 	AddVar("pri_ramp", 0, "A", I_RAMP, 0, 1000000);
 	AddVar("pri_start", 0, "A", I_START, 0, 1000000);

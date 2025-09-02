@@ -9,6 +9,7 @@
 #define STEPS 512
 uint32_t dac_ramp[STEPS];
 
+int counts_max = 0;
 void DACLut() {
 
 	int pri_OCD = GetValue(MAX_PRI_I);
@@ -16,9 +17,11 @@ void DACLut() {
 	float volts_fb = (float) pri_OCD * (float) ct_ratio; // uV/A * A = uV
 	volts_fb = volts_fb / 1000000.0; // V
 	volts_fb = volts_fb / 2.0; // 1k extra resistor
-	int counts_max = (int) (volts_fb / VREF * 4095.0);
+	counts_max = (int) (volts_fb / VREF * 4095.0);
+	HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_2, DAC_ALIGN_12B_R, counts_max);
 
 
+/*
 	int64_t a_per_us = GetValue(I_RAMP);
 	int64_t I_start = GetValue(I_START);
 
@@ -40,20 +43,21 @@ void DACLut() {
 				dac_ramp[i] = counts;
 			}
 		}
+
+
+		float ramp_time = (pri_OCD - I_start) / a_per_us / (float) STEPS; // in us
+		if (ramp_time < 1) ramp_time = 1;
+		TIM2->ARR = (uint32_t) (ramp_time * 170.0);
+
 	}
-
-
-	float ramp_time = (pri_OCD - I_start) / a_per_us / (float) STEPS; // in us
-	if (ramp_time < 1) ramp_time = 1;
-	TIM2->ARR = (uint32_t) (ramp_time * 170.0);
-
+*/
 }
 
 uint32_t of_counter = 0;
 void TIM2Overflow() {
 	of_counter++;
 	if (of_counter >= STEPS && GetValue(I_START) != 0) {
-		HAL_DAC_Stop_DMA(&hdac1, DAC_CHANNEL_2);
+		//HAL_DAC_Stop_DMA(&hdac1, DAC_CHANNEL_2);
 	}
 	if (!(INT_IN_GPIO_Port->IDR & INT_IN_Pin)) {
 		HAL_TIM_Base_Stop(&htim2);
@@ -76,7 +80,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 			HAL_TIM_Base_Start_IT(&htim16);
 		}
 		if (GetValue(I_START) != 0) {
-			HAL_DAC_Start_DMA(&hdac1, DAC_CHANNEL_2, dac_ramp, STEPS, DAC_ALIGN_12B_R);
+			//HAL_DAC_Start_DMA(&hdac1, DAC_CHANNEL_2, dac_ramp, STEPS, DAC_ALIGN_12B_R);
 		}
 		HAL_TIM_Base_Start_IT(&htim2);
 		HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_SET);

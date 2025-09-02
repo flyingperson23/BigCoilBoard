@@ -14,6 +14,7 @@ LeadLagLPFStruct controller_I_A;
 
 float vbus;
 float vbus_target;
+float vbus_target_fast;
 float I_L;
 float I_L_target;
 float vac;
@@ -29,7 +30,7 @@ float vbus_conv = 0;
 float vac_conv = 0;
 float I_L_conv = 0;
 
-uint8_t bit = 0;
+uint8_t boostcounter = 0;
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 
@@ -39,9 +40,13 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 
 	if (hadc == &hadc3) {
 		I_L = I_L_buf[0] * VREF / 4095.0 * I_L_conv;
-		HAL_GPIO_TogglePin(BLED3_GPIO_Port, BLED3_Pin);
-		bit = !bit;
-		if (bit) BoostFastLoop();
+		HAL_GPIO_TogglePin(AUX_GPIO_Port, AUX_Pin);
+		boostcounter++;
+		if (boostcounter % 2 == 0) BoostFastLoop();
+		if (boostcounter == 1) {
+			if (vbus_target < vbus_target_fast) vbus_target += 1;
+			if (vbus_target > vbus_target_fast) vbus_target = vbus_target_fast;
+		}
 	}
 
 	if (hadc == &hadc4) {
@@ -114,6 +119,7 @@ void Boost_Init() {
 void Boost_Clear() {
 	vbus = 0;
 	vbus_target = 0;
+	vbus_target_fast = 0;
 	I_L = 0;
 	I_L_target = 0;
 	vac = 0;
@@ -123,6 +129,7 @@ void Boost_Clear() {
 
 
 float v_a = 0;
+float I_L_target_real = 0;
 void FastLoop2() {
 
 	I_L_target = ((vbus_target - vbus)*0.1f) + (I_L_target*0.9f);
@@ -145,8 +152,14 @@ void FastLoop2() {
 		controller_I_A.Kp = controller_I_A.Kp * 2.5f / 1.5f;
 	}
 
+	if (vac_rms.out > 50 && vac > 10) {
+		I_L_target_real = I_L_target * vac / vac_rms.out;
+	} else {
+		I_L_target_real = I_L_target;
+	}
 
-	v_a = LeadLagLPF_Update(&controller_I_A, I_L_target-I_L) + vac;
+
+	v_a = LeadLagLPF_Update(&controller_I_A, I_L_target_real-I_L) + vac;
 
 
 	// voltage to duty cycle
@@ -178,13 +191,10 @@ void BoostFastLoop() {
 
 	AddRMS(&vac_rms, vac);
 	AddRMS(&I_L_rms, I_L);
-
-	TIM1->CCR1 = 0.3 * TIM1->ARR;
-
 }
 
 void BoostDisable() {
-	//TIM1->CCR1 = 0;
+	TIM1->CCR1 = 0;
 	enabled = 0;
 }
 
