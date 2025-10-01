@@ -2,7 +2,7 @@
  * int.h
  *
  *  Created on: Feb 15, 2025
- *      Author: ben
+ *      Author: maddie <3
  */
 
 #ifndef INC_INT_H_

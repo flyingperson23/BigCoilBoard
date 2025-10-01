@@ -2,7 +2,7 @@
  * vars.c
  *
  *  Created on: Jul 11, 2024
- *      Author: flyin
+ *      Author: maddie <3
  */
 
 #include "vars.h"
@@ -21,7 +21,7 @@ void AddVars() {
 	AddVar("max_ac_i", 100, "A", MAX_AC_I, 0, 1000);
 	AddVar("max_out_v", 800, "V", MAX_OUT_V, 0, 1000);
 	AddVar("max_temp", 60, "C", MAX_TEMP, 0, 200);
-	AddVar("max_i_l", 150, "A", MAX_I_L, 0, 1000);
+	AddVar("max_i_l", 400, "A", MAX_I_L, 0, 1000);
 	AddVar("ct_conv_factor", 1812, "u", CT_FACTOR, 0, 1000000); // 1:2814 ct + 5R1 burden - 1A out / 2814A in * 5,100,000uV out / 1A out = 1812 uV/A
 	AddVar("ac_ct_conv_factor", 20000, "u", AC_CT_FACTOR, 0, 10000000); // 1 A out / 1000 A in * 20,000,000 uV out / 1 A out = 20,000 uV out / A in
 	AddVar("vac_r", 1120, "k", VAC_R, 0, 1000000);

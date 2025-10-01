@@ -2,7 +2,7 @@
  * tc.h
  *
  *  Created on: Jan 14, 2025
- *      Author: ben
+ *      Author: maddie <3
  */
 
 #ifndef INC_TC_H_

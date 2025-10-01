@@ -2,7 +2,7 @@
  * uart.h
  *
  *  Created on: Jul 11, 2024
- *      Author: flyin
+ *      Author: maddie <3
  */
 
 #ifndef INC_UART_H_

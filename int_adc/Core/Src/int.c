@@ -2,7 +2,7 @@
  * int.c
  *
  *  Created on: Feb 15, 2025
- *      Author: ben
+ *      Author: maddie <3
  */
 #include "int.h"
 

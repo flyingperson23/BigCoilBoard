@@ -3,7 +3,7 @@
 ../Core/Src/cmds.c:47:9:CMD_set	8
 ../Core/Src/cmds.c:79:9:CMD_fault	11
 ../Core/Src/cmds.c:120:9:CMD_vbus	6
-../Core/Src/cmds.c:152:9:CMD_bus	6
-../Core/Src/cmds.c:180:9:CMD_kill	1
-../Core/Src/cmds.c:187:6:addCommand	1
-../Core/Src/cmds.c:191:6:CmdsInit	1
+../Core/Src/cmds.c:151:9:CMD_bus	6
+../Core/Src/cmds.c:179:9:CMD_kill	1
+../Core/Src/cmds.c:186:6:addCommand	1
+../Core/Src/cmds.c:190:6:CmdsInit	1

@@ -49,6 +49,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -57,6 +59,30 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define THERM1_Pin GPIO_PIN_0
+#define THERM1_GPIO_Port GPIOC
+#define THERM2_Pin GPIO_PIN_1
+#define THERM2_GPIO_Port GPIOC
+#define THERM3_Pin GPIO_PIN_2
+#define THERM3_GPIO_Port GPIOC
+#define THERM4_Pin GPIO_PIN_3
+#define THERM4_GPIO_Port GPIOC
+#define THERM5_Pin GPIO_PIN_0
+#define THERM5_GPIO_Port GPIOA
+#define OCD_Pin GPIO_PIN_1
+#define OCD_GPIO_Port GPIOA
+#define TX_Pin GPIO_PIN_4
+#define TX_GPIO_Port GPIOC
+#define RX_Pin GPIO_PIN_5
+#define RX_GPIO_Port GPIOC
+#define VAC_IN_Pin GPIO_PIN_12
+#define VAC_IN_GPIO_Port GPIOB
+#define PFC_Pin GPIO_PIN_6
+#define PFC_GPIO_Port GPIOC
+#define GD_OUT_Pin GPIO_PIN_8
+#define GD_OUT_GPIO_Port GPIOC
+#define V24_SENSE_Pin GPIO_PIN_9
+#define V24_SENSE_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 

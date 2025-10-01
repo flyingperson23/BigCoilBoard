@@ -2,21 +2,15 @@
  * boost.c
  *
  *  Created on: Jan 21, 2025
- *      Author: ben
+ *      Author: maddie <3
  */
 
 #include "boost.h"
-
-#include "leadlag.h"
-
-
-LeadLagLPFStruct controller_I_A;
 
 float vbus;
 float vbus_target;
 float vbus_target_fast;
 float I_L;
-float I_L_target;
 float vac;
 
 uint16_t vbus_buf[2];
@@ -30,7 +24,21 @@ float vbus_conv = 0;
 float vac_conv = 0;
 float I_L_conv = 0;
 
-uint8_t boostcounter = 0;
+float L = 0.000055;
+float L_adj = 0;
+float Kp = 0.04;
+float Ki = 0.5;
+float f_sw = 9000.0f;
+
+
+void Calc_L_adj() {
+	float max_current = GetValue(MAX_I_L);
+	float turns = sqrt(L * 1000000.0f / 0.02f);
+	float H = 0.4f * 3.14159265359f * turns * max_current / 33.1f;
+    float pu = 0.01f * 1.0f/((0.01f) + ((1.83f * 0.0000001f) * pow(H, 1.46f)));
+    float L_saturated = L * pu;
+    L_adj = 0.5f * (L_saturated + L);
+}
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 
@@ -40,13 +48,9 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 
 	if (hadc == &hadc3) {
 		I_L = I_L_buf[0] * VREF / 4095.0 * I_L_conv;
-		HAL_GPIO_TogglePin(AUX_GPIO_Port, AUX_Pin);
-		boostcounter++;
-		if (boostcounter % 2 == 0) BoostFastLoop();
-		if (boostcounter == 1) {
-			if (vbus_target < vbus_target_fast) vbus_target += 1;
-			if (vbus_target > vbus_target_fast) vbus_target = vbus_target_fast;
-		}
+		BoostFastLoop();
+		if (vbus_target < vbus_target_fast) vbus_target += 1;
+		if (vbus_target > vbus_target_fast) vbus_target = vbus_target_fast;
 	}
 
 	if (hadc == &hadc4) {
@@ -81,6 +85,8 @@ FilterRMS vac_rms;
 FilterRMS I_L_rms;
 
 void Boost_Init() {
+	Calc_L_adj();
+
 	vbus_conv = 1000.0 * (float) GetValue(VBUS_R) / R_MEAS;
 	vac_conv = 1000.0 * (float) GetValue(VAC_R) / R_MEAS;
 	I_L_conv = 1000000.0 / (float) GetValue(AC_CT_FACTOR); // A/V
@@ -95,13 +101,6 @@ void Boost_Init() {
 	HAL_ADCEx_Calibration_Start(&hadc4, ADC_SINGLE_ENDED);
 	HAL_ADC_Start_DMA(&hadc4, (uint32_t *) vac_buf, 1);
 
-
-	LeadLagLPF_reset(&controller_I_A);
-	controller_I_A.num_leads = 0;
-	controller_I_A.num_lpfs = 0;
-	controller_I_A.lag_ki = 0.05f;
-	controller_I_A.Kp = 3.0f;
-
 	ClearRMS(&vac_rms);
 	ClearRMS(&I_L_rms);
 
@@ -112,8 +111,6 @@ void Boost_Init() {
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_5);
 
-
-
 }
 
 void Boost_Clear() {
@@ -121,59 +118,14 @@ void Boost_Clear() {
 	vbus_target = 0;
 	vbus_target_fast = 0;
 	I_L = 0;
-	I_L_target = 0;
 	vac = 0;
 	enabled = 0;
 	dtc = 0;
 }
 
-
-float v_a = 0;
-float I_L_target_real = 0;
-void FastLoop2() {
-
-	I_L_target = ((vbus_target - vbus)*0.1f) + (I_L_target*0.9f);
-
-	if (fabsf(I_L_target) < 1.0f) {I_L_target = 0.0f;}  // this will shut down the bridge (shuts down if I_a_ref = 0)
-
-	constrain(&I_L_target, 0.0f, GetValue(MAX_AC_I));
-
-	controller_I_A.cmd_lim_min = -150.0f;  // don't add in V out here because we're already FF-ing it
-	controller_I_A.cmd_lim_max = 150.0f;
-
-	if (controller_I_A.cmd_lim_min + vac < 0.0f) { controller_I_A.cmd_lim_min = 0.0f - vac; }         // can't apply voltages less than zero
-	if (controller_I_A.cmd_lim_max + vac > GetValue(MAX_OUT_V)) { controller_I_A.cmd_lim_max = GetValue(MAX_OUT_V) - vac; } // can't apply voltages greater than Vmax
-	if (controller_I_A.cmd_lim_min > 0.0f) { controller_I_A.cmd_lim_min = 0.0f; }
-	if (controller_I_A.cmd_lim_max < 0.0f) { controller_I_A.cmd_lim_max = 0.0f; }
-
-
-	controller_I_A.Kp = ((float) GetValue(BOOST_KP)) / 10.0f;
-	if ((I_L_target-I_L) < 0.0f) {
-		controller_I_A.Kp = controller_I_A.Kp * 2.5f / 1.5f;
-	}
-
-	if (vac_rms.out > 50 && vac > 10) {
-		I_L_target_real = I_L_target * vac / vac_rms.out;
-	} else {
-		I_L_target_real = I_L_target;
-	}
-
-
-	v_a = LeadLagLPF_Update(&controller_I_A, I_L_target_real-I_L) + vac;
-
-
-	// voltage to duty cycle
-	if (vbus > 50.0f) {   // prevents /0 errors
-		dtc = (v_a / vbus);
-		if (vbus > vbus_target) dtc = 0;
-		TIM1->CCR1 = (int) (dtc * TIM1->ARR);
-	} else {
-		TIM1->CCR1 = (int) (v_a*0.1f * TIM1->ARR);
-	}
-}
-
+float integrator = 0;
 void BoostFastLoop() {
-	if (I_L > GetValue(MAX_I_L)) {
+	if (1.5f * I_L > GetValue(MAX_I_L)) { // *2 because measure in the middle
 		SetFault(FAULT_OC);
 	}
 
@@ -181,9 +133,20 @@ void BoostFastLoop() {
 		SetFault(FAULT_OV);
 	}
 
-	if (enabled && vbus_target > 20.0) {
+	if (enabled && vbus_target > 20.0 && vac > 1.0) {
+		float error = vbus_target - vbus;
+		integrator += error * Ki * 1.0f / f_sw;
+		if (integrator > 0.3f) integrator = 0.3f;
+		if (integrator < -0.3f) integrator = -0.3f;
+		dtc = Kp * error + integrator;
+		if (dtc < 0) dtc = 0;
 
-		FastLoop2();
+		float max_dtc_1 = f_sw * L_adj * (float) GetValue(MAX_I_L) / vac; // limit max current
+		float max_dtc_2 = vbus / (vbus + vac) - 0.05f; // ensure constant dcm
+		if (dtc > max_dtc_1) dtc = max_dtc_1;
+		if (dtc > max_dtc_2) dtc = max_dtc_2;
+		if (vbus > vbus_target) dtc = 0;
+		TIM1->CCR1 = (int) (dtc * TIM1->ARR);
 
 	} else {
 		TIM1->CCR1 = 0;
@@ -199,6 +162,6 @@ void BoostDisable() {
 }
 
 void BoostEnable() {
-	LeadLagLPF_reset(&controller_I_A);
+	integrator = 0;
 	enabled = 1;
 }

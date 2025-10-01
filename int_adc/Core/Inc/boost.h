@@ -2,7 +2,7 @@
  * boost.h
  *
  *  Created on: Jan 21, 2025
- *      Author: ben
+ *      Author: maddie <3
  */
 
 #ifndef INC_BOOST_H_
@@ -10,12 +10,12 @@
 
 #include "main.h"
 #include "vars.h"
+#include "math.h"
 
 extern float vbus;
 extern float vbus_target;
 extern float vbus_target_fast;
 extern float I_L;
-extern float I_L_target;
 extern float vac;
 
 extern float I_L_conv;
@@ -38,7 +38,7 @@ void BoostEnable();
 
 void Boost_Init();
 void Boost_Clear();
-
+void Calc_L_adj();
 
 typedef struct {
 	float out;

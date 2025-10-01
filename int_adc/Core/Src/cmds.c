@@ -2,7 +2,7 @@
  * cmds.c
  *
  *  Created on: Jul 11, 2024
- *      Author: flyin
+ *      Author: maddie <3
  */
 
 #include "cmds.h"
@@ -123,7 +123,6 @@ uint8_t CMD_vbus(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args) {
 			ttprintf("vbus: %i\r\n", (int) (1000 * vbus));
 			ttprintf("vbus target: %i\r\n", (int) (1000 * vbus_target));
 			ttprintf("I_L: %i\r\n", (int) (1000 * I_L_rms.out));
-			ttprintf("I_L_target: %i\r\n", (int) (1000 * I_L_target));
 			ttprintf("vac: %i\r\n", (int) (1000 * vac));
 			ttprintf("vac_rms: %i\r\n", (int) (1000 * vac_rms.out));
 			ttprintf("dtc: %i / 1000\r\n", (int) (dtc * 1000));

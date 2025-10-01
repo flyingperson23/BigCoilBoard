@@ -2,7 +2,7 @@
  * tc.c
  *
  *  Created on: Jan 14, 2025
- *      Author: ben
+ *      Author: maddie <3
  */
 
 #include "tc.h"
@@ -161,6 +161,7 @@ void TC_Loop_Tim() {
 	counter3++;
 	if (counter3 % 100 == 0) {
 		DACLut();
+		Calc_L_adj();
 	}
 
 	if (counter3 % 10 == 0) {

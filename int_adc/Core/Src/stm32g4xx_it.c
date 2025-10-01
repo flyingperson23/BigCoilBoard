@@ -65,6 +65,7 @@ extern ADC_HandleTypeDef hadc2;
 extern ADC_HandleTypeDef hadc3;
 extern ADC_HandleTypeDef hadc4;
 extern ADC_HandleTypeDef hadc5;
+extern COMP_HandleTypeDef hcomp5;
 extern DAC_HandleTypeDef hdac1;
 extern DAC_HandleTypeDef hdac4;
 extern TIM_HandleTypeDef htim1;
@@ -496,6 +497,20 @@ void ADC5_IRQHandler(void)
   /* USER CODE BEGIN ADC5_IRQn 1 */
 
   /* USER CODE END ADC5_IRQn 1 */
+}
+
+/**
+  * @brief This function handles COMP4, COMP5 and COMP6 interrupts through EXTI lines 30, 31 and 32.
+  */
+void COMP4_5_6_IRQHandler(void)
+{
+  /* USER CODE BEGIN COMP4_5_6_IRQn 0 */
+
+  /* USER CODE END COMP4_5_6_IRQn 0 */
+  HAL_COMP_IRQHandler(&hcomp5);
+  /* USER CODE BEGIN COMP4_5_6_IRQn 1 */
+
+  /* USER CODE END COMP4_5_6_IRQn 1 */
 }
 
 /**

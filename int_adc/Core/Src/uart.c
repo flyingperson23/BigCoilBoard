@@ -2,7 +2,7 @@
  * uart.c
  *
  *  Created on: Jul 11, 2024
- *      Author: flyin
+ *      Author: maddie <3
  */
 
 #include "uart.h"

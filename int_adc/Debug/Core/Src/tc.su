@@ -2,8 +2,8 @@
 ../Core/Src/tc.c:38:6:TC_Init	8	static
 ../Core/Src/tc.c:84:6:TC_Loop	8	static
 ../Core/Src/tc.c:90:6:TC_Loop_Tim	64	static
-../Core/Src/tc.c:183:6:CN_Actuate	16	static
-../Core/Src/tc.c:204:6:TERM_Box	24	static
-../Core/Src/tc.c:228:6:Overlay_Send	48	static
-../Core/Src/tc.c:291:6:SetFault	16	static
-../Core/Src/tc.c:295:6:ClearFault	16	static
+../Core/Src/tc.c:184:6:CN_Actuate	16	static
+../Core/Src/tc.c:205:6:TERM_Box	24	static
+../Core/Src/tc.c:229:6:Overlay_Send	48	static
+../Core/Src/tc.c:292:6:SetFault	16	static
+../Core/Src/tc.c:296:6:ClearFault	16	static
