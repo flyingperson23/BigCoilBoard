@@ -37,15 +37,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  0002d4ae  00000000  00000000  0004115a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00024956  00000000  00000000  0006e608  2**0
+ 17 .debug_line   00023387  00000000  00000000  0006e608  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00120242  00000000  00000000  00092f5e  2**0
+ 18 .debug_str    00120274  00000000  00000000  0009198f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  001b31a0  2**0
+ 19 .comment      00000043  00000000  00000000  001b1c03  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00008e8c  00000000  00000000  001b31e4  2**2
+ 20 .debug_frame  00008e8c  00000000  00000000  001b1c48  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000005d  00000000  00000000  001bc070  2**0
+ 21 .debug_line_str 0000005d  00000000  00000000  001baad4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -786,7 +786,7 @@ Disassembly of section .text:
  8000a8a:	e712      	b.n	80008b2 <__aeabi_dmul+0x24a>
 
 08000a8c <__gedf2>:
- 8000a8c:	f04f 3cff 	mov.w	ip, #4294967295
+ 8000a8c:	f04f 3cff 	mov.w	ip, #4294967295	@ 0xffffffff
  8000a90:	e006      	b.n	8000aa0 <__cmpdf2+0x4>
  8000a92:	bf00      	nop
 
@@ -1197,8 +1197,8 @@ Disassembly of section .text:
  8000eda:	bf08      	it	eq
  8000edc:	2800      	cmpeq	r0, #0
  8000ede:	bf1c      	itt	ne
- 8000ee0:	f04f 31ff 	movne.w	r1, #4294967295
- 8000ee4:	f04f 30ff 	movne.w	r0, #4294967295
+ 8000ee0:	f04f 31ff 	movne.w	r1, #4294967295	@ 0xffffffff
+ 8000ee4:	f04f 30ff 	movne.w	r0, #4294967295	@ 0xffffffff
  8000ee8:	f000 b988 	b.w	80011fc <__aeabi_idiv0>
  8000eec:	f1ad 0c08 	sub.w	ip, sp, #8
  8000ef0:	e96d ce04 	strd	ip, lr, [sp, #-16]!
@@ -1237,7 +1237,7 @@ Disassembly of section .text:
  8000f4e:	429a      	cmp	r2, r3
  8000f50:	d909      	bls.n	8000f66 <__udivmoddi4+0x62>
  8000f52:	18fb      	adds	r3, r7, r3
- 8000f54:	f101 30ff 	add.w	r0, r1, #4294967295
+ 8000f54:	f101 30ff 	add.w	r0, r1, #4294967295	@ 0xffffffff
  8000f58:	f080 80ea 	bcs.w	8001130 <__udivmoddi4+0x22c>
  8000f5c:	429a      	cmp	r2, r3
  8000f5e:	f240 80e7 	bls.w	8001130 <__udivmoddi4+0x22c>
@@ -1252,7 +1252,7 @@ Disassembly of section .text:
  8000f7a:	459c      	cmp	ip, r3
  8000f7c:	d909      	bls.n	8000f92 <__udivmoddi4+0x8e>
  8000f7e:	18fb      	adds	r3, r7, r3
- 8000f80:	f100 32ff 	add.w	r2, r0, #4294967295
+ 8000f80:	f100 32ff 	add.w	r2, r0, #4294967295	@ 0xffffffff
  8000f84:	f080 80d6 	bcs.w	8001134 <__udivmoddi4+0x230>
  8000f88:	459c      	cmp	ip, r3
  8000f8a:	f240 80d3 	bls.w	8001134 <__udivmoddi4+0x230>
@@ -1306,7 +1306,7 @@ Disassembly of section .text:
  800100e:	429a      	cmp	r2, r3
  8001010:	d907      	bls.n	8001022 <__udivmoddi4+0x11e>
  8001012:	18fb      	adds	r3, r7, r3
- 8001014:	f10c 38ff 	add.w	r8, ip, #4294967295
+ 8001014:	f10c 38ff 	add.w	r8, ip, #4294967295	@ 0xffffffff
  8001018:	d202      	bcs.n	8001020 <__udivmoddi4+0x11c>
  800101a:	429a      	cmp	r2, r3
  800101c:	f200 80e0 	bhi.w	80011e0 <__udivmoddi4+0x2dc>
@@ -1319,7 +1319,7 @@ Disassembly of section .text:
  8001034:	429c      	cmp	r4, r3
  8001036:	d907      	bls.n	8001048 <__udivmoddi4+0x144>
  8001038:	18fb      	adds	r3, r7, r3
- 800103a:	f102 30ff 	add.w	r0, r2, #4294967295
+ 800103a:	f102 30ff 	add.w	r0, r2, #4294967295	@ 0xffffffff
  800103e:	d202      	bcs.n	8001046 <__udivmoddi4+0x142>
  8001040:	429c      	cmp	r4, r3
  8001042:	f200 80ca 	bhi.w	80011da <__udivmoddi4+0x2d6>
@@ -1347,7 +1347,7 @@ Disassembly of section .text:
  800108a:	fa02 f201 	lsl.w	r2, r2, r1
  800108e:	d909      	bls.n	80010a4 <__udivmoddi4+0x1a0>
  8001090:	193c      	adds	r4, r7, r4
- 8001092:	f100 3aff 	add.w	sl, r0, #4294967295
+ 8001092:	f100 3aff 	add.w	sl, r0, #4294967295	@ 0xffffffff
  8001096:	f080 809c 	bcs.w	80011d2 <__udivmoddi4+0x2ce>
  800109a:	45a6      	cmp	lr, r4
  800109c:	f240 8099 	bls.w	80011d2 <__udivmoddi4+0x2ce>
@@ -1362,7 +1362,7 @@ Disassembly of section .text:
  80010bc:	45a4      	cmp	ip, r4
  80010be:	d908      	bls.n	80010d2 <__udivmoddi4+0x1ce>
  80010c0:	193c      	adds	r4, r7, r4
- 80010c2:	f103 3eff 	add.w	lr, r3, #4294967295
+ 80010c2:	f103 3eff 	add.w	lr, r3, #4294967295	@ 0xffffffff
  80010c6:	f080 8082 	bcs.w	80011ce <__udivmoddi4+0x2ca>
  80010ca:	45a4      	cmp	ip, r4
  80010cc:	d97f      	bls.n	80011ce <__udivmoddi4+0x2ca>
@@ -1424,7 +1424,7 @@ Disassembly of section .text:
  800116a:	b280      	uxth	r0, r0
  800116c:	d93e      	bls.n	80011ec <__udivmoddi4+0x2e8>
  800116e:	1879      	adds	r1, r7, r1
- 8001170:	f108 3cff 	add.w	ip, r8, #4294967295
+ 8001170:	f108 3cff 	add.w	ip, r8, #4294967295	@ 0xffffffff
  8001174:	d201      	bcs.n	800117a <__udivmoddi4+0x276>
  8001176:	4589      	cmp	r9, r1
  8001178:	d81f      	bhi.n	80011ba <__udivmoddi4+0x2b6>
@@ -1437,7 +1437,7 @@ Disassembly of section .text:
  8001190:	4542      	cmp	r2, r8
  8001192:	d229      	bcs.n	80011e8 <__udivmoddi4+0x2e4>
  8001194:	18ba      	adds	r2, r7, r2
- 8001196:	f109 31ff 	add.w	r1, r9, #4294967295
+ 8001196:	f109 31ff 	add.w	r1, r9, #4294967295	@ 0xffffffff
  800119a:	d2c4      	bcs.n	8001126 <__udivmoddi4+0x222>
  800119c:	4542      	cmp	r2, r8
  800119e:	d2c2      	bcs.n	8001126 <__udivmoddi4+0x222>
@@ -2663,7 +2663,7 @@ uint8_t CMD_get(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args) {
  8001cfe:	4618      	mov	r0, r3
  8001d00:	f003 fa76 	bl	80051f0 <GetIndex>
  8001d04:	4603      	mov	r3, r0
- 8001d06:	f1b3 3fff 	cmp.w	r3, #4294967295
+ 8001d06:	f1b3 3fff 	cmp.w	r3, #4294967295	@ 0xffffffff
  8001d0a:	d109      	bne.n	8001d20 <CMD_get+0xac>
 		ttprintf("Var not found: %s\r\n", args[0]);
  8001d0c:	68fb      	ldr	r3, [r7, #12]
@@ -2797,7 +2797,7 @@ uint8_t CMD_set(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args) {
  8001e04:	4618      	mov	r0, r3
  8001e06:	f003 f9f3 	bl	80051f0 <GetIndex>
  8001e0a:	4603      	mov	r3, r0
- 8001e0c:	f1b3 3fff 	cmp.w	r3, #4294967295
+ 8001e0c:	f1b3 3fff 	cmp.w	r3, #4294967295	@ 0xffffffff
  8001e10:	d109      	bne.n	8001e26 <CMD_set+0xaa>
 		ttprintf("Var not found: %s\r\n", args[0]);
  8001e12:	68fb      	ldr	r3, [r7, #12]
@@ -5421,7 +5421,7 @@ static void MX_TIM2_Init(void)
  8002eb0:	609a      	str	r2, [r3, #8]
   htim2.Init.Period = 4294967295;
  8002eb2:	4b19      	ldr	r3, [pc, #100]	@ (8002f18 <MX_TIM2_Init+0x98>)
- 8002eb4:	f04f 32ff 	mov.w	r2, #4294967295
+ 8002eb4:	f04f 32ff 	mov.w	r2, #4294967295	@ 0xffffffff
  8002eb8:	60da      	str	r2, [r3, #12]
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
  8002eba:	4b17      	ldr	r3, [pc, #92]	@ (8002f18 <MX_TIM2_Init+0x98>)
@@ -8291,27 +8291,15 @@ void FPU_IRQHandler(void)
  8003ee0:	4770      	bx	lr
 
 08003ee2 <_read>:
-  _kill(status, -1);
-  while (1) {}    /* Make sure we hang here */
-}
-
-__attribute__((weak)) int _read(int file, char *ptr, int len)
-{
  8003ee2:	b580      	push	{r7, lr}
  8003ee4:	b086      	sub	sp, #24
  8003ee6:	af00      	add	r7, sp, #0
  8003ee8:	60f8      	str	r0, [r7, #12]
  8003eea:	60b9      	str	r1, [r7, #8]
  8003eec:	607a      	str	r2, [r7, #4]
-  (void)file;
-  int DataIdx;
-
-  for (DataIdx = 0; DataIdx < len; DataIdx++)
  8003eee:	2300      	movs	r3, #0
  8003ef0:	617b      	str	r3, [r7, #20]
  8003ef2:	e00a      	b.n	8003f0a <_read+0x28>
-  {
-    *ptr++ = __io_getchar();
  8003ef4:	f3af 8000 	nop.w
  8003ef8:	4601      	mov	r1, r0
  8003efa:	68bb      	ldr	r3, [r7, #8]
@@ -8319,7 +8307,6 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
  8003efe:	60ba      	str	r2, [r7, #8]
  8003f00:	b2ca      	uxtb	r2, r1
  8003f02:	701a      	strb	r2, [r3, #0]
-  for (DataIdx = 0; DataIdx < len; DataIdx++)
  8003f04:	697b      	ldr	r3, [r7, #20]
  8003f06:	3301      	adds	r3, #1
  8003f08:	617b      	str	r3, [r7, #20]
@@ -8327,42 +8314,28 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
  8003f0c:	687b      	ldr	r3, [r7, #4]
  8003f0e:	429a      	cmp	r2, r3
  8003f10:	dbf0      	blt.n	8003ef4 <_read+0x12>
-  }
-
-  return len;
  8003f12:	687b      	ldr	r3, [r7, #4]
-}
  8003f14:	4618      	mov	r0, r3
  8003f16:	3718      	adds	r7, #24
  8003f18:	46bd      	mov	sp, r7
  8003f1a:	bd80      	pop	{r7, pc}
 
 08003f1c <_write>:
-
-__attribute__((weak)) int _write(int file, char *ptr, int len)
-{
  8003f1c:	b580      	push	{r7, lr}
  8003f1e:	b086      	sub	sp, #24
  8003f20:	af00      	add	r7, sp, #0
  8003f22:	60f8      	str	r0, [r7, #12]
  8003f24:	60b9      	str	r1, [r7, #8]
  8003f26:	607a      	str	r2, [r7, #4]
-  (void)file;
-  int DataIdx;
-
-  for (DataIdx = 0; DataIdx < len; DataIdx++)
  8003f28:	2300      	movs	r3, #0
  8003f2a:	617b      	str	r3, [r7, #20]
  8003f2c:	e009      	b.n	8003f42 <_write+0x26>
-  {
-    __io_putchar(*ptr++);
  8003f2e:	68bb      	ldr	r3, [r7, #8]
  8003f30:	1c5a      	adds	r2, r3, #1
  8003f32:	60ba      	str	r2, [r7, #8]
  8003f34:	781b      	ldrb	r3, [r3, #0]
  8003f36:	4618      	mov	r0, r3
  8003f38:	f3af 8000 	nop.w
-  for (DataIdx = 0; DataIdx < len; DataIdx++)
  8003f3c:	697b      	ldr	r3, [r7, #20]
  8003f3e:	3301      	adds	r3, #1
  8003f40:	617b      	str	r3, [r7, #20]
@@ -8370,27 +8343,18 @@ __attribute__((weak)) int _write(int file, char *ptr, int len)
  8003f44:	687b      	ldr	r3, [r7, #4]
  8003f46:	429a      	cmp	r2, r3
  8003f48:	dbf1      	blt.n	8003f2e <_write+0x12>
-  }
-  return len;
  8003f4a:	687b      	ldr	r3, [r7, #4]
-}
  8003f4c:	4618      	mov	r0, r3
  8003f4e:	3718      	adds	r7, #24
  8003f50:	46bd      	mov	sp, r7
  8003f52:	bd80      	pop	{r7, pc}
 
 08003f54 <_close>:
-
-int _close(int file)
-{
  8003f54:	b480      	push	{r7}
  8003f56:	b083      	sub	sp, #12
  8003f58:	af00      	add	r7, sp, #0
  8003f5a:	6078      	str	r0, [r7, #4]
-  (void)file;
-  return -1;
- 8003f5c:	f04f 33ff 	mov.w	r3, #4294967295
-}
+ 8003f5c:	f04f 33ff 	mov.w	r3, #4294967295	@ 0xffffffff
  8003f60:	4618      	mov	r0, r3
  8003f62:	370c      	adds	r7, #12
  8003f64:	46bd      	mov	sp, r7
@@ -8398,23 +8362,15 @@ int _close(int file)
  8003f6a:	4770      	bx	lr
 
 08003f6c <_fstat>:
-
-
-int _fstat(int file, struct stat *st)
-{
  8003f6c:	b480      	push	{r7}
  8003f6e:	b083      	sub	sp, #12
  8003f70:	af00      	add	r7, sp, #0
  8003f72:	6078      	str	r0, [r7, #4]
  8003f74:	6039      	str	r1, [r7, #0]
-  (void)file;
-  st->st_mode = S_IFCHR;
  8003f76:	683b      	ldr	r3, [r7, #0]
  8003f78:	f44f 5200 	mov.w	r2, #8192	@ 0x2000
  8003f7c:	605a      	str	r2, [r3, #4]
-  return 0;
  8003f7e:	2300      	movs	r3, #0
-}
  8003f80:	4618      	mov	r0, r3
  8003f82:	370c      	adds	r7, #12
  8003f84:	46bd      	mov	sp, r7
@@ -8422,17 +8378,11 @@ int _fstat(int file, struct stat *st)
  8003f8a:	4770      	bx	lr
 
 08003f8c <_isatty>:
-
-int _isatty(int file)
-{
  8003f8c:	b480      	push	{r7}
  8003f8e:	b083      	sub	sp, #12
  8003f90:	af00      	add	r7, sp, #0
  8003f92:	6078      	str	r0, [r7, #4]
-  (void)file;
-  return 1;
  8003f94:	2301      	movs	r3, #1
-}
  8003f96:	4618      	mov	r0, r3
  8003f98:	370c      	adds	r7, #12
  8003f9a:	46bd      	mov	sp, r7
@@ -8440,21 +8390,13 @@ int _isatty(int file)
  8003fa0:	4770      	bx	lr
 
 08003fa2 <_lseek>:
-
-int _lseek(int file, int ptr, int dir)
-{
  8003fa2:	b480      	push	{r7}
  8003fa4:	b085      	sub	sp, #20
  8003fa6:	af00      	add	r7, sp, #0
  8003fa8:	60f8      	str	r0, [r7, #12]
  8003faa:	60b9      	str	r1, [r7, #8]
  8003fac:	607a      	str	r2, [r7, #4]
-  (void)file;
-  (void)ptr;
-  (void)dir;
-  return 0;
  8003fae:	2300      	movs	r3, #0
-}
  8003fb0:	4618      	mov	r0, r3
  8003fb2:	3714      	adds	r7, #20
  8003fb4:	46bd      	mov	sp, r7
@@ -8462,44 +8404,23 @@ int _lseek(int file, int ptr, int dir)
  8003fba:	4770      	bx	lr
 
 08003fbc <_sbrk>:
- *
- * @param incr Memory size
- * @return Pointer to allocated memory
- */
-void *_sbrk(ptrdiff_t incr)
-{
  8003fbc:	b580      	push	{r7, lr}
  8003fbe:	b086      	sub	sp, #24
  8003fc0:	af00      	add	r7, sp, #0
  8003fc2:	6078      	str	r0, [r7, #4]
-  extern uint8_t _end; /* Symbol defined in the linker script */
-  extern uint8_t _estack; /* Symbol defined in the linker script */
-  extern uint32_t _Min_Stack_Size; /* Symbol defined in the linker script */
-  const uint32_t stack_limit = (uint32_t)&_estack - (uint32_t)&_Min_Stack_Size;
  8003fc4:	4a14      	ldr	r2, [pc, #80]	@ (8004018 <_sbrk+0x5c>)
  8003fc6:	4b15      	ldr	r3, [pc, #84]	@ (800401c <_sbrk+0x60>)
  8003fc8:	1ad3      	subs	r3, r2, r3
  8003fca:	617b      	str	r3, [r7, #20]
-  const uint8_t *max_heap = (uint8_t *)stack_limit;
  8003fcc:	697b      	ldr	r3, [r7, #20]
  8003fce:	613b      	str	r3, [r7, #16]
-  uint8_t *prev_heap_end;
-
-  /* Initialize heap end at first call */
-  if (NULL == __sbrk_heap_end)
  8003fd0:	4b13      	ldr	r3, [pc, #76]	@ (8004020 <_sbrk+0x64>)
  8003fd2:	681b      	ldr	r3, [r3, #0]
  8003fd4:	2b00      	cmp	r3, #0
  8003fd6:	d102      	bne.n	8003fde <_sbrk+0x22>
-  {
-    __sbrk_heap_end = &_end;
  8003fd8:	4b11      	ldr	r3, [pc, #68]	@ (8004020 <_sbrk+0x64>)
  8003fda:	4a12      	ldr	r2, [pc, #72]	@ (8004024 <_sbrk+0x68>)
  8003fdc:	601a      	str	r2, [r3, #0]
-  }
-
-  /* Protect heap from growing into the reserved MSP stack */
-  if (__sbrk_heap_end + incr > max_heap)
  8003fde:	4b10      	ldr	r3, [pc, #64]	@ (8004020 <_sbrk+0x64>)
  8003fe0:	681a      	ldr	r2, [r3, #0]
  8003fe2:	687b      	ldr	r3, [r7, #4]
@@ -8507,32 +8428,22 @@ void *_sbrk(ptrdiff_t incr)
  8003fe6:	693a      	ldr	r2, [r7, #16]
  8003fe8:	429a      	cmp	r2, r3
  8003fea:	d207      	bcs.n	8003ffc <_sbrk+0x40>
-  {
-    errno = ENOMEM;
  8003fec:	f00d f9bc 	bl	8011368 <__errno>
  8003ff0:	4603      	mov	r3, r0
  8003ff2:	220c      	movs	r2, #12
  8003ff4:	601a      	str	r2, [r3, #0]
-    return (void *)-1;
- 8003ff6:	f04f 33ff 	mov.w	r3, #4294967295
+ 8003ff6:	f04f 33ff 	mov.w	r3, #4294967295	@ 0xffffffff
  8003ffa:	e009      	b.n	8004010 <_sbrk+0x54>
-  }
-
-  prev_heap_end = __sbrk_heap_end;
  8003ffc:	4b08      	ldr	r3, [pc, #32]	@ (8004020 <_sbrk+0x64>)
  8003ffe:	681b      	ldr	r3, [r3, #0]
  8004000:	60fb      	str	r3, [r7, #12]
-  __sbrk_heap_end += incr;
  8004002:	4b07      	ldr	r3, [pc, #28]	@ (8004020 <_sbrk+0x64>)
  8004004:	681a      	ldr	r2, [r3, #0]
  8004006:	687b      	ldr	r3, [r7, #4]
  8004008:	4413      	add	r3, r2
  800400a:	4a05      	ldr	r2, [pc, #20]	@ (8004020 <_sbrk+0x64>)
  800400c:	6013      	str	r3, [r2, #0]
-
-  return (void *)prev_heap_end;
  800400e:	68fb      	ldr	r3, [r7, #12]
-}
  8004010:	4618      	mov	r0, r3
  8004012:	3718      	adds	r7, #24
  8004014:	46bd      	mov	sp, r7
@@ -10636,7 +10547,7 @@ int8_t GetIndex(char* name) {
 		}
 	}
 	return -1;
- 8005228:	f04f 33ff 	mov.w	r3, #4294967295
+ 8005228:	f04f 33ff 	mov.w	r3, #4294967295	@ 0xffffffff
 }
  800522c:	4618      	mov	r0, r3
  800522e:	3710      	adds	r7, #16
@@ -12257,7 +12168,7 @@ static uint8_t TERM_handleInput(uint16_t c, TERMINAL_HANDLE * handle){
  8005d9e:	683b      	ldr	r3, [r7, #0]
  8005da0:	6e5b      	ldr	r3, [r3, #100]	@ 0x64
  8005da2:	3b01      	subs	r3, #1
- 8005da4:	f04f 32ff 	mov.w	r2, #4294967295
+ 8005da4:	f04f 32ff 	mov.w	r2, #4294967295	@ 0xffffffff
  8005da8:	4619      	mov	r1, r3
  8005daa:	f000 fc1c 	bl	80065e6 <strsft>
                 ttprintfEcho("\x08");   
@@ -15340,27 +15251,18 @@ const char * TERM_getVT100Code(uint16_t cmd, uint8_t var){
  80071fc:	0801398c 	.word	0x0801398c
 
 08007200 <TERM_addCommandAC>:
-
-#include "tterm/TTerm.h"
-#include "tterm/TTerm_cmd.h"
-#include "tterm/TTerm_AC.h"
-
-void TERM_addCommandAC(TermCommandDescriptor * cmd, TermAutoCompHandler ACH, void * ACParams){
  8007200:	b480      	push	{r7}
  8007202:	b085      	sub	sp, #20
  8007204:	af00      	add	r7, sp, #0
  8007206:	60f8      	str	r0, [r7, #12]
  8007208:	60b9      	str	r1, [r7, #8]
  800720a:	607a      	str	r2, [r7, #4]
-    cmd->ACHandler = ACH;
  800720c:	68fb      	ldr	r3, [r7, #12]
  800720e:	68ba      	ldr	r2, [r7, #8]
  8007210:	615a      	str	r2, [r3, #20]
-    cmd->ACParams = ACParams;
  8007212:	68fb      	ldr	r3, [r7, #12]
  8007214:	687a      	ldr	r2, [r7, #4]
  8007216:	619a      	str	r2, [r3, #24]
-}
  8007218:	bf00      	nop
  800721a:	3714      	adds	r7, #20
  800721c:	46bd      	mov	sp, r7
@@ -15368,13 +15270,10 @@ void TERM_addCommandAC(TermCommandDescriptor * cmd, TermAutoCompHandler ACH, voi
  8007222:	4770      	bx	lr
 
 08007224 <TERM_doAutoComplete>:
-
-uint8_t TERM_doAutoComplete(TERMINAL_HANDLE * handle){
  8007224:	b580      	push	{r7, lr}
  8007226:	b084      	sub	sp, #16
  8007228:	af00      	add	r7, sp, #0
  800722a:	6078      	str	r0, [r7, #4]
-    if(strnchr(handle->inputBuffer, ' ', handle->currBufferLength) != NULL){
  800722c:	687b      	ldr	r3, [r7, #4]
  800722e:	6918      	ldr	r0, [r3, #16]
  8007230:	687b      	ldr	r3, [r7, #4]
@@ -15385,36 +15284,27 @@ uint8_t TERM_doAutoComplete(TERMINAL_HANDLE * handle){
  800723c:	4603      	mov	r3, r0
  800723e:	2b00      	cmp	r3, #0
  8007240:	d029      	beq.n	8007296 <TERM_doAutoComplete+0x72>
-        TermCommandDescriptor * cmd = TERM_findCMD(handle);
  8007242:	6878      	ldr	r0, [r7, #4]
  8007244:	f7ff fa2d 	bl	80066a2 <TERM_findCMD>
  8007248:	60f8      	str	r0, [r7, #12]
-        if(cmd != NULL){
  800724a:	68fb      	ldr	r3, [r7, #12]
  800724c:	2b00      	cmp	r3, #0
  800724e:	d017      	beq.n	8007280 <TERM_doAutoComplete+0x5c>
-            if(cmd->ACHandler == 0){
  8007250:	68fb      	ldr	r3, [r7, #12]
  8007252:	695b      	ldr	r3, [r3, #20]
  8007254:	2b00      	cmp	r3, #0
  8007256:	d10a      	bne.n	800726e <TERM_doAutoComplete+0x4a>
-                handle->currAutocompleteCount = 0;
  8007258:	687b      	ldr	r3, [r7, #4]
  800725a:	2200      	movs	r2, #0
  800725c:	601a      	str	r2, [r3, #0]
-                handle->autocompleteStart = 0;
  800725e:	687b      	ldr	r3, [r7, #4]
  8007260:	2200      	movs	r2, #0
  8007262:	60da      	str	r2, [r3, #12]
-                handle->autocompleteBufferLength = 0;
  8007264:	687b      	ldr	r3, [r7, #4]
  8007266:	2200      	movs	r2, #0
  8007268:	609a      	str	r2, [r3, #8]
-                return 0;
  800726a:	2300      	movs	r3, #0
  800726c:	e038      	b.n	80072e0 <TERM_doAutoComplete+0xbc>
-            }else{
-                return (*cmd->ACHandler)(handle, cmd->ACParams);
  800726e:	68fb      	ldr	r3, [r7, #12]
  8007270:	695b      	ldr	r3, [r3, #20]
  8007272:	68fa      	ldr	r2, [r7, #12]
@@ -15424,25 +15314,17 @@ uint8_t TERM_doAutoComplete(TERMINAL_HANDLE * handle){
  800727a:	4798      	blx	r3
  800727c:	4603      	mov	r3, r0
  800727e:	e02f      	b.n	80072e0 <TERM_doAutoComplete+0xbc>
-            }
-        } 
-        handle->currAutocompleteCount = 0;
  8007280:	687b      	ldr	r3, [r7, #4]
  8007282:	2200      	movs	r2, #0
  8007284:	601a      	str	r2, [r3, #0]
-        handle->autocompleteStart = 0;
  8007286:	687b      	ldr	r3, [r7, #4]
  8007288:	2200      	movs	r2, #0
  800728a:	60da      	str	r2, [r3, #12]
-        handle->autocompleteBufferLength = 0;
  800728c:	687b      	ldr	r3, [r7, #4]
  800728e:	2200      	movs	r2, #0
  8007290:	609a      	str	r2, [r3, #8]
-        return 0;
  8007292:	2300      	movs	r3, #0
  8007294:	e024      	b.n	80072e0 <TERM_doAutoComplete+0xbc>
-    }else{
-        handle->autocompleteBuffer = malloc(handle->cmdListHead->commandLength * sizeof(char *));
  8007296:	687b      	ldr	r3, [r7, #4]
  8007298:	f8d3 3084 	ldr.w	r3, [r3, #132]	@ 0x84
  800729c:	68db      	ldr	r3, [r3, #12]
@@ -15453,11 +15335,9 @@ uint8_t TERM_doAutoComplete(TERMINAL_HANDLE * handle){
  80072a8:	461a      	mov	r2, r3
  80072aa:	687b      	ldr	r3, [r7, #4]
  80072ac:	605a      	str	r2, [r3, #4]
-        handle->currAutocompleteCount = 0;
  80072ae:	687b      	ldr	r3, [r7, #4]
  80072b0:	2200      	movs	r2, #0
  80072b2:	601a      	str	r2, [r3, #0]
-        handle->autocompleteBufferLength = TERM_findMatchingCMDs(handle->inputBuffer, handle->currBufferLength, handle->autocompleteBuffer, handle->cmdListHead);
  80072b4:	687b      	ldr	r3, [r7, #4]
  80072b6:	6918      	ldr	r0, [r3, #16]
  80072b8:	687b      	ldr	r3, [r7, #4]
@@ -15472,24 +15352,18 @@ uint8_t TERM_doAutoComplete(TERMINAL_HANDLE * handle){
  80072ce:	461a      	mov	r2, r3
  80072d0:	687b      	ldr	r3, [r7, #4]
  80072d2:	609a      	str	r2, [r3, #8]
-        handle->autocompleteStart = 0;
  80072d4:	687b      	ldr	r3, [r7, #4]
  80072d6:	2200      	movs	r2, #0
  80072d8:	60da      	str	r2, [r3, #12]
-        return handle->autocompleteBufferLength;
  80072da:	687b      	ldr	r3, [r7, #4]
  80072dc:	689b      	ldr	r3, [r3, #8]
  80072de:	b2db      	uxtb	r3, r3
-    }
-}
  80072e0:	4618      	mov	r0, r3
  80072e2:	3710      	adds	r7, #16
  80072e4:	46bd      	mov	sp, r7
  80072e6:	bd80      	pop	{r7, pc}
 
 080072e8 <TERM_findMatchingCMDs>:
-
-uint8_t TERM_findMatchingCMDs(char * currInput, uint8_t length, char ** buff, TermCommandDescriptor * cmdListHead){
  80072e8:	b580      	push	{r7, lr}
  80072ea:	b086      	sub	sp, #24
  80072ec:	af00      	add	r7, sp, #0
@@ -15498,9 +15372,6 @@ uint8_t TERM_findMatchingCMDs(char * currInput, uint8_t length, char ** buff, Te
  80072f2:	603b      	str	r3, [r7, #0]
  80072f4:	460b      	mov	r3, r1
  80072f6:	72fb      	strb	r3, [r7, #11]
-    
-    //TODO handle auto complete of parameters, for now we return if this is attempted
-    if(strnchr(currInput, ' ', length) != NULL) return 0;
  80072f8:	7afb      	ldrb	r3, [r7, #11]
  80072fa:	461a      	mov	r2, r3
  80072fc:	2120      	movs	r1, #32
@@ -15511,22 +15382,14 @@ uint8_t TERM_findMatchingCMDs(char * currInput, uint8_t length, char ** buff, Te
  8007308:	d001      	beq.n	800730e <TERM_findMatchingCMDs+0x26>
  800730a:	2300      	movs	r3, #0
  800730c:	e032      	b.n	8007374 <TERM_findMatchingCMDs+0x8c>
-    //UART_print("scanning \"%s\" for matching cmds\r\n", currInput);
-    
-    uint8_t currPos = 0;
  800730e:	2300      	movs	r3, #0
  8007310:	75fb      	strb	r3, [r7, #23]
-    uint8_t commandsFound = 0;
  8007312:	2300      	movs	r3, #0
  8007314:	75bb      	strb	r3, [r7, #22]
-    TermCommandDescriptor * currCMD = cmdListHead->nextCmd;
  8007316:	683b      	ldr	r3, [r7, #0]
  8007318:	69db      	ldr	r3, [r3, #28]
  800731a:	613b      	str	r3, [r7, #16]
-    
-    for(;currPos < cmdListHead->commandLength; currPos++){
  800731c:	e024      	b.n	8007368 <TERM_findMatchingCMDs+0x80>
-        if(strncmp(currInput, currCMD->command, length) == 0){
  800731e:	693b      	ldr	r3, [r7, #16]
  8007320:	685b      	ldr	r3, [r3, #4]
  8007322:	7afa      	ldrb	r2, [r7, #11]
@@ -15536,13 +15399,11 @@ uint8_t TERM_findMatchingCMDs(char * currInput, uint8_t length, char ** buff, Te
  800732c:	4603      	mov	r3, r0
  800732e:	2b00      	cmp	r3, #0
  8007330:	d10f      	bne.n	8007352 <TERM_findMatchingCMDs+0x6a>
-            if(currCMD->commandLength >= length){
  8007332:	693b      	ldr	r3, [r7, #16]
  8007334:	68da      	ldr	r2, [r3, #12]
  8007336:	7afb      	ldrb	r3, [r7, #11]
  8007338:	429a      	cmp	r2, r3
  800733a:	d30f      	bcc.n	800735c <TERM_findMatchingCMDs+0x74>
-                buff[commandsFound] = (char*)currCMD->command;
  800733c:	7dbb      	ldrb	r3, [r7, #22]
  800733e:	009b      	lsls	r3, r3, #2
  8007340:	687a      	ldr	r2, [r7, #4]
@@ -15550,26 +15411,18 @@ uint8_t TERM_findMatchingCMDs(char * currInput, uint8_t length, char ** buff, Te
  8007344:	693a      	ldr	r2, [r7, #16]
  8007346:	6852      	ldr	r2, [r2, #4]
  8007348:	601a      	str	r2, [r3, #0]
-                commandsFound ++;
  800734a:	7dbb      	ldrb	r3, [r7, #22]
  800734c:	3301      	adds	r3, #1
  800734e:	75bb      	strb	r3, [r7, #22]
  8007350:	e004      	b.n	800735c <TERM_findMatchingCMDs+0x74>
-                //UART_print("found %s (count is now %d)\r\n", TERM_cmdList[currPos]->command, commandsFound);
-            }
-        }else{
-            if(commandsFound > 0) return commandsFound;
  8007352:	7dbb      	ldrb	r3, [r7, #22]
  8007354:	2b00      	cmp	r3, #0
  8007356:	d001      	beq.n	800735c <TERM_findMatchingCMDs+0x74>
  8007358:	7dbb      	ldrb	r3, [r7, #22]
  800735a:	e00b      	b.n	8007374 <TERM_findMatchingCMDs+0x8c>
-        }
-        currCMD = currCMD->nextCmd;
  800735c:	693b      	ldr	r3, [r7, #16]
  800735e:	69db      	ldr	r3, [r3, #28]
  8007360:	613b      	str	r3, [r7, #16]
-    for(;currPos < cmdListHead->commandLength; currPos++){
  8007362:	7dfb      	ldrb	r3, [r7, #23]
  8007364:	3301      	adds	r3, #1
  8007366:	75fb      	strb	r3, [r7, #23]
@@ -15578,36 +15431,26 @@ uint8_t TERM_findMatchingCMDs(char * currInput, uint8_t length, char ** buff, Te
  800736c:	68db      	ldr	r3, [r3, #12]
  800736e:	429a      	cmp	r2, r3
  8007370:	d3d5      	bcc.n	800731e <TERM_findMatchingCMDs+0x36>
-    }
-    return commandsFound;
  8007372:	7dbb      	ldrb	r3, [r7, #22]
-}
  8007374:	4618      	mov	r0, r3
  8007376:	3718      	adds	r7, #24
  8007378:	46bd      	mov	sp, r7
  800737a:	bd80      	pop	{r7, pc}
 
 0800737c <TERM_findLastArg>:
-
-uint8_t TERM_findLastArg(TERMINAL_HANDLE * handle, char * buff, uint8_t * lenBuff){
  800737c:	b580      	push	{r7, lr}
  800737e:	b088      	sub	sp, #32
  8007380:	af00      	add	r7, sp, #0
  8007382:	60f8      	str	r0, [r7, #12]
  8007384:	60b9      	str	r1, [r7, #8]
  8007386:	607a      	str	r2, [r7, #4]
-    uint8_t currPos = 0;
  8007388:	2300      	movs	r3, #0
  800738a:	77fb      	strb	r3, [r7, #31]
-    unsigned quoteMark = 0;
  800738c:	2300      	movs	r3, #0
  800738e:	61bb      	str	r3, [r7, #24]
-    char * lastSpace = 0;
  8007390:	2300      	movs	r3, #0
  8007392:	617b      	str	r3, [r7, #20]
-    for(;currPos<handle->currBufferLength; currPos++){
  8007394:	e024      	b.n	80073e0 <TERM_findLastArg+0x64>
-        switch(handle->inputBuffer[currPos]){
  8007396:	68fb      	ldr	r3, [r7, #12]
  8007398:	691a      	ldr	r2, [r3, #16]
  800739a:	7ffb      	ldrb	r3, [r7, #31]
@@ -15617,48 +15460,31 @@ uint8_t TERM_findLastArg(TERMINAL_HANDLE * handle, char * buff, uint8_t * lenBuf
  80073a2:	d002      	beq.n	80073aa <TERM_findLastArg+0x2e>
  80073a4:	2b22      	cmp	r3, #34	@ 0x22
  80073a6:	d009      	beq.n	80073bc <TERM_findLastArg+0x40>
-                    lastSpace = &handle->inputBuffer[currPos];
-                }
-                        
-                break;
-            default:
-                break;
  80073a8:	e017      	b.n	80073da <TERM_findLastArg+0x5e>
-                if(!quoteMark){
  80073aa:	69bb      	ldr	r3, [r7, #24]
  80073ac:	2b00      	cmp	r3, #0
  80073ae:	d113      	bne.n	80073d8 <TERM_findLastArg+0x5c>
-                    lastSpace = &handle->inputBuffer[currPos];
  80073b0:	68fb      	ldr	r3, [r7, #12]
  80073b2:	691a      	ldr	r2, [r3, #16]
  80073b4:	7ffb      	ldrb	r3, [r7, #31]
  80073b6:	4413      	add	r3, r2
  80073b8:	617b      	str	r3, [r7, #20]
-                break;
  80073ba:	e00d      	b.n	80073d8 <TERM_findLastArg+0x5c>
-                if(quoteMark){
  80073bc:	69bb      	ldr	r3, [r7, #24]
  80073be:	2b00      	cmp	r3, #0
  80073c0:	d002      	beq.n	80073c8 <TERM_findLastArg+0x4c>
-                    quoteMark = 0;
  80073c2:	2300      	movs	r3, #0
  80073c4:	61bb      	str	r3, [r7, #24]
-                break;
  80073c6:	e008      	b.n	80073da <TERM_findLastArg+0x5e>
-                    quoteMark = 1;
  80073c8:	2301      	movs	r3, #1
  80073ca:	61bb      	str	r3, [r7, #24]
-                    lastSpace = &handle->inputBuffer[currPos];
  80073cc:	68fb      	ldr	r3, [r7, #12]
  80073ce:	691a      	ldr	r2, [r3, #16]
  80073d0:	7ffb      	ldrb	r3, [r7, #31]
  80073d2:	4413      	add	r3, r2
  80073d4:	617b      	str	r3, [r7, #20]
-                break;
  80073d6:	e000      	b.n	80073da <TERM_findLastArg+0x5e>
-                break;
  80073d8:	bf00      	nop
-    for(;currPos<handle->currBufferLength; currPos++){
  80073da:	7ffb      	ldrb	r3, [r7, #31]
  80073dc:	3301      	adds	r3, #1
  80073de:	77fb      	strb	r3, [r7, #31]
@@ -15667,10 +15493,6 @@ uint8_t TERM_findLastArg(TERMINAL_HANDLE * handle, char * buff, uint8_t * lenBuf
  80073e4:	6e9b      	ldr	r3, [r3, #104]	@ 0x68
  80073e6:	429a      	cmp	r2, r3
  80073e8:	d3d5      	bcc.n	8007396 <TERM_findLastArg+0x1a>
-        }
-    }
-    
-    *lenBuff = handle->currBufferLength - (lastSpace - handle->inputBuffer) - 1;
  80073ea:	68fb      	ldr	r3, [r7, #12]
  80073ec:	6e9b      	ldr	r3, [r3, #104]	@ 0x68
  80073ee:	b2da      	uxtb	r2, r3
@@ -15685,7 +15507,6 @@ uint8_t TERM_findLastArg(TERMINAL_HANDLE * handle, char * buff, uint8_t * lenBuf
  8007400:	b2da      	uxtb	r2, r3
  8007402:	687b      	ldr	r3, [r7, #4]
  8007404:	701a      	strb	r2, [r3, #0]
-    memcpy(buff, lastSpace + 1, *lenBuff + 1);
  8007406:	697b      	ldr	r3, [r7, #20]
  8007408:	1c59      	adds	r1, r3, #1
  800740a:	687b      	ldr	r3, [r7, #4]
@@ -15694,7 +15515,6 @@ uint8_t TERM_findLastArg(TERMINAL_HANDLE * handle, char * buff, uint8_t * lenBuf
  8007410:	461a      	mov	r2, r3
  8007412:	68b8      	ldr	r0, [r7, #8]
  8007414:	f009 ffdd 	bl	80113d2 <memcpy>
-    return (lastSpace - handle->inputBuffer) + ((*lastSpace == '"') ? 0 : 1);
  8007418:	68fb      	ldr	r3, [r7, #12]
  800741a:	691b      	ldr	r3, [r3, #16]
  800741c:	697a      	ldr	r2, [r7, #20]
@@ -15709,15 +15529,12 @@ uint8_t TERM_findLastArg(TERMINAL_HANDLE * handle, char * buff, uint8_t * lenBuf
  800742e:	b2d2      	uxtb	r2, r2
  8007430:	4413      	add	r3, r2
  8007432:	b2db      	uxtb	r3, r3
-}
  8007434:	4618      	mov	r0, r3
  8007436:	3720      	adds	r7, #32
  8007438:	46bd      	mov	sp, r7
  800743a:	bd80      	pop	{r7, pc}
 
 0800743c <TERM_doListAC>:
-
-uint8_t TERM_doListAC(AC_LIST_HEAD * head, char * currInput, uint8_t length, char ** buff){
  800743c:	b580      	push	{r7, lr}
  800743e:	b088      	sub	sp, #32
  8007440:	af00      	add	r7, sp, #0
@@ -15726,28 +15543,18 @@ uint8_t TERM_doListAC(AC_LIST_HEAD * head, char * currInput, uint8_t length, cha
  8007446:	603b      	str	r3, [r7, #0]
  8007448:	4613      	mov	r3, r2
  800744a:	71fb      	strb	r3, [r7, #7]
-    uint8_t currPos = 0;
  800744c:	2300      	movs	r3, #0
  800744e:	77fb      	strb	r3, [r7, #31]
-    uint8_t commandsFound = 0;
  8007450:	2300      	movs	r3, #0
  8007452:	77bb      	strb	r3, [r7, #30]
-    //UART_print("\r\nStart scan\r\n", buff[commandsFound], commandsFound+1);
-    
-    if(head->isConst){
  8007454:	68fb      	ldr	r3, [r7, #12]
  8007456:	681b      	ldr	r3, [r3, #0]
  8007458:	2b00      	cmp	r3, #0
  800745a:	d038      	beq.n	80074ce <TERM_doListAC+0x92>
-        char ** strings = (char **) head->first;
  800745c:	68fb      	ldr	r3, [r7, #12]
  800745e:	689b      	ldr	r3, [r3, #8]
  8007460:	617b      	str	r3, [r7, #20]
-        
-        for(;currPos < head->elementCount; currPos++){
  8007462:	e02e      	b.n	80074c2 <TERM_doListAC+0x86>
-            //UART_print("\r\nchecking \"%s\"", strings[currPos]);
-            if(strncmp(currInput, strings[currPos], length) == 0){
  8007464:	7ffb      	ldrb	r3, [r7, #31]
  8007466:	009b      	lsls	r3, r3, #2
  8007468:	697a      	ldr	r2, [r7, #20]
@@ -15760,7 +15567,6 @@ uint8_t TERM_doListAC(AC_LIST_HEAD * head, char * currInput, uint8_t length, cha
  8007478:	4603      	mov	r3, r0
  800747a:	2b00      	cmp	r3, #0
  800747c:	d119      	bne.n	80074b2 <TERM_doListAC+0x76>
-                if(strlen(strings[currPos]) >= length){
  800747e:	7ffb      	ldrb	r3, [r7, #31]
  8007480:	009b      	lsls	r3, r3, #2
  8007482:	697a      	ldr	r2, [r7, #20]
@@ -15772,7 +15578,6 @@ uint8_t TERM_doListAC(AC_LIST_HEAD * head, char * currInput, uint8_t length, cha
  8007490:	79fb      	ldrb	r3, [r7, #7]
  8007492:	429a      	cmp	r2, r3
  8007494:	d312      	bcc.n	80074bc <TERM_doListAC+0x80>
-                    buff[commandsFound] = strings[currPos];
  8007496:	7ffb      	ldrb	r3, [r7, #31]
  8007498:	009b      	lsls	r3, r3, #2
  800749a:	697a      	ldr	r2, [r7, #20]
@@ -15783,21 +15588,15 @@ uint8_t TERM_doListAC(AC_LIST_HEAD * head, char * currInput, uint8_t length, cha
  80074a4:	440b      	add	r3, r1
  80074a6:	6812      	ldr	r2, [r2, #0]
  80074a8:	601a      	str	r2, [r3, #0]
-                    commandsFound ++;
  80074aa:	7fbb      	ldrb	r3, [r7, #30]
  80074ac:	3301      	adds	r3, #1
  80074ae:	77bb      	strb	r3, [r7, #30]
  80074b0:	e004      	b.n	80074bc <TERM_doListAC+0x80>
-                    //UART_print(" -> found match (count is now %d)", commandsFound);
-                }
-            }else{
-                if(commandsFound > 0) return commandsFound;
  80074b2:	7fbb      	ldrb	r3, [r7, #30]
  80074b4:	2b00      	cmp	r3, #0
  80074b6:	d001      	beq.n	80074bc <TERM_doListAC+0x80>
  80074b8:	7fbb      	ldrb	r3, [r7, #30]
  80074ba:	e041      	b.n	8007540 <TERM_doListAC+0x104>
-        for(;currPos < head->elementCount; currPos++){
  80074bc:	7ffb      	ldrb	r3, [r7, #31]
  80074be:	3301      	adds	r3, #1
  80074c0:	77fb      	strb	r3, [r7, #31]
@@ -15807,17 +15606,10 @@ uint8_t TERM_doListAC(AC_LIST_HEAD * head, char * currInput, uint8_t length, cha
  80074c8:	429a      	cmp	r2, r3
  80074ca:	d3cb      	bcc.n	8007464 <TERM_doListAC+0x28>
  80074cc:	e037      	b.n	800753e <TERM_doListAC+0x102>
-            }
-        }
-        //UART_print("\r\n-----list done-----\r\n");
-    }else{
-        AC_LIST_ELEMENT * curr = head->first;
  80074ce:	68fb      	ldr	r3, [r7, #12]
  80074d0:	689b      	ldr	r3, [r3, #8]
  80074d2:	61bb      	str	r3, [r7, #24]
-        for(;currPos < head->elementCount; currPos++){
  80074d4:	e02c      	b.n	8007530 <TERM_doListAC+0xf4>
-            if(strncmp(currInput, curr->string, length) == 0){
  80074d6:	69bb      	ldr	r3, [r7, #24]
  80074d8:	685b      	ldr	r3, [r3, #4]
  80074da:	79fa      	ldrb	r2, [r7, #7]
@@ -15827,7 +15619,6 @@ uint8_t TERM_doListAC(AC_LIST_HEAD * head, char * currInput, uint8_t length, cha
  80074e4:	4603      	mov	r3, r0
  80074e6:	2b00      	cmp	r3, #0
  80074e8:	d113      	bne.n	8007512 <TERM_doListAC+0xd6>
-                if(strlen(curr->string) >= length){
  80074ea:	69bb      	ldr	r3, [r7, #24]
  80074ec:	685b      	ldr	r3, [r3, #4]
  80074ee:	4618      	mov	r0, r3
@@ -15836,7 +15627,6 @@ uint8_t TERM_doListAC(AC_LIST_HEAD * head, char * currInput, uint8_t length, cha
  80074f6:	79fb      	ldrb	r3, [r7, #7]
  80074f8:	429a      	cmp	r2, r3
  80074fa:	d30f      	bcc.n	800751c <TERM_doListAC+0xe0>
-                    buff[commandsFound] = curr->string;
  80074fc:	7fbb      	ldrb	r3, [r7, #30]
  80074fe:	009b      	lsls	r3, r3, #2
  8007500:	683a      	ldr	r2, [r7, #0]
@@ -15844,30 +15634,21 @@ uint8_t TERM_doListAC(AC_LIST_HEAD * head, char * currInput, uint8_t length, cha
  8007504:	69ba      	ldr	r2, [r7, #24]
  8007506:	6852      	ldr	r2, [r2, #4]
  8007508:	601a      	str	r2, [r3, #0]
-                    commandsFound ++;
  800750a:	7fbb      	ldrb	r3, [r7, #30]
  800750c:	3301      	adds	r3, #1
  800750e:	77bb      	strb	r3, [r7, #30]
  8007510:	e004      	b.n	800751c <TERM_doListAC+0xe0>
-                    //UART_print("found %s (count is now %d)\r\n", buff[commandsFound], commandsFound);
-                }
-            }else{
-                if(commandsFound > 0) return commandsFound;
  8007512:	7fbb      	ldrb	r3, [r7, #30]
  8007514:	2b00      	cmp	r3, #0
  8007516:	d001      	beq.n	800751c <TERM_doListAC+0xe0>
  8007518:	7fbb      	ldrb	r3, [r7, #30]
  800751a:	e011      	b.n	8007540 <TERM_doListAC+0x104>
-            }
-            curr = ACL_getNext(curr);
  800751c:	69b8      	ldr	r0, [r7, #24]
  800751e:	f000 f859 	bl	80075d4 <ACL_getNext>
  8007522:	61b8      	str	r0, [r7, #24]
-            if(curr == 0) break;
  8007524:	69bb      	ldr	r3, [r7, #24]
  8007526:	2b00      	cmp	r3, #0
  8007528:	d008      	beq.n	800753c <TERM_doListAC+0x100>
-        for(;currPos < head->elementCount; currPos++){
  800752a:	7ffb      	ldrb	r3, [r7, #31]
  800752c:	3301      	adds	r3, #1
  800752e:	77fb      	strb	r3, [r7, #31]
@@ -15877,55 +15658,37 @@ uint8_t TERM_doListAC(AC_LIST_HEAD * head, char * currInput, uint8_t length, cha
  8007536:	429a      	cmp	r2, r3
  8007538:	d3cd      	bcc.n	80074d6 <TERM_doListAC+0x9a>
  800753a:	e000      	b.n	800753e <TERM_doListAC+0x102>
-            if(curr == 0) break;
  800753c:	bf00      	nop
-        }
-    }
-    return commandsFound;
  800753e:	7fbb      	ldrb	r3, [r7, #30]
-}
  8007540:	4618      	mov	r0, r3
  8007542:	3720      	adds	r7, #32
  8007544:	46bd      	mov	sp, r7
  8007546:	bd80      	pop	{r7, pc}
 
 08007548 <ACL_defaultCompleter>:
-
-uint8_t ACL_defaultCompleter(TERMINAL_HANDLE * handle, void * params){
  8007548:	b580      	push	{r7, lr}
  800754a:	b086      	sub	sp, #24
  800754c:	af00      	add	r7, sp, #0
  800754e:	6078      	str	r0, [r7, #4]
  8007550:	6039      	str	r1, [r7, #0]
-    if(params == 0){ 
  8007552:	683b      	ldr	r3, [r7, #0]
  8007554:	2b00      	cmp	r3, #0
  8007556:	d104      	bne.n	8007562 <ACL_defaultCompleter+0x1a>
-        handle->autocompleteBufferLength = 0;
  8007558:	687b      	ldr	r3, [r7, #4]
  800755a:	2200      	movs	r2, #0
  800755c:	609a      	str	r2, [r3, #8]
-        return 0;
  800755e:	2300      	movs	r3, #0
  8007560:	e034      	b.n	80075cc <ACL_defaultCompleter+0x84>
-    }
-    
-    AC_LIST_HEAD * list = (AC_LIST_HEAD *) params;
  8007562:	683b      	ldr	r3, [r7, #0]
  8007564:	617b      	str	r3, [r7, #20]
-    
-    char * buff = malloc(128);
  8007566:	2080      	movs	r0, #128	@ 0x80
  8007568:	f009 fac8 	bl	8010afc <malloc>
  800756c:	4603      	mov	r3, r0
  800756e:	613b      	str	r3, [r7, #16]
-    uint8_t len;
-    memset(buff, 0, 128);
  8007570:	2280      	movs	r2, #128	@ 0x80
  8007572:	2100      	movs	r1, #0
  8007574:	6938      	ldr	r0, [r7, #16]
  8007576:	f009 fe79 	bl	801126c <memset>
-    handle->autocompleteStart = TERM_findLastArg(handle, buff, &len);
  800757a:	f107 030f 	add.w	r3, r7, #15
  800757e:	461a      	mov	r2, r3
  8007580:	6939      	ldr	r1, [r7, #16]
@@ -15935,9 +15698,6 @@ uint8_t ACL_defaultCompleter(TERMINAL_HANDLE * handle, void * params){
  800758a:	461a      	mov	r2, r3
  800758c:	687b      	ldr	r3, [r7, #4]
  800758e:	60da      	str	r2, [r3, #12]
-    
-    //TODO use a reasonable size here
-    handle->autocompleteBuffer = malloc(list->elementCount * sizeof(char *));
  8007590:	697b      	ldr	r3, [r7, #20]
  8007592:	685b      	ldr	r3, [r3, #4]
  8007594:	009b      	lsls	r3, r3, #2
@@ -15947,11 +15707,9 @@ uint8_t ACL_defaultCompleter(TERMINAL_HANDLE * handle, void * params){
  800759e:	461a      	mov	r2, r3
  80075a0:	687b      	ldr	r3, [r7, #4]
  80075a2:	605a      	str	r2, [r3, #4]
-    handle->currAutocompleteCount = 0;
  80075a4:	687b      	ldr	r3, [r7, #4]
  80075a6:	2200      	movs	r2, #0
  80075a8:	601a      	str	r2, [r3, #0]
-    handle->autocompleteBufferLength = TERM_doListAC(list, buff, len, handle->autocompleteBuffer);
  80075aa:	7bfa      	ldrb	r2, [r7, #15]
  80075ac:	687b      	ldr	r3, [r7, #4]
  80075ae:	685b      	ldr	r3, [r3, #4]
@@ -15962,31 +15720,23 @@ uint8_t ACL_defaultCompleter(TERMINAL_HANDLE * handle, void * params){
  80075ba:	461a      	mov	r2, r3
  80075bc:	687b      	ldr	r3, [r7, #4]
  80075be:	609a      	str	r2, [r3, #8]
-        
-    free(buff);
  80075c0:	6938      	ldr	r0, [r7, #16]
  80075c2:	f009 faa3 	bl	8010b0c <free>
-    return handle->autocompleteBufferLength;
  80075c6:	687b      	ldr	r3, [r7, #4]
  80075c8:	689b      	ldr	r3, [r3, #8]
  80075ca:	b2db      	uxtb	r3, r3
-}
  80075cc:	4618      	mov	r0, r3
  80075ce:	3718      	adds	r7, #24
  80075d0:	46bd      	mov	sp, r7
  80075d2:	bd80      	pop	{r7, pc}
 
 080075d4 <ACL_getNext>:
-
-AC_LIST_ELEMENT * ACL_getNext(AC_LIST_ELEMENT * currElement){
  80075d4:	b480      	push	{r7}
  80075d6:	b083      	sub	sp, #12
  80075d8:	af00      	add	r7, sp, #0
  80075da:	6078      	str	r0, [r7, #4]
-    return currElement->next;
  80075dc:	687b      	ldr	r3, [r7, #4]
  80075de:	681b      	ldr	r3, [r3, #0]
-}
  80075e0:	4618      	mov	r0, r3
  80075e2:	370c      	adds	r7, #12
  80075e4:	46bd      	mov	sp, r7
@@ -15994,66 +15744,46 @@ AC_LIST_ELEMENT * ACL_getNext(AC_LIST_ELEMENT * currElement){
  80075ea:	4770      	bx	lr
 
 080075ec <ACL_create>:
-
-AC_LIST_HEAD * ACL_create(){
  80075ec:	b580      	push	{r7, lr}
  80075ee:	b082      	sub	sp, #8
  80075f0:	af00      	add	r7, sp, #0
-    AC_LIST_HEAD * ret = malloc(sizeof(AC_LIST_HEAD));
  80075f2:	200c      	movs	r0, #12
  80075f4:	f009 fa82 	bl	8010afc <malloc>
  80075f8:	4603      	mov	r3, r0
  80075fa:	607b      	str	r3, [r7, #4]
-    ret->elementCount = 0;
  80075fc:	687b      	ldr	r3, [r7, #4]
  80075fe:	2200      	movs	r2, #0
  8007600:	605a      	str	r2, [r3, #4]
-    ret->first = 0;
  8007602:	687b      	ldr	r3, [r7, #4]
  8007604:	2200      	movs	r2, #0
  8007606:	609a      	str	r2, [r3, #8]
-    ret->isConst = 0;
  8007608:	687b      	ldr	r3, [r7, #4]
  800760a:	2200      	movs	r2, #0
  800760c:	601a      	str	r2, [r3, #0]
-    return ret;
  800760e:	687b      	ldr	r3, [r7, #4]
-}
  8007610:	4618      	mov	r0, r3
  8007612:	3708      	adds	r7, #8
  8007614:	46bd      	mov	sp, r7
  8007616:	bd80      	pop	{r7, pc}
 
 08007618 <ACL_find>:
-    ret->first = (AC_LIST_ELEMENT *) strings;
-    ret->isConst = 1;
-    return (AC_LIST_HEAD *) ret;
-}
-
-AC_LIST_ELEMENT * ACL_find(AC_LIST_HEAD * head, char * string){
  8007618:	b590      	push	{r4, r7, lr}
  800761a:	b085      	sub	sp, #20
  800761c:	af00      	add	r7, sp, #0
  800761e:	6078      	str	r0, [r7, #4]
  8007620:	6039      	str	r1, [r7, #0]
-    if(head->elementCount == 0) return 0;
  8007622:	687b      	ldr	r3, [r7, #4]
  8007624:	685b      	ldr	r3, [r3, #4]
  8007626:	2b00      	cmp	r3, #0
  8007628:	d101      	bne.n	800762e <ACL_find+0x16>
  800762a:	2300      	movs	r3, #0
  800762c:	e02e      	b.n	800768c <ACL_find+0x74>
-    uint32_t currPos = 0;
  800762e:	2300      	movs	r3, #0
  8007630:	60fb      	str	r3, [r7, #12]
-    AC_LIST_ELEMENT * currComp = head->first;
  8007632:	687b      	ldr	r3, [r7, #4]
  8007634:	689b      	ldr	r3, [r3, #8]
  8007636:	60bb      	str	r3, [r7, #8]
-    
-    for(;currPos < head->elementCount; currPos++){
  8007638:	e022      	b.n	8007680 <ACL_find+0x68>
-        if((strlen(currComp->string) == strlen(string)) && (strcmp(currComp->string, string) == 0)){
  800763a:	68bb      	ldr	r3, [r7, #8]
  800763c:	685b      	ldr	r3, [r3, #4]
  800763e:	4618      	mov	r0, r3
@@ -16072,22 +15802,17 @@ AC_LIST_ELEMENT * ACL_find(AC_LIST_HEAD * head, char * string){
  800765e:	4603      	mov	r3, r0
  8007660:	2b00      	cmp	r3, #0
  8007662:	d101      	bne.n	8007668 <ACL_find+0x50>
-            return currComp;
  8007664:	68bb      	ldr	r3, [r7, #8]
  8007666:	e011      	b.n	800768c <ACL_find+0x74>
-        }
-        if(currComp->next == 0) return 0;
  8007668:	68bb      	ldr	r3, [r7, #8]
  800766a:	681b      	ldr	r3, [r3, #0]
  800766c:	2b00      	cmp	r3, #0
  800766e:	d101      	bne.n	8007674 <ACL_find+0x5c>
  8007670:	2300      	movs	r3, #0
  8007672:	e00b      	b.n	800768c <ACL_find+0x74>
-        currComp = currComp->next;
  8007674:	68bb      	ldr	r3, [r7, #8]
  8007676:	681b      	ldr	r3, [r3, #0]
  8007678:	60bb      	str	r3, [r7, #8]
-    for(;currPos < head->elementCount; currPos++){
  800767a:	68fb      	ldr	r3, [r7, #12]
  800767c:	3301      	adds	r3, #1
  800767e:	60fb      	str	r3, [r7, #12]
@@ -16096,24 +15821,18 @@ AC_LIST_ELEMENT * ACL_find(AC_LIST_HEAD * head, char * string){
  8007684:	68fa      	ldr	r2, [r7, #12]
  8007686:	429a      	cmp	r2, r3
  8007688:	d3d7      	bcc.n	800763a <ACL_find+0x22>
-    }
-    return 0;
  800768a:	2300      	movs	r3, #0
-}
  800768c:	4618      	mov	r0, r3
  800768e:	3714      	adds	r7, #20
  8007690:	46bd      	mov	sp, r7
  8007692:	bd90      	pop	{r4, r7, pc}
 
 08007694 <ACL_add>:
-
-void ACL_add(AC_LIST_HEAD * head, char * string){
  8007694:	b580      	push	{r7, lr}
  8007696:	b088      	sub	sp, #32
  8007698:	af00      	add	r7, sp, #0
  800769a:	6078      	str	r0, [r7, #4]
  800769c:	6039      	str	r1, [r7, #0]
-    if(head->isConst || ACL_find(head, string) != 0) return;
  800769e:	687b      	ldr	r3, [r7, #4]
  80076a0:	681b      	ldr	r3, [r3, #0]
  80076a2:	2b00      	cmp	r3, #0
@@ -16124,54 +15843,38 @@ void ACL_add(AC_LIST_HEAD * head, char * string){
  80076ae:	4603      	mov	r3, r0
  80076b0:	2b00      	cmp	r3, #0
  80076b2:	d164      	bne.n	800777e <ACL_add+0xea>
-    
-    if(head->elementCount == 0){
  80076b4:	687b      	ldr	r3, [r7, #4]
  80076b6:	685b      	ldr	r3, [r3, #4]
  80076b8:	2b00      	cmp	r3, #0
  80076ba:	d113      	bne.n	80076e4 <ACL_add+0x50>
-        AC_LIST_ELEMENT * newElement = malloc(sizeof(AC_LIST_ELEMENT));
  80076bc:	2008      	movs	r0, #8
  80076be:	f009 fa1d 	bl	8010afc <malloc>
  80076c2:	4603      	mov	r3, r0
  80076c4:	60bb      	str	r3, [r7, #8]
-        newElement->string = string;
  80076c6:	68bb      	ldr	r3, [r7, #8]
  80076c8:	683a      	ldr	r2, [r7, #0]
  80076ca:	605a      	str	r2, [r3, #4]
-        newElement->next = 0;
  80076cc:	68bb      	ldr	r3, [r7, #8]
  80076ce:	2200      	movs	r2, #0
  80076d0:	601a      	str	r2, [r3, #0]
-        head->first = newElement;
  80076d2:	687b      	ldr	r3, [r7, #4]
  80076d4:	68ba      	ldr	r2, [r7, #8]
  80076d6:	609a      	str	r2, [r3, #8]
-        head->elementCount ++;
  80076d8:	687b      	ldr	r3, [r7, #4]
  80076da:	685b      	ldr	r3, [r3, #4]
  80076dc:	1c5a      	adds	r2, r3, #1
  80076de:	687b      	ldr	r3, [r7, #4]
  80076e0:	605a      	str	r2, [r3, #4]
-        return;
  80076e2:	e04d      	b.n	8007780 <ACL_add+0xec>
-    }
-    
-    uint32_t currPos = 0;
  80076e4:	2300      	movs	r3, #0
  80076e6:	617b      	str	r3, [r7, #20]
-    AC_LIST_ELEMENT ** lastComp = &head->first;
  80076e8:	687b      	ldr	r3, [r7, #4]
  80076ea:	3308      	adds	r3, #8
  80076ec:	61fb      	str	r3, [r7, #28]
-    AC_LIST_ELEMENT * currComp = head->first;
  80076ee:	687b      	ldr	r3, [r7, #4]
  80076f0:	689b      	ldr	r3, [r3, #8]
  80076f2:	61bb      	str	r3, [r7, #24]
-    
-    while(currPos < head->elementCount){
  80076f4:	e03d      	b.n	8007772 <ACL_add+0xde>
-        if(ACL_isSorted(currComp->string, string)){
  80076f6:	69bb      	ldr	r3, [r7, #24]
  80076f8:	685b      	ldr	r3, [r3, #4]
  80076fa:	6839      	ldr	r1, [r7, #0]
@@ -16180,104 +15883,74 @@ void ACL_add(AC_LIST_HEAD * head, char * string){
  8007702:	4603      	mov	r3, r0
  8007704:	2b00      	cmp	r3, #0
  8007706:	d013      	beq.n	8007730 <ACL_add+0x9c>
-            AC_LIST_ELEMENT * newElement = malloc(sizeof(AC_LIST_ELEMENT));
  8007708:	2008      	movs	r0, #8
  800770a:	f009 f9f7 	bl	8010afc <malloc>
  800770e:	4603      	mov	r3, r0
  8007710:	60fb      	str	r3, [r7, #12]
-            newElement->string = string;
  8007712:	68fb      	ldr	r3, [r7, #12]
  8007714:	683a      	ldr	r2, [r7, #0]
  8007716:	605a      	str	r2, [r3, #4]
-
-            *lastComp = newElement;
  8007718:	69fb      	ldr	r3, [r7, #28]
  800771a:	68fa      	ldr	r2, [r7, #12]
  800771c:	601a      	str	r2, [r3, #0]
-            newElement->next = currComp;
  800771e:	68fb      	ldr	r3, [r7, #12]
  8007720:	69ba      	ldr	r2, [r7, #24]
  8007722:	601a      	str	r2, [r3, #0]
-
-            head->elementCount ++;
  8007724:	687b      	ldr	r3, [r7, #4]
  8007726:	685b      	ldr	r3, [r3, #4]
  8007728:	1c5a      	adds	r2, r3, #1
  800772a:	687b      	ldr	r3, [r7, #4]
  800772c:	605a      	str	r2, [r3, #4]
-            
-            break;
  800772e:	e027      	b.n	8007780 <ACL_add+0xec>
-        }
-        if(currComp->next == 0){
  8007730:	69bb      	ldr	r3, [r7, #24]
  8007732:	681b      	ldr	r3, [r3, #0]
  8007734:	2b00      	cmp	r3, #0
  8007736:	d117      	bne.n	8007768 <ACL_add+0xd4>
-            AC_LIST_ELEMENT * newElement = malloc(sizeof(AC_LIST_ELEMENT));
  8007738:	2008      	movs	r0, #8
  800773a:	f009 f9df 	bl	8010afc <malloc>
  800773e:	4603      	mov	r3, r0
  8007740:	613b      	str	r3, [r7, #16]
-            newElement->string = string;
  8007742:	693b      	ldr	r3, [r7, #16]
  8007744:	683a      	ldr	r2, [r7, #0]
  8007746:	605a      	str	r2, [r3, #4]
-            newElement->string = string;
  8007748:	693b      	ldr	r3, [r7, #16]
  800774a:	683a      	ldr	r2, [r7, #0]
  800774c:	605a      	str	r2, [r3, #4]
-            newElement->next = currComp->next;
  800774e:	69bb      	ldr	r3, [r7, #24]
  8007750:	681a      	ldr	r2, [r3, #0]
  8007752:	693b      	ldr	r3, [r7, #16]
  8007754:	601a      	str	r2, [r3, #0]
-            currComp->next = newElement;
  8007756:	69bb      	ldr	r3, [r7, #24]
  8007758:	693a      	ldr	r2, [r7, #16]
  800775a:	601a      	str	r2, [r3, #0]
-            head->elementCount ++;
  800775c:	687b      	ldr	r3, [r7, #4]
  800775e:	685b      	ldr	r3, [r3, #4]
  8007760:	1c5a      	adds	r2, r3, #1
  8007762:	687b      	ldr	r3, [r7, #4]
  8007764:	605a      	str	r2, [r3, #4]
-            return;
  8007766:	e00b      	b.n	8007780 <ACL_add+0xec>
-        }
-        lastComp = &currComp->next;
  8007768:	69bb      	ldr	r3, [r7, #24]
  800776a:	61fb      	str	r3, [r7, #28]
-        currComp = currComp->next;
  800776c:	69bb      	ldr	r3, [r7, #24]
  800776e:	681b      	ldr	r3, [r3, #0]
  8007770:	61bb      	str	r3, [r7, #24]
-    while(currPos < head->elementCount){
  8007772:	687b      	ldr	r3, [r7, #4]
  8007774:	685b      	ldr	r3, [r3, #4]
  8007776:	697a      	ldr	r2, [r7, #20]
  8007778:	429a      	cmp	r2, r3
  800777a:	d3bc      	bcc.n	80076f6 <ACL_add+0x62>
  800777c:	e000      	b.n	8007780 <ACL_add+0xec>
-    if(head->isConst || ACL_find(head, string) != 0) return;
  800777e:	bf00      	nop
-    }
-}
  8007780:	3720      	adds	r7, #32
  8007782:	46bd      	mov	sp, r7
  8007784:	bd80      	pop	{r7, pc}
 
 08007786 <ACL_remove>:
-
-
-
-void ACL_remove(AC_LIST_HEAD * head, char * string){
  8007786:	b590      	push	{r4, r7, lr}
  8007788:	b087      	sub	sp, #28
  800778a:	af00      	add	r7, sp, #0
  800778c:	6078      	str	r0, [r7, #4]
  800778e:	6039      	str	r1, [r7, #0]
-    if(head->isConst || head->elementCount == 0) return;
  8007790:	687b      	ldr	r3, [r7, #4]
  8007792:	681b      	ldr	r3, [r3, #0]
  8007794:	2b00      	cmp	r3, #0
@@ -16286,21 +15959,15 @@ void ACL_remove(AC_LIST_HEAD * head, char * string){
  800779a:	685b      	ldr	r3, [r3, #4]
  800779c:	2b00      	cmp	r3, #0
  800779e:	d03c      	beq.n	800781a <ACL_remove+0x94>
-    uint32_t currPos = 0;
  80077a0:	2300      	movs	r3, #0
  80077a2:	617b      	str	r3, [r7, #20]
-    AC_LIST_ELEMENT ** lastComp = &head->first;
  80077a4:	687b      	ldr	r3, [r7, #4]
  80077a6:	3308      	adds	r3, #8
  80077a8:	613b      	str	r3, [r7, #16]
-    AC_LIST_ELEMENT * currComp = head->first;
  80077aa:	687b      	ldr	r3, [r7, #4]
  80077ac:	689b      	ldr	r3, [r3, #8]
  80077ae:	60fb      	str	r3, [r7, #12]
-    
-    for(;currPos < head->elementCount; currPos++){
  80077b0:	e02d      	b.n	800780e <ACL_remove+0x88>
-        if((strlen(currComp->string) == strlen(string)) && (strcmp(currComp->string, string) == 0)){
  80077b2:	68fb      	ldr	r3, [r7, #12]
  80077b4:	685b      	ldr	r3, [r3, #4]
  80077b6:	4618      	mov	r0, r3
@@ -16319,41 +15986,27 @@ void ACL_remove(AC_LIST_HEAD * head, char * string){
  80077d6:	4603      	mov	r3, r0
  80077d8:	2b00      	cmp	r3, #0
  80077da:	d10c      	bne.n	80077f6 <ACL_remove+0x70>
-            *lastComp = currComp->next;
  80077dc:	68fb      	ldr	r3, [r7, #12]
  80077de:	681a      	ldr	r2, [r3, #0]
  80077e0:	693b      	ldr	r3, [r7, #16]
  80077e2:	601a      	str	r2, [r3, #0]
-            //TODO reimplement this. currently this leaks memory
-            /*if(ptr_is_in_ram(currComp->string)){
-                free(currComp->string);
-            }*/
-            
-            free(currComp);
  80077e4:	68f8      	ldr	r0, [r7, #12]
  80077e6:	f009 f991 	bl	8010b0c <free>
-            head->elementCount --;
  80077ea:	687b      	ldr	r3, [r7, #4]
  80077ec:	685b      	ldr	r3, [r3, #4]
  80077ee:	1e5a      	subs	r2, r3, #1
  80077f0:	687b      	ldr	r3, [r7, #4]
  80077f2:	605a      	str	r2, [r3, #4]
-            return;
  80077f4:	e014      	b.n	8007820 <ACL_remove+0x9a>
-        }
-        if(currComp->next == 0) break;
  80077f6:	68fb      	ldr	r3, [r7, #12]
  80077f8:	681b      	ldr	r3, [r3, #0]
  80077fa:	2b00      	cmp	r3, #0
  80077fc:	d00f      	beq.n	800781e <ACL_remove+0x98>
-        lastComp = &currComp->next;
  80077fe:	68fb      	ldr	r3, [r7, #12]
  8007800:	613b      	str	r3, [r7, #16]
-        currComp = currComp->next;
  8007802:	68fb      	ldr	r3, [r7, #12]
  8007804:	681b      	ldr	r3, [r3, #0]
  8007806:	60fb      	str	r3, [r7, #12]
-    for(;currPos < head->elementCount; currPos++){
  8007808:	697b      	ldr	r3, [r7, #20]
  800780a:	3301      	adds	r3, #1
  800780c:	617b      	str	r3, [r7, #20]
@@ -16363,41 +16016,28 @@ void ACL_remove(AC_LIST_HEAD * head, char * string){
  8007814:	429a      	cmp	r2, r3
  8007816:	d3cc      	bcc.n	80077b2 <ACL_remove+0x2c>
  8007818:	e002      	b.n	8007820 <ACL_remove+0x9a>
-    if(head->isConst || head->elementCount == 0) return;
  800781a:	bf00      	nop
  800781c:	e000      	b.n	8007820 <ACL_remove+0x9a>
-        if(currComp->next == 0) break;
  800781e:	bf00      	nop
-    }
-}
  8007820:	371c      	adds	r7, #28
  8007822:	46bd      	mov	sp, r7
  8007824:	bd90      	pop	{r4, r7, pc}
 
 08007826 <ACL_isSorted>:
-
-unsigned ACL_isSorted(char * a, char * b){
  8007826:	b580      	push	{r7, lr}
  8007828:	b086      	sub	sp, #24
  800782a:	af00      	add	r7, sp, #0
  800782c:	6078      	str	r0, [r7, #4]
  800782e:	6039      	str	r1, [r7, #0]
-    uint8_t currPos = 0;
  8007830:	2300      	movs	r3, #0
  8007832:	75fb      	strb	r3, [r7, #23]
-    uint32_t aLength = strlen(a);
  8007834:	6878      	ldr	r0, [r7, #4]
  8007836:	f7f8 fcfd 	bl	8000234 <strlen>
  800783a:	6138      	str	r0, [r7, #16]
-    uint32_t bLength = strlen(b);
  800783c:	6838      	ldr	r0, [r7, #0]
  800783e:	f7f8 fcf9 	bl	8000234 <strlen>
  8007842:	60f8      	str	r0, [r7, #12]
-    
-    //compare the lowercase ASCII values of each character in the command (They are alphabetically sorted)
-    for(;currPos < aLength && currPos < bLength; currPos++){
  8007844:	e020      	b.n	8007888 <ACL_isSorted+0x62>
-        char letterA = toLowerCase(a[currPos]);
  8007846:	7dfb      	ldrb	r3, [r7, #23]
  8007848:	687a      	ldr	r2, [r7, #4]
  800784a:	4413      	add	r3, r2
@@ -16406,7 +16046,6 @@ unsigned ACL_isSorted(char * a, char * b){
  8007850:	f7ff f958 	bl	8006b04 <toLowerCase>
  8007854:	4603      	mov	r3, r0
  8007856:	72fb      	strb	r3, [r7, #11]
-        char letterB = toLowerCase(b[currPos]);
  8007858:	7dfb      	ldrb	r3, [r7, #23]
  800785a:	683a      	ldr	r2, [r7, #0]
  800785c:	4413      	add	r3, r2
@@ -16415,24 +16054,18 @@ unsigned ACL_isSorted(char * a, char * b){
  8007862:	f7ff f94f 	bl	8006b04 <toLowerCase>
  8007866:	4603      	mov	r3, r0
  8007868:	72bb      	strb	r3, [r7, #10]
-        //if the letters are different we return 1 if a is smaller than b (they are correctly sorted) or zero if its the other way around
-        if(letterA > letterB){
  800786a:	7afa      	ldrb	r2, [r7, #11]
  800786c:	7abb      	ldrb	r3, [r7, #10]
  800786e:	429a      	cmp	r2, r3
  8007870:	d901      	bls.n	8007876 <ACL_isSorted+0x50>
-            return 1;
  8007872:	2301      	movs	r3, #1
  8007874:	e01d      	b.n	80078b2 <ACL_isSorted+0x8c>
-        }else if(letterB > letterA){
  8007876:	7aba      	ldrb	r2, [r7, #10]
  8007878:	7afb      	ldrb	r3, [r7, #11]
  800787a:	429a      	cmp	r2, r3
  800787c:	d901      	bls.n	8007882 <ACL_isSorted+0x5c>
-            return 0;
  800787e:	2300      	movs	r3, #0
  8007880:	e017      	b.n	80078b2 <ACL_isSorted+0x8c>
-    for(;currPos < aLength && currPos < bLength; currPos++){
  8007882:	7dfb      	ldrb	r3, [r7, #23]
  8007884:	3301      	adds	r3, #1
  8007886:	75fb      	strb	r3, [r7, #23]
@@ -16444,34 +16077,19 @@ unsigned ACL_isSorted(char * a, char * b){
  8007892:	68fa      	ldr	r2, [r7, #12]
  8007894:	429a      	cmp	r2, r3
  8007896:	d8d6      	bhi.n	8007846 <ACL_isSorted+0x20>
-        }
-    }
-    
-    //the two commands have identical letters for their entire length we check which one is longer (the shortest should come first)
-    if(aLength > bLength){
  8007898:	693a      	ldr	r2, [r7, #16]
  800789a:	68fb      	ldr	r3, [r7, #12]
  800789c:	429a      	cmp	r2, r3
  800789e:	d901      	bls.n	80078a4 <ACL_isSorted+0x7e>
-        return 1;
  80078a0:	2301      	movs	r3, #1
  80078a2:	e006      	b.n	80078b2 <ACL_isSorted+0x8c>
-    }else if(bLength > aLength){
  80078a4:	68fa      	ldr	r2, [r7, #12]
  80078a6:	693b      	ldr	r3, [r7, #16]
  80078a8:	429a      	cmp	r2, r3
  80078aa:	d901      	bls.n	80078b0 <ACL_isSorted+0x8a>
-        return 0;
  80078ac:	2300      	movs	r3, #0
  80078ae:	e000      	b.n	80078b2 <ACL_isSorted+0x8c>
-    }else{
-        //it might happen that a command is added twice (or two identical ones are added), in which case we just say they are sorted correctly and print an error in the console
-        //TODO implement an alarm here
-        //UART_print("WARNING: Found identical commands: \"%S\" and \"%S\"\r\n", a, b);
-        return 1;
  80078b0:	2301      	movs	r3, #1
-    }
-}
  80078b2:	4618      	mov	r0, r3
  80078b4:	3718      	adds	r7, #24
  80078b6:	46bd      	mov	sp, r7
@@ -16479,12 +16097,6 @@ unsigned ACL_isSorted(char * a, char * b){
 	...
 
 080078bc <CMD_testCommandHandler>:
-//#include "system.h"
-//#include "UART.h"
-
-AC_LIST_HEAD * head;
-
-uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  80078bc:	b590      	push	{r4, r7, lr}
  80078be:	b087      	sub	sp, #28
  80078c0:	af00      	add	r7, sp, #0
@@ -16492,15 +16104,11 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  80078c4:	460b      	mov	r3, r1
  80078c6:	607a      	str	r2, [r7, #4]
  80078c8:	72fb      	strb	r3, [r7, #11]
-    uint8_t currArg = 0;
  80078ca:	2300      	movs	r3, #0
  80078cc:	75fb      	strb	r3, [r7, #23]
-    uint8_t returnCode = 0;
  80078ce:	2300      	movs	r3, #0
  80078d0:	75bb      	strb	r3, [r7, #22]
-    for(;currArg<argCount; currArg++){
  80078d2:	e0da      	b.n	8007a8a <CMD_testCommandHandler+0x1ce>
-        if(strcmp(args[currArg], "-?") == 0){
  80078d4:	7dfb      	ldrb	r3, [r7, #23]
  80078d6:	009b      	lsls	r3, r3, #2
  80078d8:	687a      	ldr	r2, [r7, #4]
@@ -16512,20 +16120,16 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  80078e6:	4603      	mov	r3, r0
  80078e8:	2b00      	cmp	r3, #0
  80078ea:	d10b      	bne.n	8007904 <CMD_testCommandHandler+0x48>
-            ttprintf("This function is intended for testing. it will list all passed arguments\r\n");
  80078ec:	68fb      	ldr	r3, [r7, #12]
  80078ee:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  80078f2:	4885      	ldr	r0, [pc, #532]	@ (8007b08 <CMD_testCommandHandler+0x24c>)
  80078f4:	4798      	blx	r3
-            ttprintf("usage:\r\n\ttest [{option} {value}]\r\n\n\t-aa : adds an argument to the ACL\r\n\n\t-ra : removes an argument from the ACL\r\n\n\t-r  : returns with the given code");
  80078f6:	68fb      	ldr	r3, [r7, #12]
  80078f8:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  80078fc:	4883      	ldr	r0, [pc, #524]	@ (8007b0c <CMD_testCommandHandler+0x250>)
  80078fe:	4798      	blx	r3
-            return TERM_CMD_EXIT_SUCCESS;
  8007900:	23ff      	movs	r3, #255	@ 0xff
  8007902:	e0fa      	b.n	8007afa <CMD_testCommandHandler+0x23e>
-        }else if(strcmp(args[currArg], "-r") == 0){
  8007904:	7dfb      	ldrb	r3, [r7, #23]
  8007906:	009b      	lsls	r3, r3, #2
  8007908:	687a      	ldr	r2, [r7, #4]
@@ -16537,13 +16141,11 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007916:	4603      	mov	r3, r0
  8007918:	2b00      	cmp	r3, #0
  800791a:	d128      	bne.n	800796e <CMD_testCommandHandler+0xb2>
-            if(argCount > currArg + 1){
  800791c:	7afa      	ldrb	r2, [r7, #11]
  800791e:	7dfb      	ldrb	r3, [r7, #23]
  8007920:	3301      	adds	r3, #1
  8007922:	429a      	cmp	r2, r3
  8007924:	dd1c      	ble.n	8007960 <CMD_testCommandHandler+0xa4>
-                returnCode = atoi(args[currArg + 1]);
  8007926:	7dfb      	ldrb	r3, [r7, #23]
  8007928:	3301      	adds	r3, #1
  800792a:	009b      	lsls	r3, r3, #2
@@ -16554,7 +16156,6 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007934:	f009 f8de 	bl	8010af4 <atoi>
  8007938:	4603      	mov	r3, r0
  800793a:	75bb      	strb	r3, [r7, #22]
-                ttprintf("returning %d (from string \"%s\")\r\n", returnCode, args[currArg + 1]);
  800793c:	68fb      	ldr	r3, [r7, #12]
  800793e:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  8007942:	7db8      	ldrb	r0, [r7, #22]
@@ -16567,28 +16168,17 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007950:	4601      	mov	r1, r0
  8007952:	4870      	ldr	r0, [pc, #448]	@ (8007b14 <CMD_testCommandHandler+0x258>)
  8007954:	4798      	blx	r3
-                currArg++;
  8007956:	7dfb      	ldrb	r3, [r7, #23]
  8007958:	3301      	adds	r3, #1
  800795a:	75fb      	strb	r3, [r7, #23]
-                return returnCode;
  800795c:	7dbb      	ldrb	r3, [r7, #22]
  800795e:	e0cc      	b.n	8007afa <CMD_testCommandHandler+0x23e>
-            }else{
-                ttprintf("usage:\r\ntest -r [return code]\r\n");
  8007960:	68fb      	ldr	r3, [r7, #12]
  8007962:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  8007966:	486c      	ldr	r0, [pc, #432]	@ (8007b18 <CMD_testCommandHandler+0x25c>)
  8007968:	4798      	blx	r3
-                return 0;
  800796a:	2300      	movs	r3, #0
  800796c:	e0c5      	b.n	8007afa <CMD_testCommandHandler+0x23e>
-            }else{
-                ttprintf("usage:\r\ntest -atoiFP [value to convert]\r\n");
-                return TERM_CMD_EXIT_ERROR;
-            }
-#endif
-        }else if(strcmp(args[currArg], "-ra") == 0){
  800796e:	7dfb      	ldrb	r3, [r7, #23]
  8007970:	009b      	lsls	r3, r3, #2
  8007972:	687a      	ldr	r2, [r7, #4]
@@ -16600,7 +16190,6 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007980:	4603      	mov	r3, r0
  8007982:	2b00      	cmp	r3, #0
  8007984:	d126      	bne.n	80079d4 <CMD_testCommandHandler+0x118>
-            if(++currArg < argCount){
  8007986:	7dfb      	ldrb	r3, [r7, #23]
  8007988:	3301      	adds	r3, #1
  800798a:	75fb      	strb	r3, [r7, #23]
@@ -16608,7 +16197,6 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  800798e:	7afb      	ldrb	r3, [r7, #11]
  8007990:	429a      	cmp	r2, r3
  8007992:	d217      	bcs.n	80079c4 <CMD_testCommandHandler+0x108>
-                ACL_remove(head, args[currArg]);
  8007994:	4b62      	ldr	r3, [pc, #392]	@ (8007b20 <CMD_testCommandHandler+0x264>)
  8007996:	6818      	ldr	r0, [r3, #0]
  8007998:	7dfb      	ldrb	r3, [r7, #23]
@@ -16618,7 +16206,6 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  80079a0:	681b      	ldr	r3, [r3, #0]
  80079a2:	4619      	mov	r1, r3
  80079a4:	f7ff feef 	bl	8007786 <ACL_remove>
-                ttprintf("removed \"%s\" from the ACL\r\n", args[currArg]);
  80079a8:	68fb      	ldr	r3, [r7, #12]
  80079aa:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  80079ae:	7dfa      	ldrb	r2, [r7, #23]
@@ -16629,22 +16216,16 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  80079b8:	4611      	mov	r1, r2
  80079ba:	485a      	ldr	r0, [pc, #360]	@ (8007b24 <CMD_testCommandHandler+0x268>)
  80079bc:	4798      	blx	r3
-                returnCode = TERM_CMD_EXIT_SUCCESS;
  80079be:	23ff      	movs	r3, #255	@ 0xff
  80079c0:	75bb      	strb	r3, [r7, #22]
  80079c2:	e05f      	b.n	8007a84 <CMD_testCommandHandler+0x1c8>
-            }else{
-                ttprintf("missing ACL element value for option \"-ra\"\r\n");
  80079c4:	68fb      	ldr	r3, [r7, #12]
  80079c6:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  80079ca:	4857      	ldr	r0, [pc, #348]	@ (8007b28 <CMD_testCommandHandler+0x26c>)
  80079cc:	4798      	blx	r3
-                returnCode = TERM_CMD_EXIT_ERROR;
  80079ce:	2300      	movs	r3, #0
  80079d0:	75bb      	strb	r3, [r7, #22]
  80079d2:	e057      	b.n	8007a84 <CMD_testCommandHandler+0x1c8>
-            }
-        }else if(strcmp(args[currArg], "-lp") == 0){
  80079d4:	7dfb      	ldrb	r3, [r7, #23]
  80079d6:	009b      	lsls	r3, r3, #2
  80079d8:	687a      	ldr	r2, [r7, #4]
@@ -16656,15 +16237,11 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  80079e6:	4603      	mov	r3, r0
  80079e8:	2b00      	cmp	r3, #0
  80079ea:	d105      	bne.n	80079f8 <CMD_testCommandHandler+0x13c>
-            ttprintf("going to sleep, good night :) \r\n");
  80079ec:	68fb      	ldr	r3, [r7, #12]
  80079ee:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  80079f2:	484f      	ldr	r0, [pc, #316]	@ (8007b30 <CMD_testCommandHandler+0x274>)
  80079f4:	4798      	blx	r3
  80079f6:	e045      	b.n	8007a84 <CMD_testCommandHandler+0x1c8>
-            //SYS_setOscillatorSource(0b001);
-            //SYS_setOscillatorSource(0b101);
-        }else if(strcmp(args[currArg], "-aa") == 0){
  80079f8:	7dfb      	ldrb	r3, [r7, #23]
  80079fa:	009b      	lsls	r3, r3, #2
  80079fc:	687a      	ldr	r2, [r7, #4]
@@ -16676,7 +16253,6 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007a0a:	4603      	mov	r3, r0
  8007a0c:	2b00      	cmp	r3, #0
  8007a0e:	d139      	bne.n	8007a84 <CMD_testCommandHandler+0x1c8>
-            if(++currArg < argCount){
  8007a10:	7dfb      	ldrb	r3, [r7, #23]
  8007a12:	3301      	adds	r3, #1
  8007a14:	75fb      	strb	r3, [r7, #23]
@@ -16684,7 +16260,6 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007a18:	7afb      	ldrb	r3, [r7, #11]
  8007a1a:	429a      	cmp	r2, r3
  8007a1c:	d22b      	bcs.n	8007a76 <CMD_testCommandHandler+0x1ba>
-                char * newString = malloc(strlen(args[currArg])+1);
  8007a1e:	7dfb      	ldrb	r3, [r7, #23]
  8007a20:	009b      	lsls	r3, r3, #2
  8007a22:	687a      	ldr	r2, [r7, #4]
@@ -16698,7 +16273,6 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007a34:	f009 f862 	bl	8010afc <malloc>
  8007a38:	4603      	mov	r3, r0
  8007a3a:	613b      	str	r3, [r7, #16]
-                strcpy(newString, args[currArg]);
  8007a3c:	7dfb      	ldrb	r3, [r7, #23]
  8007a3e:	009b      	lsls	r3, r3, #2
  8007a40:	687a      	ldr	r2, [r7, #4]
@@ -16707,13 +16281,11 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007a46:	4619      	mov	r1, r3
  8007a48:	6938      	ldr	r0, [r7, #16]
  8007a4a:	f009 fcba 	bl	80113c2 <strcpy>
-                ACL_add(head, newString);
  8007a4e:	4b34      	ldr	r3, [pc, #208]	@ (8007b20 <CMD_testCommandHandler+0x264>)
  8007a50:	681b      	ldr	r3, [r3, #0]
  8007a52:	6939      	ldr	r1, [r7, #16]
  8007a54:	4618      	mov	r0, r3
  8007a56:	f7ff fe1d 	bl	8007694 <ACL_add>
-                ttprintf("Added \"%s\" to the ACL\r\n", args[currArg]);
  8007a5a:	68fb      	ldr	r3, [r7, #12]
  8007a5c:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  8007a60:	7dfa      	ldrb	r2, [r7, #23]
@@ -16724,20 +16296,15 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007a6a:	4611      	mov	r1, r2
  8007a6c:	4832      	ldr	r0, [pc, #200]	@ (8007b38 <CMD_testCommandHandler+0x27c>)
  8007a6e:	4798      	blx	r3
-                returnCode = TERM_CMD_EXIT_SUCCESS;
  8007a70:	23ff      	movs	r3, #255	@ 0xff
  8007a72:	75bb      	strb	r3, [r7, #22]
  8007a74:	e006      	b.n	8007a84 <CMD_testCommandHandler+0x1c8>
-            }else{
-                ttprintf("missing ACL element value for option \"-aa\"\r\n");
  8007a76:	68fb      	ldr	r3, [r7, #12]
  8007a78:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  8007a7c:	482f      	ldr	r0, [pc, #188]	@ (8007b3c <CMD_testCommandHandler+0x280>)
  8007a7e:	4798      	blx	r3
-                returnCode = TERM_CMD_EXIT_ERROR;
  8007a80:	2300      	movs	r3, #0
  8007a82:	75bb      	strb	r3, [r7, #22]
-    for(;currArg<argCount; currArg++){
  8007a84:	7dfb      	ldrb	r3, [r7, #23]
  8007a86:	3301      	adds	r3, #1
  8007a88:	75fb      	strb	r3, [r7, #23]
@@ -16745,19 +16312,11 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007a8c:	7afb      	ldrb	r3, [r7, #11]
  8007a8e:	429a      	cmp	r2, r3
  8007a90:	f4ff af20 	bcc.w	80078d4 <CMD_testCommandHandler+0x18>
-            
-            returnCode = TERM_CMD_EXIT_SUCCESS;
-#endif
-        }
-    }
-    if(returnCode != 0) return returnCode;
  8007a94:	7dbb      	ldrb	r3, [r7, #22]
  8007a96:	2b00      	cmp	r3, #0
  8007a98:	d001      	beq.n	8007a9e <CMD_testCommandHandler+0x1e2>
  8007a9a:	7dbb      	ldrb	r3, [r7, #22]
  8007a9c:	e02d      	b.n	8007afa <CMD_testCommandHandler+0x23e>
-    
-    ttprintf("Terminal test function called. ArgCount = %d ; Calling user = \"%s\"%s\r\n", argCount, handle->currUserName, (argCount != 0) ? "; \r\narguments={" : "");
  8007a9e:	68fb      	ldr	r3, [r7, #12]
  8007aa0:	f8d3 4088 	ldr.w	r4, [r3, #136]	@ 0x88
  8007aa4:	7af9      	ldrb	r1, [r7, #11]
@@ -16771,11 +16330,9 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007ab6:	4b23      	ldr	r3, [pc, #140]	@ (8007b44 <CMD_testCommandHandler+0x288>)
  8007ab8:	4823      	ldr	r0, [pc, #140]	@ (8007b48 <CMD_testCommandHandler+0x28c>)
  8007aba:	47a0      	blx	r4
-    for(currArg = 0;currArg<argCount; currArg++){
  8007abc:	2300      	movs	r3, #0
  8007abe:	75fb      	strb	r3, [r7, #23]
  8007ac0:	e016      	b.n	8007af0 <CMD_testCommandHandler+0x234>
-        ttprintf("%d:\"%s\"%s\r\n", currArg, args[currArg], (currArg == argCount - 1) ? "\r\n}" : ",");
  8007ac2:	68fb      	ldr	r3, [r7, #12]
  8007ac4:	f8d3 4088 	ldr.w	r4, [r3, #136]	@ 0x88
  8007ac8:	7df9      	ldrb	r1, [r7, #23]
@@ -16795,7 +16352,6 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007ae4:	4602      	mov	r2, r0
  8007ae6:	481b      	ldr	r0, [pc, #108]	@ (8007b54 <CMD_testCommandHandler+0x298>)
  8007ae8:	47a0      	blx	r4
-    for(currArg = 0;currArg<argCount; currArg++){
  8007aea:	7dfb      	ldrb	r3, [r7, #23]
  8007aec:	3301      	adds	r3, #1
  8007aee:	75fb      	strb	r3, [r7, #23]
@@ -16803,10 +16359,7 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007af2:	7afb      	ldrb	r3, [r7, #11]
  8007af4:	429a      	cmp	r2, r3
  8007af6:	d3e4      	bcc.n	8007ac2 <CMD_testCommandHandler+0x206>
-    }
-    return TERM_CMD_EXIT_SUCCESS;
  8007af8:	23ff      	movs	r3, #255	@ 0xff
-}
  8007afa:	4618      	mov	r0, r3
  8007afc:	371c      	adds	r7, #28
  8007afe:	46bd      	mov	sp, r7
@@ -16835,12 +16388,6 @@ uint8_t CMD_testCommandHandler(TERMINAL_HANDLE * handle, uint8_t argCount, char 
  8007b54:	08013be8 	.word	0x08013be8
 
 08007b58 <CMD_help>:
-    TERM_RESET_FUNCTION();
-    return TERM_CMD_EXIT_SUCCESS;
-}
-#endif
-
-uint8_t CMD_help(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007b58:	b590      	push	{r4, r7, lr}
  8007b5a:	b089      	sub	sp, #36	@ 0x24
  8007b5c:	af02      	add	r7, sp, #8
@@ -16848,13 +16395,9 @@ uint8_t CMD_help(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007b60:	460b      	mov	r3, r1
  8007b62:	607a      	str	r2, [r7, #4]
  8007b64:	72fb      	strb	r3, [r7, #11]
-    uint8_t currArg = 0;
  8007b66:	2300      	movs	r3, #0
  8007b68:	75fb      	strb	r3, [r7, #23]
-    //uint8_t returnCode = TERM_CMD_EXIT_SUCCESS;
-    for(;currArg<argCount; currArg++){
  8007b6a:	e015      	b.n	8007b98 <CMD_help+0x40>
-        if(strcmp(args[currArg], "-?") == 0){
  8007b6c:	7dfb      	ldrb	r3, [r7, #23]
  8007b6e:	009b      	lsls	r3, r3, #2
  8007b70:	687a      	ldr	r2, [r7, #4]
@@ -16866,15 +16409,12 @@ uint8_t CMD_help(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007b7e:	4603      	mov	r3, r0
  8007b80:	2b00      	cmp	r3, #0
  8007b82:	d106      	bne.n	8007b92 <CMD_help+0x3a>
-            ttprintf("come on do you really need help with help?\r\n");
  8007b84:	68fb      	ldr	r3, [r7, #12]
  8007b86:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  8007b8a:	481f      	ldr	r0, [pc, #124]	@ (8007c08 <CMD_help+0xb0>)
  8007b8c:	4798      	blx	r3
-            return TERM_CMD_EXIT_SUCCESS;
  8007b8e:	23ff      	movs	r3, #255	@ 0xff
  8007b90:	e033      	b.n	8007bfa <CMD_help+0xa2>
-    for(;currArg<argCount; currArg++){
  8007b92:	7dfb      	ldrb	r3, [r7, #23]
  8007b94:	3301      	adds	r3, #1
  8007b96:	75fb      	strb	r3, [r7, #23]
@@ -16882,9 +16422,6 @@ uint8_t CMD_help(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007b9a:	7afb      	ldrb	r3, [r7, #11]
  8007b9c:	429a      	cmp	r2, r3
  8007b9e:	d3e5      	bcc.n	8007b6c <CMD_help+0x14>
-        }
-    }
-    ttprintf("\r\nTTerm %s\r\n%d Commands available:\r\n\r\n", TERM_VERSION_STRING, handle->cmdListHead->commandLength);
  8007ba0:	68fb      	ldr	r3, [r7, #12]
  8007ba2:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  8007ba6:	68fa      	ldr	r2, [r7, #12]
@@ -16893,7 +16430,6 @@ uint8_t CMD_help(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007bae:	4917      	ldr	r1, [pc, #92]	@ (8007c0c <CMD_help+0xb4>)
  8007bb0:	4817      	ldr	r0, [pc, #92]	@ (8007c10 <CMD_help+0xb8>)
  8007bb2:	4798      	blx	r3
-    ttprintf("\x1b[%dC%s\r\x1b[%dC%s\r\n\r\n", 2, "Command:", 19, "Description:");
  8007bb4:	68fb      	ldr	r3, [r7, #12]
  8007bb6:	f8d3 4088 	ldr.w	r4, [r3, #136]	@ 0x88
  8007bba:	4b16      	ldr	r3, [pc, #88]	@ (8007c14 <CMD_help+0xbc>)
@@ -16903,14 +16439,11 @@ uint8_t CMD_help(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007bc2:	2102      	movs	r1, #2
  8007bc4:	4815      	ldr	r0, [pc, #84]	@ (8007c1c <CMD_help+0xc4>)
  8007bc6:	47a0      	blx	r4
-    TermCommandDescriptor * currCmd = handle->cmdListHead->nextCmd;
  8007bc8:	68fb      	ldr	r3, [r7, #12]
  8007bca:	f8d3 3084 	ldr.w	r3, [r3, #132]	@ 0x84
  8007bce:	69db      	ldr	r3, [r3, #28]
  8007bd0:	613b      	str	r3, [r7, #16]
-    while(currCmd != 0){
  8007bd2:	e00e      	b.n	8007bf2 <CMD_help+0x9a>
-        ttprintf("\x1b[%dC%s\r\x1b[%dC%s\r\n", 3, currCmd->command, 20, currCmd->commandDescription);
  8007bd4:	68fb      	ldr	r3, [r7, #12]
  8007bd6:	f8d3 4088 	ldr.w	r4, [r3, #136]	@ 0x88
  8007bda:	693b      	ldr	r3, [r7, #16]
@@ -16922,18 +16455,13 @@ uint8_t CMD_help(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007be6:	2103      	movs	r1, #3
  8007be8:	480d      	ldr	r0, [pc, #52]	@ (8007c20 <CMD_help+0xc8>)
  8007bea:	47a0      	blx	r4
-        currCmd = currCmd->nextCmd;
  8007bec:	693b      	ldr	r3, [r7, #16]
  8007bee:	69db      	ldr	r3, [r3, #28]
  8007bf0:	613b      	str	r3, [r7, #16]
-    while(currCmd != 0){
  8007bf2:	693b      	ldr	r3, [r7, #16]
  8007bf4:	2b00      	cmp	r3, #0
  8007bf6:	d1ed      	bne.n	8007bd4 <CMD_help+0x7c>
-    }
-    return TERM_CMD_EXIT_SUCCESS;
  8007bf8:	23ff      	movs	r3, #255	@ 0xff
-}
  8007bfa:	4618      	mov	r0, r3
  8007bfc:	371c      	adds	r7, #28
  8007bfe:	46bd      	mov	sp, r7
@@ -16949,8 +16477,6 @@ uint8_t CMD_help(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007c20:	08013c84 	.word	0x08013c84
 
 08007c24 <CMD_cls>:
-
-uint8_t CMD_cls(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007c24:	b580      	push	{r7, lr}
  8007c26:	b086      	sub	sp, #24
  8007c28:	af00      	add	r7, sp, #0
@@ -16958,13 +16484,9 @@ uint8_t CMD_cls(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007c2c:	460b      	mov	r3, r1
  8007c2e:	607a      	str	r2, [r7, #4]
  8007c30:	72fb      	strb	r3, [r7, #11]
-    uint8_t currArg = 0;
  8007c32:	2300      	movs	r3, #0
  8007c34:	75fb      	strb	r3, [r7, #23]
-    //uint8_t returnCode = TERM_CMD_EXIT_SUCCESS;
-    for(;currArg<argCount; currArg++){
  8007c36:	e015      	b.n	8007c64 <CMD_cls+0x40>
-        if(strcmp(args[currArg], "-?") == 0){
  8007c38:	7dfb      	ldrb	r3, [r7, #23]
  8007c3a:	009b      	lsls	r3, r3, #2
  8007c3c:	687a      	ldr	r2, [r7, #4]
@@ -16976,15 +16498,12 @@ uint8_t CMD_cls(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007c4a:	4603      	mov	r3, r0
  8007c4c:	2b00      	cmp	r3, #0
  8007c4e:	d106      	bne.n	8007c5e <CMD_cls+0x3a>
-            ttprintf("clears the screen\r\n");
  8007c50:	68fb      	ldr	r3, [r7, #12]
  8007c52:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
  8007c56:	4810      	ldr	r0, [pc, #64]	@ (8007c98 <CMD_cls+0x74>)
  8007c58:	4798      	blx	r3
-            return TERM_CMD_EXIT_SUCCESS;
  8007c5a:	23ff      	movs	r3, #255	@ 0xff
  8007c5c:	e015      	b.n	8007c8a <CMD_cls+0x66>
-    for(;currArg<argCount; currArg++){
  8007c5e:	7dfb      	ldrb	r3, [r7, #23]
  8007c60:	3301      	adds	r3, #1
  8007c62:	75fb      	strb	r3, [r7, #23]
@@ -16992,10 +16511,6 @@ uint8_t CMD_cls(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007c66:	7afb      	ldrb	r3, [r7, #11]
  8007c68:	429a      	cmp	r2, r3
  8007c6a:	d3e5      	bcc.n	8007c38 <CMD_cls+0x14>
-        }
-    }
-    
-    TERM_sendVT100Code(handle, _VT100_RESET, 0); TERM_sendVT100Code(handle, _VT100_CURSOR_POS1, 0);
  8007c6c:	2200      	movs	r2, #0
  8007c6e:	f44f 5180 	mov.w	r1, #4096	@ 0x1000
  8007c72:	68f8      	ldr	r0, [r7, #12]
@@ -17004,13 +16519,9 @@ uint8_t CMD_cls(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007c7a:	2100      	movs	r1, #0
  8007c7c:	68f8      	ldr	r0, [r7, #12]
  8007c7e:	f7fe ff6d 	bl	8006b5c <TERM_sendVT100Code>
-    TERM_printBootMessage(handle);
  8007c82:	68f8      	ldr	r0, [r7, #12]
  8007c84:	f7fd feb4 	bl	80059f0 <TERM_printBootMessage>
-    
-    return TERM_CMD_EXIT_SUCCESS;
  8007c88:	23ff      	movs	r3, #255	@ 0xff
-}
  8007c8a:	4618      	mov	r0, r3
  8007c8c:	3718      	adds	r7, #24
  8007c8e:	46bd      	mov	sp, r7
@@ -17020,110 +16531,49 @@ uint8_t CMD_cls(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args){
  8007c98:	08013c98 	.word	0x08013c98
 
 08007c9c <Reset_Handler>:
-
-    .section	.text.Reset_Handler
-	.weak	Reset_Handler
-	.type	Reset_Handler, %function
-Reset_Handler:
-  ldr   r0, =_estack
  8007c9c:	480d      	ldr	r0, [pc, #52]	@ (8007cd4 <LoopForever+0x2>)
-  mov   sp, r0          /* set stack pointer */
  8007c9e:	4685      	mov	sp, r0
-
-/* Call the clock system initialization function.*/
-    bl  SystemInit
  8007ca0:	f7fc f9c2 	bl	8004028 <SystemInit>
-
-/* Copy the data segment initializers from flash to SRAM */
-  ldr r0, =_sdata
  8007ca4:	480c      	ldr	r0, [pc, #48]	@ (8007cd8 <LoopForever+0x6>)
-  ldr r1, =_edata
  8007ca6:	490d      	ldr	r1, [pc, #52]	@ (8007cdc <LoopForever+0xa>)
-  ldr r2, =_sidata
  8007ca8:	4a0d      	ldr	r2, [pc, #52]	@ (8007ce0 <LoopForever+0xe>)
-  movs r3, #0
  8007caa:	2300      	movs	r3, #0
-  b	LoopCopyDataInit
  8007cac:	e002      	b.n	8007cb4 <LoopCopyDataInit>
 
 08007cae <CopyDataInit>:
-
-CopyDataInit:
-  ldr r4, [r2, r3]
  8007cae:	58d4      	ldr	r4, [r2, r3]
-  str r4, [r0, r3]
  8007cb0:	50c4      	str	r4, [r0, r3]
-  adds r3, r3, #4
  8007cb2:	3304      	adds	r3, #4
 
 08007cb4 <LoopCopyDataInit>:
-
-LoopCopyDataInit:
-  adds r4, r0, r3
  8007cb4:	18c4      	adds	r4, r0, r3
-  cmp r4, r1
  8007cb6:	428c      	cmp	r4, r1
-  bcc CopyDataInit
  8007cb8:	d3f9      	bcc.n	8007cae <CopyDataInit>
-  
-/* Zero fill the bss segment. */
-  ldr r2, =_sbss
  8007cba:	4a0a      	ldr	r2, [pc, #40]	@ (8007ce4 <LoopForever+0x12>)
-  ldr r4, =_ebss
  8007cbc:	4c0a      	ldr	r4, [pc, #40]	@ (8007ce8 <LoopForever+0x16>)
-  movs r3, #0
  8007cbe:	2300      	movs	r3, #0
-  b LoopFillZerobss
  8007cc0:	e001      	b.n	8007cc6 <LoopFillZerobss>
 
 08007cc2 <FillZerobss>:
-
-FillZerobss:
-  str  r3, [r2]
  8007cc2:	6013      	str	r3, [r2, #0]
-  adds r2, r2, #4
  8007cc4:	3204      	adds	r2, #4
 
 08007cc6 <LoopFillZerobss>:
-
-LoopFillZerobss:
-  cmp r2, r4
  8007cc6:	42a2      	cmp	r2, r4
-  bcc FillZerobss
  8007cc8:	d3fb      	bcc.n	8007cc2 <FillZerobss>
-
-/* Call static constructors */
-    bl __libc_init_array
  8007cca:	f009 fb53 	bl	8011374 <__libc_init_array>
-/* Call the application's entry point.*/
-	bl	main
  8007cce:	f7fa fc63 	bl	8002598 <main>
 
 08007cd2 <LoopForever>:
-
-LoopForever:
-    b LoopForever
  8007cd2:	e7fe      	b.n	8007cd2 <LoopForever>
-  ldr   r0, =_estack
  8007cd4:	20020000 	.word	0x20020000
-  ldr r0, =_sdata
  8007cd8:	20000000 	.word	0x20000000
-  ldr r1, =_edata
  8007cdc:	200000a8 	.word	0x200000a8
-  ldr r2, =_sidata
  8007ce0:	08013e70 	.word	0x08013e70
-  ldr r2, =_sbss
  8007ce4:	200000a8 	.word	0x200000a8
-  ldr r4, =_ebss
  8007ce8:	200009f8 	.word	0x200009f8
 
 08007cec <COMP1_2_3_IRQHandler>:
- * @retval : None
-*/
-    .section	.text.Default_Handler,"ax",%progbits
-Default_Handler:
-Infinite_Loop:
-	b	Infinite_Loop
  8007cec:	e7fe      	b.n	8007cec <COMP1_2_3_IRQHandler>
 
 08007cee <HAL_Init>:
@@ -17224,7 +16674,7 @@ __weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
         HAL_NVIC_SetPriority(SysTick_IRQn, TickPriority, 0U);
  8007d5a:	2200      	movs	r2, #0
  8007d5c:	6879      	ldr	r1, [r7, #4]
- 8007d5e:	f04f 30ff 	mov.w	r0, #4294967295
+ 8007d5e:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
  8007d62:	f002 fc5e 	bl	800a622 <HAL_NVIC_SetPriority>
         uwTickPrio = TickPriority;
  8007d66:	4a0a      	ldr	r2, [pc, #40]	@ (8007d90 <HAL_InitTick+0x70>)
@@ -17333,7 +16783,7 @@ __weak void HAL_Delay(uint32_t Delay)
   /* Add a freq to guarantee minimum wait */
   if (wait < HAL_MAX_DELAY)
  8007de2:	68fb      	ldr	r3, [r7, #12]
- 8007de4:	f1b3 3fff 	cmp.w	r3, #4294967295
+ 8007de4:	f1b3 3fff 	cmp.w	r3, #4294967295	@ 0xffffffff
  8007de8:	d004      	beq.n	8007df4 <HAL_Delay+0x24>
   {
     wait += (uint32_t)(uwTickFreq);
@@ -24166,7 +23616,7 @@ __STATIC_INLINE uint32_t NVIC_EncodePriority (uint32_t PriorityGroup, uint32_t P
 
   return (
            ((PreemptPriority & (uint32_t)((1UL << (PreemptPriorityBits)) - 1UL)) << SubPriorityBits) |
- 800a594:	f04f 32ff 	mov.w	r2, #4294967295
+ 800a594:	f04f 32ff 	mov.w	r2, #4294967295	@ 0xffffffff
  800a598:	69bb      	ldr	r3, [r7, #24]
  800a59a:	fa02 f303 	lsl.w	r3, r2, r3
  800a59e:	43da      	mvns	r2, r3
@@ -24175,7 +23625,7 @@ __STATIC_INLINE uint32_t NVIC_EncodePriority (uint32_t PriorityGroup, uint32_t P
  800a5a4:	697b      	ldr	r3, [r7, #20]
  800a5a6:	409a      	lsls	r2, r3
            ((SubPriority     & (uint32_t)((1UL << (SubPriorityBits    )) - 1UL)))
- 800a5a8:	f04f 31ff 	mov.w	r1, #4294967295
+ 800a5a8:	f04f 31ff 	mov.w	r1, #4294967295	@ 0xffffffff
  800a5ac:	697b      	ldr	r3, [r7, #20]
  800a5ae:	fa01 f303 	lsl.w	r3, r1, r3
  800a5b2:	43d9      	mvns	r1, r3
@@ -24221,7 +23671,7 @@ __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
  800a5e4:	6053      	str	r3, [r2, #4]
   NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
  800a5e6:	210f      	movs	r1, #15
- 800a5e8:	f04f 30ff 	mov.w	r0, #4294967295
+ 800a5e8:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
  800a5ec:	f7ff ff8e 	bl	800a50c <__NVIC_SetPriority>
   SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Value */
  800a5f0:	4b05      	ldr	r3, [pc, #20]	@ (800a608 <SysTick_Config+0x40>)
@@ -27044,7 +26494,7 @@ void HAL_FLASH_IRQHandler(void)
         /* Reset Address and stop Erase pages procedure */
         pFlash.Page = 0xFFFFFFFFU;
  800b4aa:	4b1f      	ldr	r3, [pc, #124]	@ (800b528 <HAL_FLASH_IRQHandler+0x1a0>)
- 800b4ac:	f04f 32ff 	mov.w	r2, #4294967295
+ 800b4ac:	f04f 32ff 	mov.w	r2, #4294967295	@ 0xffffffff
  800b4b0:	615a      	str	r2, [r3, #20]
         pFlash.ProcedureOnGoing = FLASH_PROC_NONE;
  800b4b2:	4b1d      	ldr	r3, [pc, #116]	@ (800b528 <HAL_FLASH_IRQHandler+0x1a0>)
@@ -27699,7 +27149,7 @@ HAL_StatusTypeDef HAL_FLASHEx_Erase(FLASH_EraseInitTypeDef *pEraseInit, uint32_t
       /*Initialization of PageError variable*/
       *PageError = 0xFFFFFFFFU;
  800b7e6:	683b      	ldr	r3, [r7, #0]
- 800b7e8:	f04f 32ff 	mov.w	r2, #4294967295
+ 800b7e8:	f04f 32ff 	mov.w	r2, #4294967295	@ 0xffffffff
  800b7ec:	601a      	str	r2, [r3, #0]
 
       for (page_index = pEraseInit->Page; page_index < (pEraseInit->Page + pEraseInit->NbPages); page_index++)
@@ -38836,7 +38286,7 @@ HAL_StatusTypeDef UART_WaitOnFlagUntilTimeout(UART_HandleTypeDef *huart, uint32_
     /* Check for the Timeout */
     if (Timeout != HAL_MAX_DELAY)
  800fa1a:	69bb      	ldr	r3, [r7, #24]
- 800fa1c:	f1b3 3fff 	cmp.w	r3, #4294967295
+ 800fa1c:	f1b3 3fff 	cmp.w	r3, #4294967295	@ 0xffffffff
  800fa20:	d04b      	beq.n	800faba <UART_WaitOnFlagUntilTimeout+0xb2>
     {
       if (((HAL_GetTick() - Tickstart) > Timeout) || (Timeout == 0U))
@@ -41607,7 +41057,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8010b32:	f000 fbf7 	bl	8011324 <_sbrk_r>
  8010b36:	1c43      	adds	r3, r0, #1
  8010b38:	d103      	bne.n	8010b42 <sbrk_aligned+0x26>
- 8010b3a:	f04f 34ff 	mov.w	r4, #4294967295
+ 8010b3a:	f04f 34ff 	mov.w	r4, #4294967295	@ 0xffffffff
  8010b3e:	4620      	mov	r0, r4
  8010b40:	bd70      	pop	{r4, r5, r6, pc}
  8010b42:	1cc4      	adds	r4, r0, #3
@@ -41794,7 +41244,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8010ce0:	230a      	movne	r3, #10
  8010ce2:	2308      	moveq	r3, #8
  8010ce4:	f106 4c00 	add.w	ip, r6, #2147483648	@ 0x80000000
- 8010ce8:	f10c 3cff 	add.w	ip, ip, #4294967295
+ 8010ce8:	f10c 3cff 	add.w	ip, ip, #4294967295	@ 0xffffffff
  8010cec:	2200      	movs	r2, #0
  8010cee:	fbbc f9f3 	udiv	r9, ip, r3
  8010cf2:	4610      	mov	r0, r2
@@ -41826,7 +41276,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8010d32:	d804      	bhi.n	8010d3e <_strtol_l.isra.0+0xc6>
  8010d34:	3c57      	subs	r4, #87	@ 0x57
  8010d36:	e7e4      	b.n	8010d02 <_strtol_l.isra.0+0x8a>
- 8010d38:	f04f 32ff 	mov.w	r2, #4294967295
+ 8010d38:	f04f 32ff 	mov.w	r2, #4294967295	@ 0xffffffff
  8010d3c:	e7ed      	b.n	8010d1a <_strtol_l.isra.0+0xa2>
  8010d3e:	1c53      	adds	r3, r2, #1
  8010d40:	d108      	bne.n	8010d54 <_strtol_l.isra.0+0xdc>
@@ -42046,7 +41496,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8010f34:	4628      	mov	r0, r5
  8010f36:	f000 f943 	bl	80111c0 <__swsetup_r>
  8010f3a:	b380      	cbz	r0, 8010f9e <_puts_r+0x9a>
- 8010f3c:	f04f 35ff 	mov.w	r5, #4294967295
+ 8010f3c:	f04f 35ff 	mov.w	r5, #4294967295	@ 0xffffffff
  8010f40:	6e63      	ldr	r3, [r4, #100]	@ 0x64
  8010f42:	07da      	lsls	r2, r3, #31
  8010f44:	d405      	bmi.n	8010f52 <_puts_r+0x4e>
@@ -42207,7 +41657,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8011096:	da05      	bge.n	80110a4 <_vsniprintf_r+0x1a>
  8011098:	238b      	movs	r3, #139	@ 0x8b
  801109a:	6003      	str	r3, [r0, #0]
- 801109c:	f04f 30ff 	mov.w	r0, #4294967295
+ 801109c:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
  80110a0:	b01b      	add	sp, #108	@ 0x6c
  80110a2:	bd30      	pop	{r4, r5, pc}
  80110a4:	f44f 7302 	mov.w	r3, #520	@ 0x208
@@ -42215,7 +41665,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80110ac:	f04f 0300 	mov.w	r3, #0
  80110b0:	9319      	str	r3, [sp, #100]	@ 0x64
  80110b2:	bf14      	ite	ne
- 80110b4:	f104 33ff 	addne.w	r3, r4, #4294967295
+ 80110b4:	f104 33ff 	addne.w	r3, r4, #4294967295	@ 0xffffffff
  80110b8:	4623      	moveq	r3, r4
  80110ba:	9302      	str	r3, [sp, #8]
  80110bc:	9305      	str	r3, [sp, #20]
@@ -42302,7 +41752,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8011166:	4628      	mov	r0, r5
  8011168:	f000 f82a 	bl	80111c0 <__swsetup_r>
  801116c:	b118      	cbz	r0, 8011176 <__swbuf_r+0x32>
- 801116e:	f04f 37ff 	mov.w	r7, #4294967295
+ 801116e:	f04f 37ff 	mov.w	r7, #4294967295	@ 0xffffffff
  8011172:	4638      	mov	r0, r7
  8011174:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
  8011176:	6823      	ldr	r3, [r4, #0]
@@ -42360,7 +41810,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80111e2:	602a      	str	r2, [r5, #0]
  80111e4:	f043 0340 	orr.w	r3, r3, #64	@ 0x40
  80111e8:	81a3      	strh	r3, [r4, #12]
- 80111ea:	f04f 30ff 	mov.w	r0, #4294967295
+ 80111ea:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
  80111ee:	e033      	b.n	8011258 <__swsetup_r+0x98>
  80111f0:	0758      	lsls	r0, r3, #29
  80111f2:	d512      	bpl.n	801121a <__swsetup_r+0x5a>
@@ -42600,7 +42050,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
 080113d2 <memcpy>:
  80113d2:	440a      	add	r2, r1
  80113d4:	4291      	cmp	r1, r2
- 80113d6:	f100 33ff 	add.w	r3, r0, #4294967295
+ 80113d6:	f100 33ff 	add.w	r3, r0, #4294967295	@ 0xffffffff
  80113da:	d100      	bne.n	80113de <memcpy+0xc>
  80113dc:	4770      	bx	lr
  80113de:	b510      	push	{r4, lr}
@@ -42754,7 +42204,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  801152c:	89a3      	ldrh	r3, [r4, #12]
  801152e:	f043 0340 	orr.w	r3, r3, #64	@ 0x40
  8011532:	81a3      	strh	r3, [r4, #12]
- 8011534:	f04f 30ff 	mov.w	r0, #4294967295
+ 8011534:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
  8011538:	e7e9      	b.n	801150e <__ssputs_r+0x8a>
 	...
 
@@ -42777,7 +42227,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  801155e:	b930      	cbnz	r0, 801156e <_svfiprintf_r+0x32>
  8011560:	230c      	movs	r3, #12
  8011562:	603b      	str	r3, [r7, #0]
- 8011564:	f04f 30ff 	mov.w	r0, #4294967295
+ 8011564:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
  8011568:	b01d      	add	sp, #116	@ 0x74
  801156a:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
  801156e:	2340      	movs	r3, #64	@ 0x40
@@ -42813,7 +42263,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80115be:	2b00      	cmp	r3, #0
  80115c0:	f000 809f 	beq.w	8011702 <_svfiprintf_r+0x1c6>
  80115c4:	2300      	movs	r3, #0
- 80115c6:	f04f 32ff 	mov.w	r2, #4294967295
+ 80115c6:	f04f 32ff 	mov.w	r2, #4294967295	@ 0xffffffff
  80115ca:	e9cd 2305 	strd	r2, r3, [sp, #20]
  80115ce:	f10a 0a01 	add.w	sl, sl, #1
  80115d2:	9304      	str	r3, [sp, #16]
@@ -43037,7 +42487,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  80117d2:	47c8      	blx	r9
  80117d4:	3001      	adds	r0, #1
  80117d6:	d103      	bne.n	80117e0 <_printf_common+0xac>
- 80117d8:	f04f 30ff 	mov.w	r0, #4294967295
+ 80117d8:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
  80117dc:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
  80117e0:	3501      	adds	r5, #1
  80117e2:	e7c6      	b.n	8011772 <_printf_common+0x3e>
@@ -43180,7 +42630,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8011946:	bfde      	ittt	le
  8011948:	2330      	movle	r3, #48	@ 0x30
  801194a:	f806 3c01 	strble.w	r3, [r6, #-1]
- 801194e:	f106 36ff 	addle.w	r6, r6, #4294967295
+ 801194e:	f106 36ff 	addle.w	r6, r6, #4294967295	@ 0xffffffff
  8011952:	1b92      	subs	r2, r2, r6
  8011954:	6122      	str	r2, [r4, #16]
  8011956:	f8cd a000 	str.w	sl, [sp]
@@ -43191,7 +42641,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8011962:	f7ff fee7 	bl	8011734 <_printf_common>
  8011966:	3001      	adds	r0, #1
  8011968:	d14a      	bne.n	8011a00 <_printf_i+0x1f0>
- 801196a:	f04f 30ff 	mov.w	r0, #4294967295
+ 801196a:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
  801196e:	b004      	add	sp, #16
  8011970:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
  8011974:	6823      	ldr	r3, [r4, #0]
@@ -43406,7 +42856,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8011b36:	f9b4 300c 	ldrsh.w	r3, [r4, #12]
  8011b3a:	f043 0340 	orr.w	r3, r3, #64	@ 0x40
  8011b3e:	81a3      	strh	r3, [r4, #12]
- 8011b40:	f04f 30ff 	mov.w	r0, #4294967295
+ 8011b40:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
  8011b44:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
  8011b48:	4407      	add	r7, r0
  8011b4a:	eba8 0800 	sub.w	r8, r8, r0
@@ -43921,7 +43371,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  801202c:	1a9b      	subs	r3, r3, r2
  801202e:	458e      	cmp	lr, r1
  8012030:	bf88      	it	hi
- 8012032:	f103 33ff 	addhi.w	r3, r3, #4294967295
+ 8012032:	f103 33ff 	addhi.w	r3, r3, #4294967295	@ 0xffffffff
  8012036:	eba1 010e 	sub.w	r1, r1, lr
  801203a:	4465      	add	r5, ip
  801203c:	4642      	mov	r2, r8
@@ -43945,7 +43395,7 @@ static void UARTEx_SetNbDataToProcess(UART_HandleTypeDef *huart)
  8012074:	4649      	mov	r1, r9
  8012076:	f7ee fd73 	bl	8000b60 <__aeabi_dcmple>
  801207a:	b140      	cbz	r0, 801208e <__ieee754_sqrt+0x15e>
- 801207c:	f1b5 3fff 	cmp.w	r5, #4294967295
+ 801207c:	f1b5 3fff 	cmp.w	r5, #4294967295	@ 0xffffffff
  8012080:	e9da 0100 	ldrd	r0, r1, [sl]
  8012084:	e9db 2300 	ldrd	r2, r3, [fp]
  8012088:	d10e      	bne.n	80120a8 <__ieee754_sqrt+0x178>
