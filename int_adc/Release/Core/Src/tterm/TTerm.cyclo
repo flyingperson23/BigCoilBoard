@@ -9,7 +9,7 @@
 ../Core/Src/tterm/TTerm.c:853:25:TERM_findCMD	2
 ../Core/Src/tterm/TTerm.c:1151:9:TERM_seperateArgs	9
 ../Core/Src/tterm/TTerm.c:1194:10:TERM_countArgs	9
-../Core/Src/tterm/TTerm.c:1082:9:TERM_interpretCMD	7
+../Core/Src/tterm/TTerm.c:1082:9:TERM_interpretCMD	5
 ../Core/Src/tterm/TTerm.c:1235:6:TERM_freeCommandList	1
 ../Core/Src/tterm/TTerm.c:1348:6:toLowerCase	2
 ../Core/Src/tterm/TTerm.c:1321:10:TERM_isSorted	5

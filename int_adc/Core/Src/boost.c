@@ -13,8 +13,7 @@ float vbus_target_fast;
 float I_L;
 float vac;
 
-uint16_t vbus_buf[2];
-uint16_t vac_buf[1];
+uint16_t v_buf[2];
 uint16_t I_L_buf[1];
 
 uint8_t enabled = 0;
@@ -42,10 +41,6 @@ void Calc_L_adj() {
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 
-	if (hadc == &hadc2) {
-		vbus = vbus_buf[0] * VREF / 4095.0 * vbus_conv;
-	}
-
 	if (hadc == &hadc3) {
 		I_L = I_L_buf[0] * VREF / 4095.0 * I_L_conv;
 		BoostFastLoop();
@@ -54,7 +49,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 	}
 
 	if (hadc == &hadc4) {
-		vac = vac_buf[0] * VREF / 4095.0 * vac_conv;
+		vac = v_buf[0] * VREF / 4095.0 * vac_conv;
+		vbus = v_buf[1] * VREF / 4095.0 * vbus_conv;
 	}
 }
 
@@ -92,14 +88,12 @@ void Boost_Init() {
 	I_L_conv = 1000000.0 / (float) GetValue(AC_CT_FACTOR); // A/V
 
 
-	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
-	HAL_ADC_Start_DMA(&hadc2, (uint32_t *) vbus_buf, 2);
 
 	HAL_ADCEx_Calibration_Start(&hadc3, ADC_SINGLE_ENDED);
 	HAL_ADC_Start_DMA(&hadc3, (uint32_t *) I_L_buf, 1);
 
 	HAL_ADCEx_Calibration_Start(&hadc4, ADC_SINGLE_ENDED);
-	HAL_ADC_Start_DMA(&hadc4, (uint32_t *) vac_buf, 1);
+	HAL_ADC_Start_DMA(&hadc4, (uint32_t *) v_buf, 2);
 
 	ClearRMS(&vac_rms);
 	ClearRMS(&I_L_rms);

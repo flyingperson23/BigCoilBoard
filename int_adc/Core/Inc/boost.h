@@ -22,8 +22,7 @@ extern float I_L_conv;
 extern float vbus_conv;
 extern float vac_conv;
 
-extern uint16_t vbus_buf[2];
-extern uint16_t vac_buf[1];
+extern uint16_t v_buf[2];
 extern uint16_t I_L_buf[1];
 
 extern float dtc;

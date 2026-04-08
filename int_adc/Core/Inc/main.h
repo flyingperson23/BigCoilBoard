@@ -80,10 +80,8 @@ void Error_Handler(void);
 #define INT_IN_Pin GPIO_PIN_2
 #define INT_IN_GPIO_Port GPIOB
 #define INT_IN_EXTI_IRQn EXTI2_IRQn
-#define AUX_Pin GPIO_PIN_12
-#define AUX_GPIO_Port GPIOB
-#define I_L_Pin GPIO_PIN_13
-#define I_L_GPIO_Port GPIOB
+#define I_L_SENSE_Pin GPIO_PIN_13
+#define I_L_SENSE_GPIO_Port GPIOB
 #define VAC_SENSE_Pin GPIO_PIN_14
 #define VAC_SENSE_GPIO_Port GPIOB
 #define VBUS_SENSE_Pin GPIO_PIN_15

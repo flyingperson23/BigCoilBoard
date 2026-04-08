@@ -1,5 +1,5 @@
 ../Core/Src/boost.c:34:6:Calc_L_adj	1
-../Core/Src/boost.c:43:6:HAL_ADC_ConvCpltCallback	6
+../Core/Src/boost.c:43:6:HAL_ADC_ConvCpltCallback	2
 ../Core/Src/boost.c:61:6:ClearRMS	1
 ../Core/Src/boost.c:67:6:AddRMS	1
 ../Core/Src/boost.c:72:7:CalcRMS	2

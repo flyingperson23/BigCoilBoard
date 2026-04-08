@@ -18,8 +18,8 @@ uint8_t CMD_telem(TERMINAL_HANDLE * handle, uint8_t argCount, char ** args) {
 	ttprintf("VREF: %imV\r\n", (int) (1000*VREF));
 	ttprintf("Temps: %i %i %i %i %i %i\r\n", (int) temps[0], (int) temps[1], (int) temps[2], (int) temps[3], (int) temps[4], (int) temps[5]);
 	ttprintf("Aux ADC: %i %i %i\r\n", aux_adc[0], aux_adc[1], aux_adc[2]);
-	ttprintf("Boost ADC: %i %i %i\r\n", vbus_buf[0], vac_buf[0], I_L_buf[0]);
-	ttprintf("Therm ADC: %i %i %i %i %i\r\n", therm_readings[0], therm_readings[1], therm_readings[2], therm_readings[3], therm_readings[4]);
+	ttprintf("Boost ADC: %i %i %i\r\n", v_buf[0], v_buf[1], I_L_buf[0]);
+	ttprintf("Therm ADC: %i %i %i %i %i\r\n", therm_readings[0], therm_readings[1], therm_readings[2], therm_readings[3], adc2[0]);
 	return TERM_CMD_EXIT_SUCCESS;
 }
 

@@ -17,7 +17,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 /* USER CODE BEGIN Includes */
@@ -210,24 +209,17 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     }
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
     /**ADC2 GPIO Configuration
     PA4     ------> ADC2_IN17
-    PB15     ------> ADC2_IN15
     */
     GPIO_InitStruct.Pin = THERM3_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(THERM3_GPIO_Port, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = VBUS_SENSE_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(VBUS_SENSE_GPIO_Port, &GPIO_InitStruct);
-
     /* ADC2 DMA Init */
     /* ADC2 Init */
-    hdma_adc2.Instance = DMA1_Channel4;
+    hdma_adc2.Instance = DMA1_Channel2;
     hdma_adc2.Init.Request = DMA_REQUEST_ADC2;
     hdma_adc2.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_adc2.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -275,10 +267,10 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     /**ADC3 GPIO Configuration
     PB13     ------> ADC3_IN5
     */
-    GPIO_InitStruct.Pin = I_L_Pin;
+    GPIO_InitStruct.Pin = I_L_SENSE_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(I_L_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(I_L_SENSE_GPIO_Port, &GPIO_InitStruct);
 
     /* ADC3 DMA Init */
     /* ADC3 Init */
@@ -329,15 +321,16 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     __HAL_RCC_GPIOB_CLK_ENABLE();
     /**ADC4 GPIO Configuration
     PB14     ------> ADC4_IN4
+    PB15     ------> ADC4_IN5
     */
-    GPIO_InitStruct.Pin = VAC_SENSE_Pin;
+    GPIO_InitStruct.Pin = VAC_SENSE_Pin|VBUS_SENSE_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(VAC_SENSE_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /* ADC4 DMA Init */
     /* ADC4 Init */
-    hdma_adc4.Instance = DMA1_Channel5;
+    hdma_adc4.Instance = DMA1_Channel4;
     hdma_adc4.Init.Request = DMA_REQUEST_ADC4;
     hdma_adc4.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_adc4.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -476,11 +469,8 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
 
     /**ADC2 GPIO Configuration
     PA4     ------> ADC2_IN17
-    PB15     ------> ADC2_IN15
     */
     HAL_GPIO_DeInit(THERM3_GPIO_Port, THERM3_Pin);
-
-    HAL_GPIO_DeInit(VBUS_SENSE_GPIO_Port, VBUS_SENSE_Pin);
 
     /* ADC2 DMA DeInit */
     HAL_DMA_DeInit(hadc->DMA_Handle);
@@ -512,7 +502,7 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
     /**ADC3 GPIO Configuration
     PB13     ------> ADC3_IN5
     */
-    HAL_GPIO_DeInit(I_L_GPIO_Port, I_L_Pin);
+    HAL_GPIO_DeInit(I_L_SENSE_GPIO_Port, I_L_SENSE_Pin);
 
     /* ADC3 DMA DeInit */
     HAL_DMA_DeInit(hadc->DMA_Handle);
@@ -536,8 +526,9 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
 
     /**ADC4 GPIO Configuration
     PB14     ------> ADC4_IN4
+    PB15     ------> ADC4_IN5
     */
-    HAL_GPIO_DeInit(VAC_SENSE_GPIO_Port, VAC_SENSE_Pin);
+    HAL_GPIO_DeInit(GPIOB, VAC_SENSE_Pin|VBUS_SENSE_Pin);
 
     /* ADC4 DMA DeInit */
     HAL_DMA_DeInit(hadc->DMA_Handle);
@@ -595,10 +586,10 @@ void HAL_COMP_MspInit(COMP_HandleTypeDef* hcomp)
     /**COMP5 GPIO Configuration
     PB13     ------> COMP5_INP
     */
-    GPIO_InitStruct.Pin = I_L_Pin;
+    GPIO_InitStruct.Pin = I_L_SENSE_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(I_L_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(I_L_SENSE_GPIO_Port, &GPIO_InitStruct);
 
     /* COMP5 interrupt Init */
     HAL_NVIC_SetPriority(COMP4_5_6_IRQn, 0, 0);
@@ -628,7 +619,7 @@ void HAL_COMP_MspDeInit(COMP_HandleTypeDef* hcomp)
     /**COMP5 GPIO Configuration
     PB13     ------> COMP5_INP
     */
-    HAL_GPIO_DeInit(I_L_GPIO_Port, I_L_Pin);
+    HAL_GPIO_DeInit(I_L_SENSE_GPIO_Port, I_L_SENSE_Pin);
 
     /* COMP5 interrupt DeInit */
     HAL_NVIC_DisableIRQ(COMP4_5_6_IRQn);

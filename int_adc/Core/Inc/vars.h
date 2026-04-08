@@ -29,7 +29,7 @@ int64_t GetValue(uint8_t index);
 
 #define MEMORY_START 0x0803F000
 
-#define NUM_VARS 14
+#define NUM_VARS 10
 
 #define MAX_PRI_I 0
 #define MAX_AC_I 1

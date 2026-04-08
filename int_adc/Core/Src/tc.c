@@ -11,6 +11,7 @@ uint8_t bus_status = BUS_OFF;
 uint16_t therm_readings[4];
 float temps[6];
 uint16_t aux_adc[3];
+uint16_t adc2[1];
 uint32_t fault = 0;
 float v24_value = 0;
 
@@ -70,7 +71,10 @@ void TC_Init() {
 	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t *) therm_readings, 4);
 
-	HAL_COMP_Start(&hcomp5);
+	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
+	HAL_ADC_Start_DMA(&hadc2, (uint32_t *) adc2, 1);
+
+	//HAL_COMP_Start(&hcomp5);
 
 	Boost_Init();
 
@@ -114,7 +118,7 @@ void TC_Loop_Tim() {
 		}
 	}
 
-	float voltage = (float) vbus_buf[1] * VREF / 4095.0;
+	float voltage = (float) adc2[0] * VREF / 4095.0;
 	if (voltage > 0) {
 		float resistance = R_MEAS * (3.3 / voltage - 1.0);
 		if (resistance > 1) {

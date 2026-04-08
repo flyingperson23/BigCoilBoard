@@ -21,6 +21,7 @@
 extern uint16_t therm_readings[4];
 extern float temps[6];
 extern uint16_t aux_adc[3];
+extern uint16_t adc2[1];
 extern uint8_t bus_status;
 extern float v24_value;
 

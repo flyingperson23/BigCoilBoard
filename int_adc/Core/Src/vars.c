@@ -27,11 +27,6 @@ void AddVars() {
 	AddVar("vac_r", 1120, "k", VAC_R, 0, 1000000);
 	AddVar("vbus_r", 1680, "k", VBUS_R, 0, 1000000);
 	AddVar("driver_uvlo", 18, "V", DRIVER_UVLO, 0, 30);
-	AddVar("pri_ramp", 0, "A", I_RAMP, 0, 1000000);
-	AddVar("pri_start", 0, "A", I_START, 0, 1000000);
-	AddVar("max_ot", 1000, "u", MAX_OT, 0, 1000000);
-	AddVar("boost_kp", 15, "p", BOOST_KP, 0, 1000000);
-
 }
 
 void AddVar(char * name, int64_t default_value, char * suffix, uint8_t index, int64_t min, int64_t max) {

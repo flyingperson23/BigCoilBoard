@@ -1,4 +1,4 @@
 ../Core/Src/tterm/TTerm_cmd.c:45:9:CMD_testCommandHandler	48	static
 ../Core/Src/tterm/TTerm_cmd.c:174:9:TERM_testCommandAutoCompleter	24	static
-../Core/Src/tterm/TTerm_cmd.c:210:9:CMD_help	32	static
-../Core/Src/tterm/TTerm_cmd.c:229:9:CMD_cls	24	static
+../Core/Src/tterm/TTerm_cmd.c:210:9:CMD_help	24	static
+../Core/Src/tterm/TTerm_cmd.c:229:9:CMD_cls	16	static
