@@ -28,7 +28,8 @@ float L_adj = 0;
 float Kp = 0.04;
 float Ki = 0.5;
 float f_sw = 9000.0f;
-
+uint32_t increment_th = (int) (f_sw / 50.0); // 50 V/s
+uint32_t counter = 0;
 
 void Calc_L_adj() {
 	float max_current = GetValue(MAX_I_L);
@@ -44,8 +45,11 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 	if (hadc == &hadc3) {
 		I_L = I_L_buf[0] * VREF / 4095.0 * I_L_conv;
 		BoostFastLoop();
-		if (vbus_target < vbus_target_fast) vbus_target += 1;
-		if (vbus_target > vbus_target_fast) vbus_target = vbus_target_fast;
+		counter++;
+		if (counter % increment_th == 0) {
+			if (vbus_target < vbus_target_fast) vbus_target += 1;
+			if (vbus_target > vbus_target_fast) vbus_target = vbus_target_fast;
+		}
 	}
 
 	if (hadc == &hadc4) {
